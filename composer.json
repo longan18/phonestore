@@ -21,6 +21,16 @@
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
+        "files": [
+            "app/Helpers/Global/GenaralHelper.php",
+            "app/Helpers/Global/HtmlHelper.php",
+            "app/Helpers/Global/LocaleHelper.php",
+            "app/Helpers/Global/ModelHelper.php",
+            "app/Helpers/Global/SystemHelper.php",
+            "app/Helpers/Global/TimezoneHelper.php",
+            "config/contants.php"
+        ],
+
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
