@@ -47,6 +47,19 @@ Copy the `.env.example` file and make the required configuration changes in the 
 cp .env.example .env
 ```
 
+Open .env file and set the following:
+```bash
+vi .env
+```
+Edit content as below:
+```bash
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=phonestore
+DB_USERNAME=root
+DB_PASSWORD=root
+```
 Generate a new application key
 ```bash
 php artisan key:generate
