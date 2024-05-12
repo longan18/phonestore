@@ -54,8 +54,7 @@
                 <li><a class="dropdown-item" href="#"><i class="fa fa-cog fa-lg"></i> Cài Đặt</a></li>
 {{--                <li><a class="dropdown-item" href="{{ route('admin.profile.index') }}"><i class="fa fa-user fa-lg"></i> Hồ Sơ</a></li>--}}
                 <li><a class="dropdown-item" href="#"><i class="fa fa-user fa-lg"></i> Hồ Sơ</a></li>
-{{--                <li><a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="fa fa-sign-out fa-lg"></i> Đăng Xuất</a></li>--}}
-                <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out fa-lg"></i> Đăng Xuất</a></li>
+                <li><a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="fa fa-sign-out fa-lg"></i> Đăng Xuất</a></li>
             </ul>
         </li>
     </ul>
