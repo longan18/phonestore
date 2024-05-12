@@ -22,12 +22,6 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/Global/GenaralHelper.php",
-            "app/Helpers/Global/HtmlHelper.php",
-            "app/Helpers/Global/LocaleHelper.php",
-            "app/Helpers/Global/ModelHelper.php",
-            "app/Helpers/Global/SystemHelper.php",
-            "app/Helpers/Global/TimezoneHelper.php",
             "config/contants.php"
         ],
 
