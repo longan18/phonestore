@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Modules\{{ path }}\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
+use App\Modules\{{ path }}\Http\Requests\{{ nameModule }}Request;
+use App\Modules\{{ path }}\Interfaces\{{ nameModule }}Interface;
+use App\Modules\{{ path }}\Models\{{ nameModule }};
+
+/**
+ * @{{ nameModule }}Controller
+ */
+class {{ nameModule }}Controller extends Controller
+{
+    protected ${{ name }};
+
+    /**
+     * @param {{ nameModule }}Interface ${{ name }}
+     */
+    public function __construct({{ nameModule }}Interface ${{ name }})
+    {
+        $this->{{ name }} = ${{ name }};
+    }
+}

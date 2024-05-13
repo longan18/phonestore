@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Modules\{{ path }}\Interfaces;
+
+/**
+ * @{{ nameModule }}Interface
+ */
+interface {{ nameModule }}Interface
+{
+
+}

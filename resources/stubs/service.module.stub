@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Modules\{{ path }}\Services;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
+use App\Modules\{{ path }}\Interfaces\{{ nameModule }}Interface;
+use App\Modules\{{ path }}\Models\{{ nameModule }};
+use App\Modules\Media\Interfaces\MediaInterface;
+use App\Services\BaseService;
+
+/**
+ * @{{ nameModule }}Service
+ */
+class {{ nameModule }}Service extends BaseService implements {{ nameModule }}Interface
+{
+    protected $media;
+
+    /**
+     * @param {{ nameModule }} ${{ name }}
+     * @param MediaInterface $media
+     */
+    public function __construct({{ nameModule }} ${{ name }}, MediaInterface $media)
+    {
+        $this->model = ${{ name }};
+        $this->media = $media;
+    }
+}

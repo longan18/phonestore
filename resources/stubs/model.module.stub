@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Modules\{{ path }}\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+use App\Modules\{{ path }}\Models\Traits\{{ nameModule }}Attribute;
+use App\Modules\{{ path }}\Models\Traits\{{ nameModule }}Scope;
+use App\Modules\{{ path }}\Models\Traits\{{ nameModule }}Relationship;
+use App\Modules\{{ path }}\Models\Traits\{{ nameModule }}Method;
+
+use Plank\Mediable\Mediable;
+
+/**
+ * @{{ nameModule }}
+ *
+ * TODO attribute model
+ */
+class {{ nameModule }} extends Model
+{
+     use HasFactory,
+         SoftDeletes,
+         Mediable,
+         {{ nameModule }}Attribute,
+         {{ nameModule }}Scope
+         {{ nameModule }}Relationship,
+         {{ nameModule }}Method;
+
+    protected $table = '';
+
+    protected $primaryKey = '';
+
+    protected $fillable = [];
+}
