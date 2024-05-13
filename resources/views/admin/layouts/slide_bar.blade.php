@@ -11,10 +11,9 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">{{ __('Quản lý sản phẩm') }}</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
 {{--                <li><a class="treeview-item" href="{{ route('admin.products.index') }}"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách sản phẩm') }}</a></li>--}}
-{{--                <li><a class="treeview-item" href="{{ route('admin.brands.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách nhãn hiệu') }}</a></li>--}}
 {{--                <li><a class="treeview-item" href="{{ route('admin.categories.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh mục sản phẩm') }}</a></li>--}}
                 <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách sản phẩm') }}</a></li>
-                <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách nhãn hiệu') }}</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.brands.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách nhãn hiệu') }}</a></li>
                 <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh mục sản phẩm') }}</a></li>
             </ul>
         </li>

@@ -24,7 +24,7 @@ class {{ nameModule }} extends Model
          SoftDeletes,
          Mediable,
          {{ nameModule }}Attribute,
-         {{ nameModule }}Scope
+         {{ nameModule }}Scope,
          {{ nameModule }}Relationship,
          {{ nameModule }}Method;
 
