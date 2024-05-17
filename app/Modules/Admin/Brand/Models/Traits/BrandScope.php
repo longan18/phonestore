@@ -16,7 +16,7 @@ trait BrandScope
      */
     public function scopeSearch($query, $request): mixed
     {
-        return $query->when(!empty($request->key_search), function ($q) use ($request) {
+        return $query->with(['media'])->when(!empty($request->key_search), function ($q) use ($request) {
             $q->where('name', 'like', '%' . escapeLike($request->key_search) . '%');
         });
     }

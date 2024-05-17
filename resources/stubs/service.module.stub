@@ -15,15 +15,15 @@ use App\Services\BaseService;
  */
 class {{ nameModule }}Service extends BaseService implements {{ nameModule }}Interface
 {
-    protected $media;
+    protected $mediaInterface;
 
     /**
      * @param {{ nameModule }} ${{ name }}
-     * @param MediaInterface $media
+     * @param MediaInterface $mediaInterface
      */
-    public function __construct({{ nameModule }} ${{ name }}, MediaInterface $media)
+    public function __construct({{ nameModule }} ${{ name }}, MediaInterface $mediaInterface)
     {
         $this->model = ${{ name }};
-        $this->media = $media;
+        $this->mediaInterface = $mediaInterface;
     }
 }

@@ -40,3 +40,15 @@ if (!function_exists('generateSlug')) {
         return Str::slug($data . '-' . time());
     }
 }
+
+if (!function_exists('uuid')) {
+    /**
+     * @param $data
+     *
+     * @return string
+     */
+    function uuid(): string
+    {
+        return Str::uuid();
+    }
+}

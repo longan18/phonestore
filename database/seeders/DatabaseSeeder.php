@@ -21,7 +21,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdminSeeder::class,
-            BrandSeeder::class
+            BrandSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
+            ProductSmartphoneSeeder::class,
+            ProductSmartphonePriceSeeder::class
         ]);
     }
 }

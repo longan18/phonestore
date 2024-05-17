@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->tinyInteger('status')->default(1)->unsigned();
+            $table->tinyInteger('status')->default(\App\Enums\Status::StopSelling->value)->unsigned();
             $table->timestamps();
         });
     }

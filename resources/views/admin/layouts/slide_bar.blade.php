@@ -12,8 +12,8 @@
             <ul class="treeview-menu">
 {{--                <li><a class="treeview-item" href="{{ route('admin.products.index') }}"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách sản phẩm') }}</a></li>--}}
 {{--                <li><a class="treeview-item" href="{{ route('admin.categories.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh mục sản phẩm') }}</a></li>--}}
-                <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách sản phẩm') }}</a></li>
-                <li><a class="treeview-item" href="{{ route('admin.brands.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách nhãn hiệu') }}</a></li>
+                <li><a class="treeview-item" href="{{ route('smartphone.index') }}"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách điện thoại thông minh') }}</a></li>
+                <li><a class="treeview-item" href="{{ route('admin.brands.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách thương hiệu') }}</a></li>
                 <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh mục sản phẩm') }}</a></li>
             </ul>
         </li>

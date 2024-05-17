@@ -13,6 +13,7 @@ Route::namespace('admin')->group(
         Route::group(['middleware' => ['auth:admin']], function () {
             includeRouteFiles(__DIR__.'/admin/dashboard');
             includeRouteFiles(__DIR__.'/admin/brand');
+            includeRouteFiles(__DIR__.'/admin/product');
         });
 
         Route::group(['prefix' => '/'],function () {

@@ -160,6 +160,8 @@ return [
          * Package Service Providers...
          */
         Plank\Mediable\MediableServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -167,6 +169,7 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\InterfaceServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
         App\Providers\EventServiceProvider::class,
@@ -187,6 +190,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'MediaUploader' => Plank\Mediable\MediaUploaderFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];
