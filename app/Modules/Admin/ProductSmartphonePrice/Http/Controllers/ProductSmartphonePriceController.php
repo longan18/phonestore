@@ -3,6 +3,7 @@
 namespace App\Modules\Admin\ProductSmartphonePrice\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Admin\Product\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -18,13 +19,32 @@ use App\Modules\Admin\ProductSmartphonePrice\Models\ProductSmartphonePrice;
  */
 class ProductSmartphonePriceController extends Controller
 {
-    protected $productsmartphoneprice;
+    /**
+     * @param Product $product
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function create(Product $product)
+    {
+        return view('admin.product-smartphone.option.form', compact('product'));
+    }
 
     /**
-     * @param ProductSmartphonePriceInterface $productsmartphoneprice
+     * @param Product $product
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function __construct(ProductSmartphonePriceInterface $productsmartphoneprice)
+    public function index(Product $product)
     {
-        $this->productsmartphoneprice = $productsmartphoneprice;
+        $options = $product->smartphone->smartphone_price;
+        return view('admin.product-smartphone.option.index', compact('product', 'options'));
+    }
+
+    public function handle(ProductSmartphonePriceRequest $request)
+    {
+        dd($request->all());
+    }
+
+    public function show()
+    {
+
     }
 }

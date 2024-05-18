@@ -13,7 +13,7 @@
             <button class="btn btn-warning edit-product mr-3" data-url="{{ route('smartphone.show', ['product' => $product->slug]) }}" type="button">{{ __('Sửa') }}</button>
             <select class="btn border-0 bg-lg-FFF-EF0D0D">
                 <option value="">Dừng bán</option>
-                <option value="">Đang bán</option>
+                <option value="">Đăng bán</option>
             </select>
         </td>
     </tr>

@@ -74,30 +74,6 @@ class ProductSmartphoneController extends Controller
     }
 
     /**
-     * @param Product $product
-     * @return void
-     */
-    public function createOption(Product $product)
-    {
-        return view('admin.product-smartphone.option.form', compact('product'));
-    }
-
-    /**
-     * @param Product $product
-     * @return void
-     */
-    public function getListOption(Product $product)
-    {
-        $options = $product->smartphone->smartphone_price;
-        return view('admin.product-smartphone.option.index', compact('product', 'options'));
-    }
-
-    public function showOption()
-    {
-
-    }
-
-    /**
      * @param Request $request
      *
      * @return JsonResponse

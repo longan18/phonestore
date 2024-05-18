@@ -25,7 +25,7 @@
             <button class="btn btn-danger delete-product" data-id="#" type="button">{{ __('Xóa') }}</button>
             <select class="btn border-0 bg-lg-FFF-EF0D0D" style="height: 37px">
                 <option value="">Dừng bán</option>
-                <option value="">Đang bán</option>
+                <option value="">Đăng bán</option>
             </select>
         </td>
     </tr>

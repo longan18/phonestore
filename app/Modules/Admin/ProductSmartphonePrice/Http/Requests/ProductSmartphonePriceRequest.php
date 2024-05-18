@@ -27,6 +27,40 @@ class ProductSmartphonePriceRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            'item_id' => [
+                'bail',
+                Rule::requiredIf(fn () => !$this->route('product')),
+            ],
+            'price' => 'bail|required|numeric|min:1',
+            'ram' => 'bail|required|numeric|min:1',
+            'color' => 'bail|required',
+            'hex_color' => 'bail|required|hex_color',
+            'quantity' => 'bail|required|numeric|min:1',
+            'storage_capacity' => 'bail|required',
+            'sub_image.*'           => [
+                'file',
+                'max:'.config('upload.file_max_size'),
+                'mimetypes:'.implode(',', config('upload.image_mime_types_allow')),
+            ],
+        ];
+    }
+
+    public function getValidatorInstance()
+    {
+        $this->formatPrice();
+
+        return parent::getValidatorInstance();
+    }
+
+    protected function formatPrice()
+    {
+        if ($this->request->has('price')) {
+            $this->merge(
+                [
+                    'price' => str_replace(',', '', request('price')),
+                ]
+            );
+        }
     }
 }

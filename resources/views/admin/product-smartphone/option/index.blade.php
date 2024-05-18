@@ -22,10 +22,12 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="{{ route('smartphone.index') }}">Danh sách sản phẩm điện thoại thông
-                    minh</a></li>
-            <li class="breadcrumb-item"><a
-                    href="#">{{ __('Option sản phẩm').' '. $product->slug }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('smartphone.index') }}">Danh sách sản phẩm điện thoại thông minh</a></li>
+            <li class="breadcrumb-item">
+                <a href="{{ route('smartphone.show-list-option', ['product' => $product->slug]) }}">
+                    {{ __('Option sản phẩm').' '. $product->slug }}
+                </a>
+            </li>
         </ul>
     </div>
     <div class="row justify-content-center">
