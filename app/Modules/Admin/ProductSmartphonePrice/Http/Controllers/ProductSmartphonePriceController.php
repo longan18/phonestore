@@ -13,12 +13,20 @@ use Illuminate\Http\Request;
 use App\Modules\Admin\ProductSmartphonePrice\Http\Requests\ProductSmartphonePriceRequest;
 use App\Modules\Admin\ProductSmartphonePrice\Interfaces\ProductSmartphonePriceInterface;
 use App\Modules\Admin\ProductSmartphonePrice\Models\ProductSmartphonePrice;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @ProductSmartphonePriceController
  */
 class ProductSmartphonePriceController extends Controller
 {
+    protected $productSmartphonePrice;
+
+    public function __construct(ProductSmartphonePriceInterface $productSmartphonePrice)
+    {
+        $this->productSmartphonePrice = $productSmartphonePrice;
+    }
+
     /**
      * @param Product $product
      * @return Application|Factory|View|\Illuminate\Foundation\Application
@@ -40,7 +48,15 @@ class ProductSmartphonePriceController extends Controller
 
     public function handle(ProductSmartphonePriceRequest $request)
     {
-        dd($request->all());
+        try {
+            $this->productSmartphonePrice->handle($request);
+
+            return $this->responseSuccess(message: __((!empty($request->id) ? 'Sửa' : 'Tạo').' sản phẩm thành công!'));
+        } catch (\Throwable $e) {
+            Log::info($e->getMessage());
+
+            return $this->responseFailed(message: __((!empty($request->id) ? 'Sửa' : 'Tạo').' sản phẩm thất bại!'));
+        }
     }
 
     public function show()

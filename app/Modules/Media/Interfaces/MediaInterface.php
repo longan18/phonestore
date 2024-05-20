@@ -10,15 +10,16 @@ namespace App\Modules\Media\Interfaces;
 interface MediaInterface
 {
     /**
-     * @param $file
-     * @param $disk
-     * @param $directory
+     * @param $model
+     * @param $request
+     * @return mixed
      */
-    public function upload($file, $disk = null, $directory = null);
+    public function uploadAvatar($model, $request);
 
     /**
-     * @param $media
-     * @param bool $is_first
+     * @param $model
+     * @param $request
+     * @return mixed
      */
-    public function deleteExistingFile($media, bool $is_first = true);
+    public function uploadSubImage($model, $request);
 }

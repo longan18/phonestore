@@ -7,5 +7,5 @@ namespace App\Modules\Admin\ProductSmartphonePrice\Interfaces;
  */
 interface ProductSmartphonePriceInterface
 {
-
+    public function handle($request);
 }

@@ -44,13 +44,12 @@ class ProductSmartphoneService extends BaseService implements ProductSmartphoneI
     {
         DB::beginTransaction();
         try {
-            if (!$request->id) {
+            if (empty($request->id)) {
                 $product = $this->product->store($request);
                 $product->productSmartphone()->create($request->only($this->model->getFillable()));
-                $this->product->uploadAvatar($product, $request);
             }
-            DB::commit();
 
+            DB::commit();
             return true;
         } catch (\Exception $exception) {
             DB::rollBack();

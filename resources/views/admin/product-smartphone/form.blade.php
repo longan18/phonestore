@@ -86,6 +86,32 @@
                                 <div class="error-message error_avatar"></div>
                             </div>
                             <div class="mb-3">
+                                <label>{{ __('Ảnh phụ:') }}</label>
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit">
+                                        <input name="sub_image[]" multiple="" data-max_length="4" id="image-upload-multiple"
+                                               class="d-none upload_multiple" type='file' accept=".png,.jpg,.jpeg"/>
+                                        <label for="image-upload-multiple">
+                                            <div class="btn btn-primary icon-btn">
+                                                <i class="fa fa-plus"></i>{{ __('Chọn file') }}
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 row upload__img-wrap">
+                                    @if(!empty($product->sub_image))
+                                        @foreach($product->sub_image as $subImage)
+                                            <div class="upload__img-box">
+                                                <div style="background-image: url('{{ $subImage['url'] }}')" data-number="0" data-file="download (6).jpeg" class="img-bg">
+                                                    <div class="upload__img-close remove-sub-image" data-sub_image_remove="{{ $subImage['id'] }}"></div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                                <div class="col-12 row error-message error_sub_image"></div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="screenTechnology" class="form-label">{{ __('Screen technology') }}</label>
                                 <input type="text" name="screen_technology" value="{{ $product->smartphone->screen_technology ?? '' }}" class="form-control">
                                 <div class="error-message erro_screen_technology"></div>

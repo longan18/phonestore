@@ -10,6 +10,8 @@ use App\Modules\Admin\Product\Interfaces\ProductInterface;
 use App\Modules\Admin\Product\Services\ProductService;
 use App\Modules\Admin\ProductSmartphone\Interfaces\ProductSmartphoneInterface;
 use App\Modules\Admin\ProductSmartphone\Services\ProductSmartphoneService;
+use App\Modules\Admin\ProductSmartphonePrice\Interfaces\ProductSmartphonePriceInterface;
+use App\Modules\Admin\ProductSmartphonePrice\Services\ProductSmartphonePriceService;
 use App\Modules\Media\Interfaces\MediaInterface;
 use App\Modules\Media\Services\MediaService;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +30,7 @@ class InterfaceServiceProvider extends ServiceProvider
         $this->app->singleton(BrandInterface::class, BrandService::class);
         $this->app->singleton(ProductInterface::class, ProductService::class);
         $this->app->singleton(ProductSmartphoneInterface::class, ProductSmartphoneService::class);
+        $this->app->singleton(ProductSmartphonePriceInterface::class, ProductSmartphonePriceService::class);
         $this->app->singleton(ProductInterface::class, ProductService::class);
     }
 

@@ -47,6 +47,25 @@
                     <div class="row w-100 d-flex justify-content-center">
                         <div class="col-md-12 col-lg-4">
                             <div class="mb-3">
+                                <label>{{ __('Ảnh option') }}<span class="text-danger">*</span></label>
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit">
+                                        <input name="avatar" class="d-none" type='file' id="image-upload"
+                                               accept=".png,.jpg,.jpeg"/>
+                                        <label for="image-upload">
+                                            <div class="btn btn-primary icon-btn">
+                                                <i class="fa fa-plus"></i>{{ __('Chọn file') }}
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="avatar-preview mt-2 mb-1">
+                                        <img class="profile-user-img img-responsive img-circle object-fit-cover {{ !empty($product->avatar) ?: 'd-none' }}"
+                                             height="150" width="150" id="image-preview" alt="User profile picture" src="{{ $product->avatar ?? '' }}">
+                                    </div>
+                                </div>
+                                <div class="error-message error_avatar"></div>
+                            </div>
+                            <div class="mb-3">
                                 <label>{{ __('Ram') }}<span class="text-danger">*</span></label>
                                 <input name="ram" value="{{ $productSmartphonePrice->ram ?? '' }}" class="form-control" type="text" placeholder="Nhập ram sản phẩm">
                                 <div class="error-message error_ram"></div>
@@ -98,32 +117,6 @@
 
                                 </select>
                                 <div class="error-message error_status"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label>{{ __('Ảnh phụ:') }}</label>
-                                <div class="avatar-upload">
-                                    <div class="avatar-edit">
-                                        <input name="sub_image[]" multiple="" data-max_length="4" id="image-upload-multiple"
-                                               class="d-none upload_multiple" type='file' accept=".png,.jpg,.jpeg"/>
-                                        <label for="image-upload-multiple">
-                                            <div class="btn btn-primary icon-btn">
-                                                <i class="fa fa-plus"></i>{{ __('Chọn file') }}
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 row upload__img-wrap">
-                                    @if(!empty($productSmartphonePrice->sub_image))
-                                        @foreach($productSmartphonePrice->sub_image as $subImage)
-                                            <div class="upload__img-box">
-                                                <div style="background-image: url('{{ $subImage['url'] }}')" data-number="0" data-file="download (6).jpeg" class="img-bg">
-                                                    <div class="upload__img-close remove-sub-image" data-sub_image_remove="{{ $subImage['id'] }}"></div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                                <div class="col-12 row error-message error_sub_image"></div>
                             </div>
                             <div class="row mb-10">
                                 <div class="col-md-12 d-flex justify-content-end">

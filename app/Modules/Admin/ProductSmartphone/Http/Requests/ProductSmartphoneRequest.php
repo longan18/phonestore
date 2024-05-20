@@ -35,6 +35,11 @@ class ProductSmartphoneRequest extends FormRequest
                 'mimes:jpeg,png,jpg',
                 'max:2048',
             ],
+            'sub_image.*' => [
+                'file',
+                'max:'.config('upload.file_max_size'),
+                'mimetypes:'.implode(',', config('upload.image_mime_types_allow')),
+            ],
             'name' => [
                 'bail',
                 'required',

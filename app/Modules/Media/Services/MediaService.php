@@ -2,6 +2,7 @@
 
 namespace App\Modules\Media\Services;
 
+use App\Enums\TagMedia;
 use Exception;
 use App\Modules\Media\Interfaces\MediaInterface;
 use App\Modules\Media\Models\Media;
@@ -36,6 +37,48 @@ class MediaService extends BaseService implements MediaInterface
     }
 
     /**
+     * @param $model
+     * @param $request
+     * @return void
+     */
+    public function uploadAvatar($model, $request)
+    {
+        if ($model) {
+            if ($request->hasFile('avatar')) {
+                $media = $this->upload($request->file('avatar'), directory: 'product');
+            }
+            if (!empty($media) && $model->hasMedia(TagMedia::Avatar->value)) {
+                $this->deleteExistingFile($model->getMedia(TagMedia::Avatar->value)->first());
+            }
+            empty($media) ?: $model->syncMedia($media, TagMedia::Avatar->value);
+        }
+    }
+
+    /**
+     * @param $request
+     * @param $model
+     */
+    public function uploadSubImage($model, $request)
+    {
+        if ($model) {
+            $media = [];
+            if (!empty($request->sub_image)) {
+                foreach ($request->sub_image as $sub) {
+                    $upload = $this->upload($sub, directory: 'product');
+                    if ($upload->id) {
+                        $media[] = $upload->id;
+                    }
+                }
+            }
+            if (!empty($request->sub_image_remove)) {
+                $this->deleteExistingFile($model->getSubImageByIdMethod($request->sub_image_remove), false);
+                $model->detachMedia($request->sub_image_remove);
+            }
+            empty($media) ?: $model->attachMedia($media, TagMedia::SubImage->value);
+        }
+    }
+
+    /**
      * @param        $file
      * @param string $disk
      * @param null   $directory
@@ -43,7 +86,7 @@ class MediaService extends BaseService implements MediaInterface
      * @return \Plank\Mediable\Media
      * @throws Exception
      */
-    public function upload($file, $disk = 'public', $directory = null): \Plank\Mediable\Media
+    private function upload($file, $disk = 'public', $directory = null): \Plank\Mediable\Media
     {
         try {
             return $this->mediaUploader
@@ -62,7 +105,7 @@ class MediaService extends BaseService implements MediaInterface
      *
      * @return void
      */
-    public function deleteExistingFile($media, bool $is_first = true): void
+    private function deleteExistingFile($media, bool $is_first = true): void
     {
         if (!$is_first && $media) {
             foreach ($media as $value) {

@@ -28,6 +28,13 @@ class ProductSmartphonePriceRequest extends FormRequest
     public function rules()
     {
         return [
+            'avatar' => [
+                'bail',
+                Rule::requiredIf(fn () => !$this->route('product')),
+                'image',
+                'mimes:jpeg,png,jpg',
+                'max:2048',
+            ],
             'item_id' => [
                 'bail',
                 Rule::requiredIf(fn () => !$this->route('product')),
@@ -38,11 +45,6 @@ class ProductSmartphonePriceRequest extends FormRequest
             'hex_color' => 'bail|required|hex_color',
             'quantity' => 'bail|required|numeric|min:1',
             'storage_capacity' => 'bail|required',
-            'sub_image.*'           => [
-                'file',
-                'max:'.config('upload.file_max_size'),
-                'mimetypes:'.implode(',', config('upload.image_mime_types_allow')),
-            ],
         ];
     }
 

@@ -12,6 +12,4 @@ interface ProductInterface
     public function store($request);
 
     public function getDataFillable($request, $create);
-
-    public function uploadAvatar($model, $request);
 }

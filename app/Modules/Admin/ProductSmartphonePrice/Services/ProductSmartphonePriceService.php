@@ -26,4 +26,24 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
         $this->model = $productsmartphoneprice;
         $this->media = $media;
     }
+
+
+    public function handle($request)
+    {
+        DB::beginTransaction();
+        try {
+            if (empty($request->id)) {
+                $model = $this->create($request->only($this->model->getFillable()));
+                $this->media->uploadAvatar($model, $request);
+            }
+
+            DB::commit();
+            return true;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+        }
+
+        return false;
+    }
 }
