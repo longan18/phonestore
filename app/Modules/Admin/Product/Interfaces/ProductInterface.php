@@ -9,7 +9,5 @@ interface ProductInterface
 {
     public function search($request, $categoryId);
 
-    public function store($request);
-
-    public function getDataFillable($request, $create);
+    public function createOrUpdate($request);
 }

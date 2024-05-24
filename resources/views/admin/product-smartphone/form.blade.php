@@ -34,13 +34,16 @@
                     <h3 class="tile-title">{{ !empty($product->name) ?  __('Sửa sản phẩm').' '. $product->slug : __('Tạo sản phẩm') }}</h3>
                     @if(!empty($product))
                         <p>
-                            <a class="btn btn-primary icon-btn" href="{{ route('smartphone.show-list-option', ['product' => $product->slug]) }}"><i class="fa fa-list"></i>{{ __('Danh sách option sản phẩm') }}</a>
+                            <a class="btn btn-primary icon-btn" href="{{ route('smartphone.option.index', ['product' => $product->slug]) }}"><i class="fa fa-list"></i>{{ __('Danh sách option sản phẩm') }}</a>
                         </p>
                     @endif
                 </div>
-                <form id="handle-product" action="{{ route('smartphone.handle') }}" method="POST" data-redirect="{{ route('smartphone.index') }}" enctype="multipart/form-data">
+
+                <form id="handle-product" action="{{ empty($product) ? route('smartphone.store') : route('smartphone.update') }}"
+                      method="POST" data-redirect="{{ route('smartphone.index') }}" enctype="multipart/form-data">
                     @if(!empty($product))
-                        <input name="id" value="{{ $product->id ?? '' }}" type="hidden">
+                        <input name="slug" value="{{ $product->slug }}" type="hidden">
+                        <input name="id" value="{{ $product->smartphone->id }}" type="hidden">
                     @endif
                     <div class="row">
                         <div class="col-md-12 col-lg-4">
@@ -98,7 +101,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-12 row upload__img-wrap">
+                                <div class="upload__img-wrap">
                                     @if(!empty($product->sub_image))
                                         @foreach($product->sub_image as $subImage)
                                             <div class="upload__img-box">
@@ -369,7 +372,11 @@
         // Lặp qua các phần tử textarea và khởi tạo CKEditor
         textareas.forEach(textarea => {
             ClassicEditor
-                .create(textarea)
+                .create(textarea, {
+                    toolbar: {
+                        items: [ 'bulletedList' ]
+                    }
+                })
                 .catch(error => {
                     console.error(error);
                 });

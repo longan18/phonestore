@@ -10,7 +10,9 @@
         <td>{{ $option->quantity }}</td>
         <td class="text-danger"><b>Dừng bán</b></td>
         <td class="d-flex">
-            <button class="btn btn-warning edit-product mr-3" data-url="{{ route('smartphone.show', ['product' => $product->slug]) }}" type="button">{{ __('Sửa') }}</button>
+            <button class="btn btn-warning edit-product mr-3"
+                    data-url="{{ route('smartphone.option.show', ['product' => $product->slug, 'option' => $option->id]) }}"
+                    type="button">{{ __('Sửa') }}</button>
             <select class="btn border-0 bg-lg-FFF-EF0D0D">
                 <option value="">Dừng bán</option>
                 <option value="">Đăng bán</option>

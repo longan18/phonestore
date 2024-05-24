@@ -32,10 +32,12 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
     {
         DB::beginTransaction();
         try {
-            if (empty($request->id)) {
-                $model = $this->create($request->only($this->model->getFillable()));
-                $this->media->uploadAvatar($model, $request);
-            }
+           $dataArr = $request->only($this->model->getFillable());
+           $dataArr['price'] = str_replace(',', '', $dataArr['price']);
+           $dataArr['id'] = $request->id ?? null;
+
+           $model = $this->model::upsertWithReturn($dataArr, ['id', 'item_id'], $this->model->getFillable());
+           $this->media->uploadAvatar($model, $request);
 
             DB::commit();
             return true;

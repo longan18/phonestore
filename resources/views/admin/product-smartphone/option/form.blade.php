@@ -24,7 +24,7 @@
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item"><a href="{{ route('smartphone.index') }}">{{ __('Danh sách sản phẩm điện thoại thông minh') }}</a></li>
             <li class="breadcrumb-item">
-                <a href="{{ route('smartphone.show-list-option', ['product' => $product->slug]) }}">
+                <a href="{{ route('smartphone.option.index', ['product' => $product->slug]) }}">
                     {{ __('Option sản phẩm').' '. $product->slug }}
                 </a>
             </li>
@@ -41,8 +41,10 @@
                         <li><b>Tên sản phẩm:</b> {{ $product->name }} </li>
                     </ul>
                 @endif
-                <form id="handle-product" action="{{ route('smartphone.handle-option') }}" method="POST"
-                      data-redirect="{{ route('smartphone.show-list-option', ['product' => $product->slug]) }}" enctype="multipart/form-data">
+                <form id="handle-product" method="POST"
+                      action="{{ empty($productSmartphonePrice->id) ? route('smartphone.option.store') : route('smartphone.option.update') }}"
+                      data-redirect="{{ route('smartphone.option.index', ['product' => $product->slug]) }}" enctype="multipart/form-data">
+                    <input name="id" value="{{ $productSmartphonePrice->id ?? '' }}" type="hidden">
                     <input name="item_id" value="{{ $product->smartphone->id ?? '' }}" type="hidden">
                     <div class="row w-100 d-flex justify-content-center">
                         <div class="col-md-12 col-lg-4">
@@ -59,8 +61,8 @@
                                         </label>
                                     </div>
                                     <div class="avatar-preview mt-2 mb-1">
-                                        <img class="profile-user-img img-responsive img-circle object-fit-cover {{ !empty($product->avatar) ?: 'd-none' }}"
-                                             height="150" width="150" id="image-preview" alt="User profile picture" src="{{ $product->avatar ?? '' }}">
+                                        <img class="profile-user-img img-responsive img-circle object-fit-cover {{ !empty($productSmartphonePrice->avatar) ?: 'd-none' }}"
+                                             height="150" width="150" id="image-preview" alt="User profile picture" src="{{ $productSmartphonePrice->avatar ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="error-message error_avatar"></div>
@@ -92,7 +94,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Price') }}<span class="text-danger">*</span></label>
-                                <input name="price" value="{{ $productSmartphonePrice->price ?? '' }}" class="form-control" type="text" placeholder="Nhập tiền sản phẩm">
+                                <input name="price" value="{{ !empty($productSmartphonePrice->price) ? formatCurrency($productSmartphonePrice->price) : '' }}" class="form-control" type="text" placeholder="Nhập tiền sản phẩm">
                                 <div class="error-message error_price"></div>
                             </div>
                             <div class="mb-3">

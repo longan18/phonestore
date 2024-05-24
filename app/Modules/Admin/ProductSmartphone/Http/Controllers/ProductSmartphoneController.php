@@ -74,20 +74,32 @@ class ProductSmartphoneController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
+     * @param ProductSmartphoneRequest $request
      * @return JsonResponse
      */
-    public function handle(ProductSmartphoneRequest $request): JsonResponse
+    public function store(Request $request)
     {
         try {
-            $this->productSmartphone->handle($request);
+            $result = $this->productSmartphone->handle($request);
 
-            return $this->responseSuccess(message: __((!empty($request->id) ? 'Sửa' : 'Tạo').' sản phẩm thành công!'));
+            return $result ? $this->responseSuccess(message: __('Tạo sản phẩm thành công!'))
+                : $this->responseFailed(message: __('Tạo sản phẩm thất bại!'));
         } catch (\Throwable $e) {
-            Log::info($e->getMessage());
+            Log::error($e->getMessage());
+            return $this->responseFailed(message: __('Tạo sản phẩm thất bại!'));
+        }
+    }
 
-            return $this->responseFailed(message: __((!empty($request->id) ? 'Sửa' : 'Tạo').' sản phẩm thất bại!'));
+    public function update(Request $request)
+    {
+        try {
+            $result = $this->productSmartphone->handle($request);
+
+            return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'))
+                : $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
+        } catch (\Throwable $e) {
+            Log::error($e->getMessage());
+            return $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
         }
     }
 }

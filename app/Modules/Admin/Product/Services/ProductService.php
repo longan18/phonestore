@@ -40,30 +40,27 @@ class ProductService extends BaseService implements ProductInterface
 
     /**
      * @param $request
-     * @return Model
+     * @return mixed
      */
-    public function store($request)
+    public function createOrUpdate($request)
     {
-        $arrData = $this->getDataFillable($request, true);
-        $product = $this->create($arrData);
+        $arrData = $request->only($this->fillable());
+
+        if (empty($request->slug)) {
+            $arrData['slug'] = uuid();
+        }
+
+        $product = $this->model::upsertWithReturn($arrData, ['slug'],
+            [
+                'name',
+                'brand_id',
+                'category_id',
+            ],
+        );
 
         $this->media->uploadAvatar($product, $request);
         $this->media->uploadSubImage($product, $request);
 
         return $product;
-    }
-
-    /**
-     * @param $request
-     * @return mixed
-     */
-    public function getDataFillable($request, $create = false)
-    {
-        $arrData = $request->only($this->model->getFillable());
-        if ($create) {
-            $arrData['slug'] = uuid();
-        }
-
-        return $arrData;
     }
 }

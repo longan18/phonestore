@@ -7,5 +7,11 @@ namespace App\Modules\Admin\Product\Models\Traits;
  */
 trait ProductMethod
 {
-
+    /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

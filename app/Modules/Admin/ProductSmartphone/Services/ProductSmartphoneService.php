@@ -44,10 +44,8 @@ class ProductSmartphoneService extends BaseService implements ProductSmartphoneI
     {
         DB::beginTransaction();
         try {
-            if (empty($request->id)) {
-                $product = $this->product->store($request);
-                $product->productSmartphone()->create($request->only($this->model->getFillable()));
-            }
+           $product = $this->product->createOrUpdate($request);
+           $this->createOrUpdate($request, $product->id);
 
             DB::commit();
             return true;
@@ -57,5 +55,14 @@ class ProductSmartphoneService extends BaseService implements ProductSmartphoneI
         }
 
         return false;
+    }
+
+    public function createOrUpdate($request, $productId)
+    {
+        $dataArr = $request->only($this->model->getFillable());
+        $dataArr['id'] = $request->id ?? null;
+        $dataArr['product_id'] = $productId;
+
+        $this->model::upsertWithReturn($dataArr, ['id', 'product_id'], $this->model->getFillable());
     }
 }

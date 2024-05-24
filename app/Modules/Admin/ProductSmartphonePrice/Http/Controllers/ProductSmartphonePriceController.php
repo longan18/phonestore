@@ -31,36 +31,50 @@ class ProductSmartphonePriceController extends Controller
      * @param Product $product
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function create(Product $product)
-    {
-        return view('admin.product-smartphone.option.form', compact('product'));
-    }
-
-    /**
-     * @param Product $product
-     * @return Application|Factory|View|\Illuminate\Foundation\Application
-     */
     public function index(Product $product)
     {
         $options = $product->smartphone->smartphone_price;
         return view('admin.product-smartphone.option.index', compact('product', 'options'));
     }
 
-    public function handle(ProductSmartphonePriceRequest $request)
+    /**
+     * @param Product $product
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function create(Product $product)
+    {
+        return view('admin.product-smartphone.option.form', compact('product'));
+    }
+
+    public function show(Product $product, Request $request)
+    {
+        $productSmartphonePrice = $this->productSmartphonePrice->getById($request->option);
+        return view('admin.product-smartphone.option.form', compact('product', 'productSmartphonePrice'));
+    }
+
+    public function store(Request $request)
     {
         try {
-            $this->productSmartphonePrice->handle($request);
+            $result = $this->productSmartphonePrice->handle($request);
 
-            return $this->responseSuccess(message: __((!empty($request->id) ? 'Sửa' : 'Tạo').' sản phẩm thành công!'));
-        } catch (\Throwable $e) {
-            Log::info($e->getMessage());
-
-            return $this->responseFailed(message: __((!empty($request->id) ? 'Sửa' : 'Tạo').' sản phẩm thất bại!'));
+            return $result ? $this->responseSuccess(message: __('Tạo option thành công!'))
+                : $this->responseFailed(message: __('Tạo option thất bại!'));
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return $this->responseFailed(message: __('Tạo option thất bại!'));
         }
     }
 
-    public function show()
+    public function update(Request $request)
     {
+        try {
+            $result = $this->productSmartphonePrice->handle($request);
 
+            return $result ? $this->responseSuccess(message: __('Cập nhật option thành công!'))
+                : $this->responseFailed(message: __('Cập nhật option thất bại!'));
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return $this->responseFailed(message: __('Cập nhật option thất bại!'));
+        }
     }
 }

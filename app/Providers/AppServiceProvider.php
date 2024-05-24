@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Macros\BuilderMacro;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Builder::macro('upsertWithReturn', (new BuilderMacro())->upsertWithReturn());
     }
 }

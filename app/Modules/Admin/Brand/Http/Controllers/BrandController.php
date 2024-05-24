@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Modules\Admin\Brand\Http\Requests\BrandRequest;
 use App\Modules\Admin\Brand\Interfaces\BrandInterface;
 use App\Modules\Admin\Brand\Models\Brand;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @BrandController

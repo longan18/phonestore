@@ -24,7 +24,7 @@
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item"><a href="{{ route('smartphone.index') }}">Danh sách sản phẩm điện thoại thông minh</a></li>
             <li class="breadcrumb-item">
-                <a href="{{ route('smartphone.show-list-option', ['product' => $product->slug]) }}">
+                <a href="{{ route('smartphone.option.index', ['product' => $product->slug]) }}">
                     {{ __('Option sản phẩm').' '. $product->slug }}
                 </a>
             </li>
@@ -37,7 +37,7 @@
                     <h3 class="tile-title">{{ __('Option sản phẩm').' '. $product->slug }}</h3>
                     <p>
                         <a class="btn btn-primary icon-btn"
-                           href="{{ route('smartphone.create-option', ['product' => $product->slug]) }}"><i
+                           href="{{ route('smartphone.option.create', ['product' => $product->slug]) }}"><i
                                 class="fa fa-plus"></i>{{ __('Thêm option sản phẩm') }}</a>
                     </p>
                 </div>

@@ -33,6 +33,7 @@ class ProductSmartphonePrice extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'id',
         'item_id',
         'ram',
         'storage_capacity',

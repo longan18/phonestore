@@ -87,7 +87,7 @@ abstract class BaseService
 
     public function fillable()
     {
-        return $this->model->fillable;
+        return $this->model->getFillable();
     }
 
     /**

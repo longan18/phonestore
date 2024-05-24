@@ -7,11 +7,5 @@ namespace App\Modules\Admin\ProductSmartphone\Models\Traits;
  */
 trait ProductSmartphoneMethod
 {
-    /**
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+
 }

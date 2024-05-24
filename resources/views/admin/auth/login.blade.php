@@ -28,7 +28,7 @@
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Đăng nhập</h3>
             <div class="form-group">
                 <label class="control-label">Tài khoản</label>
-                <input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
+                <input class="form-control" type="text" value="{{ old('email') }}" placeholder="Email" name="email" autocomplete="off">
                 @error('email')
                  <div class="error-message d-flex"> {{ $message }}</div>
                 @enderror

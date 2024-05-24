@@ -41,7 +41,7 @@ class MediaService extends BaseService implements MediaInterface
      * @param $request
      * @return void
      */
-    public function uploadAvatar($model, $request)
+    public function uploadAvatar($model, $request, $directory = 'product')
     {
         if ($model) {
             if ($request->hasFile('avatar')) {
@@ -50,6 +50,7 @@ class MediaService extends BaseService implements MediaInterface
             if (!empty($media) && $model->hasMedia(TagMedia::Avatar->value)) {
                 $this->deleteExistingFile($model->getMedia(TagMedia::Avatar->value)->first());
             }
+
             empty($media) ?: $model->syncMedia($media, TagMedia::Avatar->value);
         }
     }
@@ -105,7 +106,7 @@ class MediaService extends BaseService implements MediaInterface
      *
      * @return void
      */
-    private function deleteExistingFile($media, bool $is_first = true): void
+    public function deleteExistingFile($media, bool $is_first = true): void
     {
         if (!$is_first && $media) {
             foreach ($media as $value) {
