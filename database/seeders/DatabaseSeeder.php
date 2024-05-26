@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ProductSeeder::class,
             ProductSmartphoneSeeder::class,
+            ColorSeeder::class,
+            RamSeeder::class,
+            StorageCapacitySeeder::class,
             ProductSmartphonePriceSeeder::class
         ]);
     }

@@ -7,13 +7,17 @@
     </div>
     <ul class="app-menu">
 {{--        <li><a class="app-menu__item active" href="{{ route('admin.dashboard.index') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{ __('Trang chủ') }}</span></a></li>--}}
-        <li><a class="app-menu__item active" href="#" ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{ __('Trang chủ') }}</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">{{ __('Quản lý sản phẩm') }}</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li><a class="app-menu__item @if(currentRoute('admin.dashboard.index')) active @endif" href="#" ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{ __('Trang chủ') }}</span></a></li>
+        <li class="treeview @if(currentRoute('smartphone.index') || currentRoute('brands.index')) is-expanded @endif">
+            <a class="app-menu__item @if(currentRoute('smartphone.index') || currentRoute('brands.index')) active @endif" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">{{ __('Quản lý sản phẩm') }}</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
             <ul class="treeview-menu">
 {{--                <li><a class="treeview-item" href="{{ route('admin.products.index') }}"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách sản phẩm') }}</a></li>--}}
 {{--                <li><a class="treeview-item" href="{{ route('admin.categories.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh mục sản phẩm') }}</a></li>--}}
-                <li><a class="treeview-item" href="{{ route('smartphone.index') }}"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách điện thoại thông minh') }}</a></li>
-                <li><a class="treeview-item" href="{{ route('admin.brands.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách thương hiệu') }}</a></li>
+                <li><a class="treeview-item @if(currentRoute('smartphone.index')) active @endif" href="{{ route('smartphone.index') }}"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách điện thoại thông minh') }}</a></li>
+                <li><a class="treeview-item @if(currentRoute('brands.index')) active @endif" href="{{ route('brands.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách thương hiệu') }}</a></li>
                 <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh mục sản phẩm') }}</a></li>
             </ul>
         </li>

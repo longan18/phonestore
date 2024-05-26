@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 if (!function_exists('htmlLang')) {
     /**
@@ -62,6 +63,21 @@ if (! function_exists('formatCurrency')) {
         }
 
         return '';
+    }
+}
+
+if (! function_exists('currentRoute')) {
+    /**
+     * @param $routeName
+     * @return bool
+     */
+    function currentRoute($routeName): bool
+    {
+        if (Route::currentRouteName() == $routeName) {
+            return true;
+        }
+
+        return false;
     }
 }
 

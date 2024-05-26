@@ -12,14 +12,16 @@ interface MediaInterface
     /**
      * @param $model
      * @param $request
+     * @param $directory
      * @return mixed
      */
-    public function uploadAvatar($model, $request);
+    public function uploadAvatar($model, $request, $directory);
 
     /**
      * @param $model
      * @param $request
+     * @param $directory
      * @return mixed
      */
-    public function uploadSubImage($model, $request);
+    public function uploadSubImage($model, $request, $directory);
 }

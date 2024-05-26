@@ -39,7 +39,7 @@
                     @endif
                 </div>
 
-                <form id="handle-product" action="{{ empty($product) ? route('smartphone.store') : route('smartphone.update') }}"
+                <form id="handle-product" action="{{ empty($product) ? route('smartphone.store') : route('smartphone.update', ['product' => $product->id]) }}"
                       method="POST" data-redirect="{{ route('smartphone.index') }}" enctype="multipart/form-data">
                     @if(!empty($product))
                         <input name="slug" value="{{ $product->slug }}" type="hidden">
@@ -193,7 +193,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="mobileNetwork" class="form-label">Mobile network</label>
-                                <input type="text" name="mobile_network" value="{{ $product->mobile_network ?? '' }}" class="form-control">
+                                <input type="text" name="mobile_network" value="{{ $product->smartphone->mobile_network ?? '' }}" class="form-control">
                                 <div class="error-message error_mobile_network"></div>
                             </div>
                             <div class="mb-3">

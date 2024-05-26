@@ -7,5 +7,15 @@ namespace App\Modules\Admin\ProductSmartphonePrice\Interfaces;
  */
 interface ProductSmartphonePriceInterface
 {
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function handle($request);
+
+    /**
+     * @param $itemId
+     * @return mixed
+     */
+    public function getByItemId($itemId);
 }

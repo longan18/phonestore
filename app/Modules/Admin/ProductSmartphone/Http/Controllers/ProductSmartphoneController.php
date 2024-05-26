@@ -77,7 +77,7 @@ class ProductSmartphoneController extends Controller
      * @param ProductSmartphoneRequest $request
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(ProductSmartphoneRequest $request)
     {
         try {
             $result = $this->productSmartphone->handle($request);
@@ -90,7 +90,11 @@ class ProductSmartphoneController extends Controller
         }
     }
 
-    public function update(Request $request)
+    /**
+     * @param ProductSmartphoneRequest $request
+     * @return JsonResponse
+     */
+    public function update(ProductSmartphoneRequest $request)
     {
         try {
             $result = $this->productSmartphone->handle($request);

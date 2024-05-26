@@ -4,7 +4,7 @@ use App\Modules\Admin\Brand\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('brands')
-    ->name('admin.brands.')
+    ->name('brands.')
     ->group(function ()
     {
         Route::get('/', [BrandController::class, 'index'])->name('index');

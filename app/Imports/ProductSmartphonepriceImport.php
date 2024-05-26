@@ -4,9 +4,10 @@ namespace App\Imports;
 
 use App\Modules\Admin\ProductSmartphonePrice\Models\ProductSmartphonePrice;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithColumnLimit;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class ProductSmartphonepriceImport implements ToModel, WithHeadingRow
+class ProductSmartphonepriceImport implements ToModel, WithHeadingRow, WithColumnLimit
 {
 
     /**
@@ -17,6 +18,14 @@ class ProductSmartphonepriceImport implements ToModel, WithHeadingRow
     public function headingRow(): int
     {
         return 2;
+    }
+
+    /**
+     * @return string
+     */
+    public function endColumn(): string
+    {
+        return 'M';
     }
 
     /**
@@ -34,11 +43,10 @@ class ProductSmartphonepriceImport implements ToModel, WithHeadingRow
 
         return new ProductSmartphonePrice([
             'item_id' => $row['item_id'],
-            'ram' => $row['ram'],
-            'storage_capacity' => $row['storage_capacity'],
+            'ram_id' => $row['ram_id'],
+            'storage_capacity_id' => $row['storage_capacity_id'],
             'remaining_capacity_is_approx' => $row['remaining_capacity_is_approx'],
-            'color' => $row['color'],
-            'hex_color' => $row['hex_color'],
+            'color_id' => $row['color_id'],
             'price' => $row['price'],
             'quantity' => $row['quantity'],
         ]);

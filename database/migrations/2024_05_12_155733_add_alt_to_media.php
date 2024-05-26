@@ -29,12 +29,14 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table(
-            'media',
-            function (Blueprint $table) {
-                $table->dropColumn('alt');
-            }
-        );
+        if (Schema::hasTable('media') && Schema::hasColumn('media', 'alt')) {
+            Schema::table(
+                'media',
+                function (Blueprint $table) {
+                    $table->dropColumn('alt');
+                }
+            );
+        }
     }
 
     /**

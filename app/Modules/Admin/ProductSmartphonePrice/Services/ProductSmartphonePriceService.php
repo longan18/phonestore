@@ -27,7 +27,10 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
         $this->media = $media;
     }
 
-
+    /**
+     * @param $request
+     * @return bool
+     */
     public function handle($request)
     {
         DB::beginTransaction();
@@ -47,5 +50,12 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
         }
 
         return false;
+    }
+
+    public function getByItemId($itemId)
+    {
+        return $this->with(['ram', 'color', 'storageCapacity'])
+            ->where('item_id', $itemId)
+            ->get();
     }
 }

@@ -30,21 +30,25 @@ class ProductSmartphonePriceRequest extends FormRequest
         return [
             'avatar' => [
                 'bail',
-                Rule::requiredIf(fn () => !$this->route('product')),
+                Rule::requiredIf(fn () => !$this->route('option')),
                 'image',
                 'mimes:jpeg,png,jpg',
                 'max:2048',
             ],
-            'item_id' => [
-                'bail',
-                Rule::requiredIf(fn () => !$this->route('product')),
-            ],
+            'ram_id' => 'bail|required|numeric|min:1',
+            'color_id' => 'bail|required',
+            'storage_capacity_id' => 'bail|required',
             'price' => 'bail|required|numeric|min:1',
-            'ram' => 'bail|required|numeric|min:1',
-            'color' => 'bail|required',
-            'hex_color' => 'bail|required|hex_color',
             'quantity' => 'bail|required|numeric|min:1',
-            'storage_capacity' => 'bail|required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'ram_id.required' => 'The ram field is required.',
+            'color_id.required' => 'The storage capacity  field is required.',
+            'storage_capacity_id.required' => 'The color field is required.',
         ];
     }
 

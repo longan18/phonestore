@@ -9,15 +9,6 @@
             <div>{{ __('Đã bán:') }} 20</div>
         </td>
         <td><img src="{{ $product->brand->avatar }}" width="100" height="100" class="object-fit-cover image-table" alt=""></td>
-        <td>
-            @if($product->quantity)
-                <b>{{ $product->quantity }}</b>
-            @else
-                <div class="text-danger">
-                    <b>{{ __('Hết hàng') }}</b>
-                </div>
-            @endif
-        </td>
         <td class="#"><b>#</b></td>
         <td>{{ formatTime($product->created_at) }}</td>
         <td>

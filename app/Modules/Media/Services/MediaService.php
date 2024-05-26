@@ -45,7 +45,7 @@ class MediaService extends BaseService implements MediaInterface
     {
         if ($model) {
             if ($request->hasFile('avatar')) {
-                $media = $this->upload($request->file('avatar'), directory: 'product');
+                $media = $this->upload($request->file('avatar'), directory: $directory);
             }
             if (!empty($media) && $model->hasMedia(TagMedia::Avatar->value)) {
                 $this->deleteExistingFile($model->getMedia(TagMedia::Avatar->value)->first());
@@ -59,13 +59,13 @@ class MediaService extends BaseService implements MediaInterface
      * @param $request
      * @param $model
      */
-    public function uploadSubImage($model, $request)
+    public function uploadSubImage($model, $request, $directory = 'product')
     {
         if ($model) {
             $media = [];
             if (!empty($request->sub_image)) {
                 foreach ($request->sub_image as $sub) {
-                    $upload = $this->upload($sub, directory: 'product');
+                    $upload = $this->upload($sub, directory: $directory);
                     if ($upload->id) {
                         $media[] = $upload->id;
                     }

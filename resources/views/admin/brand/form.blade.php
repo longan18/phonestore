@@ -14,7 +14,7 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="{{ route('admin.brands.index') }}">{{ __('Danh sách thương hiệu') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('brands.index') }}">{{ __('Danh sách thương hiệu') }}</a></li>
             <li class="breadcrumb-item"><a href="#">{{ !empty($brand->name) ? __('Sửa thương hiệu') : __('Tạo mới thương hiệu') }}</a></li>
         </ul>
     </div>
@@ -24,7 +24,8 @@
                 <div class="d-flex justify-content-between">
                     <h3 class="tile-title">{{ !empty($brand->name) ?  __('Sửa thương hiệu') : __('Tạo thương hiệu') }}</h3>
                 </div>
-                <form id="handle-brand" action="{{ route('admin.brands.handle') }}" method="POST" data-redirect="{{ route('admin.brands.index') }}" enctype="multipart/form-data">
+                <form id="handle-brand" action="{{ route('brands.handle') }}" method="POST"
+                      data-redirect="{{ route('brands.index') }}" enctype="multipart/form-data">
                     @if(!empty($brand))
                         <input name="id" value="{{ $brand->id ?? '' }}" type="hidden">
                     @endif
@@ -49,7 +50,8 @@
                                     </label>
                                 </div>
                                 <div class="avatar-preview mt-2">
-                                    <img class="profile-user-img img-responsive img-circle object-fit-cover d-none"
+                                    <img class="profile-user-img img-responsive img-circle object-fit-cover {{ !empty($brand->avatar) ?: 'd-none' }}"
+                                         src="{{ $brand->avatar ?? '' }}"
                                          height="150" width="150"
                                          id="image-preview"
                                          alt="User profile picture">

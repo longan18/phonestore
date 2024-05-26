@@ -33,7 +33,7 @@ class ProductSmartphonePriceController extends Controller
      */
     public function index(Product $product)
     {
-        $options = $product->smartphone->smartphone_price;
+        $options = $this->productSmartphonePrice->getByItemId($product->smartphone->id);
         return view('admin.product-smartphone.option.index', compact('product', 'options'));
     }
 
@@ -46,13 +46,22 @@ class ProductSmartphonePriceController extends Controller
         return view('admin.product-smartphone.option.form', compact('product'));
     }
 
+    /**
+     * @param Product $product
+     * @param Request $request
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
     public function show(Product $product, Request $request)
     {
         $productSmartphonePrice = $this->productSmartphonePrice->getById($request->option);
         return view('admin.product-smartphone.option.form', compact('product', 'productSmartphonePrice'));
     }
 
-    public function store(Request $request)
+    /**
+     * @param ProductSmartphonePriceRequest $request
+     * @return JsonResponse
+     */
+    public function store(ProductSmartphonePriceRequest $request)
     {
         try {
             $result = $this->productSmartphonePrice->handle($request);
@@ -65,7 +74,11 @@ class ProductSmartphonePriceController extends Controller
         }
     }
 
-    public function update(Request $request)
+    /**
+     * @param ProductSmartphonePriceRequest $request
+     * @return JsonResponse
+     */
+    public function update(ProductSmartphonePriceRequest $request)
     {
         try {
             $result = $this->productSmartphonePrice->handle($request);

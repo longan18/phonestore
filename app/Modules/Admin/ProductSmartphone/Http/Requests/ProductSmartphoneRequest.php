@@ -43,7 +43,9 @@ class ProductSmartphoneRequest extends FormRequest
             'name' => [
                 'bail',
                 'required',
-                Rule::unique('products')->ignore($this->route('product'))->whereNull('deleted_at'),
+                Rule::unique('products')
+                    ->ignore($this->route('product'))
+                    ->whereNull('deleted_at'),
                 'string',
                 'max:255'
             ],

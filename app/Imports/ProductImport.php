@@ -21,6 +21,9 @@ class ProductImport implements ToModel, WithHeadingRow, WithColumnLimit
         return 2;
     }
 
+    /**
+     * @return string
+     */
     public function endColumn(): string
     {
         return 'E';

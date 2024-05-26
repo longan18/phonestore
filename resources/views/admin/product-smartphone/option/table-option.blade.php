@@ -2,10 +2,10 @@
 @forelse($options as $option)
     <tr>
         <td class="text-center">{{ $index++ }}</td>
-        <td>{{ $option->ram.'GB' }}</td>
-        <td>{{ $option->storage_capacity }}</td>
+        <td>{{ $option->ram->value }}</td>
+        <td>{{ $option->storageCapacity->value }}</td>
         <td>{{ $option->remaining_capacity_is_approx }}</td>
-        <td><p class="m-0 text-danger" style="background-color: {{ $option->hex_color }}"><b>{{ $option->color }}</b></p></td>
+        <td><div style="width: 100%; height: 38px; background-color: {{ $option->color->hex_color }}"></div></td>
         <td>{{ formatCurrency($option->price) }}</td>
         <td>{{ $option->quantity }}</td>
         <td class="text-danger"><b>Dừng bán</b></td>

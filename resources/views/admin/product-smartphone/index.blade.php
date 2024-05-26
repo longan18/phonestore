@@ -34,7 +34,6 @@
                         <th>{{ __('Hình ảnh') }}</th>
                         <th class="w-25">{{ __('Tên sản phẩm') }}</th>
                         <th>{{ __('Thương hiệu') }}</th>
-                        <th>{{ __('Số lượng') }}</th>
                         <th>{{ __('Trạng thái') }}</th>
                         <th>{{ __('Ngày tạo') }}</th>
                         <th>{{ __('Tùy chọn') }}</th>

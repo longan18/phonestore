@@ -46,7 +46,7 @@ return new class extends Migration
             'media',
             function (Blueprint $table) {
                 if (DB::getDriverName() !== 'sqlite') {
-                    $table->dropForeign('original_media_id');
+                    $table->dropForeign('media_original_media_id_foreign');
                 }
                 $table->dropColumn('original_media_id');
             }

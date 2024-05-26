@@ -14,7 +14,7 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="{{ route('admin.brands.index') }}">{{ __('Danh sách thương hiệu') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('brands.index') }}">{{ __('Danh sách thương hiệu') }}</a></li>
         </ul>
     </div>
     <div class="row justify-content-center">
@@ -23,7 +23,7 @@
                 <div class="d-flex justify-content-between">
                     <h3 class="tile-title">{{ __('Danh sách thương hiệu') }}</h3>
                     <p>
-                        <a class="btn btn-primary icon-btn" href="{{ route('admin.brands.create')  }}"><i class="fa fa-plus"></i>{{ __('Thêm mới') }}</a>
+                        <a class="btn btn-primary icon-btn" href="{{ route('brands.create')  }}"><i class="fa fa-plus"></i>{{ __('Thêm mới') }}</a>
                     </p>
                 </div>
                 <div class="w-30 ml-0 mb-3 position-relative">

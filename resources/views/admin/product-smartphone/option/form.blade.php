@@ -42,7 +42,7 @@
                     </ul>
                 @endif
                 <form id="handle-product" method="POST"
-                      action="{{ empty($productSmartphonePrice->id) ? route('smartphone.option.store') : route('smartphone.option.update') }}"
+                      action="{{ empty($productSmartphonePrice->id) ? route('smartphone.option.store') : route('smartphone.option.update', ['option' => $productSmartphonePrice->id]) }}"
                       data-redirect="{{ route('smartphone.option.index', ['product' => $product->slug]) }}" enctype="multipart/form-data">
                     <input name="id" value="{{ $productSmartphonePrice->id ?? '' }}" type="hidden">
                     <input name="item_id" value="{{ $product->smartphone->id ?? '' }}" type="hidden">
@@ -69,13 +69,27 @@
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Ram') }}<span class="text-danger">*</span></label>
-                                <input name="ram" value="{{ $productSmartphonePrice->ram ?? '' }}" class="form-control" type="text" placeholder="Nhập ram sản phẩm">
-                                <div class="error-message error_ram"></div>
+                                <select class="select2-multiple form-control w-100 filter-product" name="ram_id">
+                                    <option value="">{{ __('Ram') }}</option>
+                                    @foreach($rams as $item)
+                                        <option value="{{ $item->id }}" {{ handleSelected($item->id, $productSmartphonePrice->ram->id ?? null) }}>
+                                            {{ $item->value }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="error-message error_ram_id"></div>
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Storage capacity') }}<span class="text-danger">*</span></label>
-                                <input name="storage_capacity" value="{{ $productSmartphonePrice->storage_capacity ?? '' }}" class="form-control" type="text" placeholder="Nhập bộ nhớ sản phẩm">
-                                <div class="error-message error_storage_capacity"></div>
+                                <select class="select2-multiple form-control w-100 filter-product" name="storage_capacity_id">
+                                    <option value="">{{ __('Storage capacity') }}</option>
+                                    @foreach($storageCapacities as $item)
+                                        <option value="{{ $item->id }}" {{ handleSelected($item->id, $productSmartphonePrice->storageCapacity->id ?? null) }}>
+                                            {{ $item->value }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="error-message error_storage_capacity_id"></div>
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Remaining capacity is approx') }}</label>
@@ -84,13 +98,15 @@
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Color') }}<span class="text-danger">*</span></label>
-                                <input name="color" value="{{ $productSmartphonePrice->color ?? '' }}" class="form-control" type="text" placeholder="Nhập màu sản phẩm">
-                                <div class="error-message error_name"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label>{{ __('Hex color') }}<span class="text-danger">*</span></label>
-                                <input name="hex_color" value="{{ $productSmartphonePrice->hex_color ?? '' }}" class="form-control" type="text" placeholder="Nhập mã màu hex sản phẩm">
-                                <div class="error-message error_hex_color"></div>
+                                <select class="color-select2 select2-multiple form-control w-100 filter-product" name="color_id">
+                                    <option value="">{{ __('Color') }}</option>
+                                    @foreach($colors as $item)
+                                        <option value="{{ $item->id }}" {{ handleSelected($item->id, $productSmartphonePrice->color->id ?? null) }}>
+                                            {{ $item->color }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="error-message error_color_id"></div>
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Price') }}<span class="text-danger">*</span></label>
