@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        // Seeder viet-nam map: php artisan vietnam-map:install
         $this->call([
             AdminSeeder::class,
             BrandSeeder::class,
