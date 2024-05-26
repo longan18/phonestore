@@ -71,9 +71,12 @@ if (! function_exists('currentRoute')) {
      * @param $routeName
      * @return bool
      */
-    function currentRoute($routeName): bool
+    function currentRoute($namePrefix): bool
     {
-        if (Route::currentRouteName() == $routeName) {
+        $routeName = Route::currentRouteName();
+        $prefix = explode('.', $routeName)[0];
+
+        if ($prefix == $namePrefix || $routeName == $namePrefix) {
             return true;
         }
 

@@ -14,7 +14,18 @@ trait ProductScope
      */
     public function scopeSearch($query, $request, $categoryId): mixed
     {
-        return $query->with(['media', 'brand', 'category'])->where('category_id', $categoryId)
+        $withs = [
+            'media',
+            'brand',
+            'category'
+        ];
+
+        if ($categoryId == CATEGORY_SAMRTPHONE) {
+            array_push($withs, 'productSmartphone.productSmartphonePrice');
+        }
+
+        return $query->with($withs)
+            ->where('category_id', $categoryId)
             ->when(!empty($request->key_search), function ($q) use ($request) {
                 $q->where('name', 'like', '%' . escapeLike($request->key_search) . '%');
             });

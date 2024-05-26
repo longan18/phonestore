@@ -1,23 +1,21 @@
 <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar object-fit-cover" width="60" height="60" src="{{ $admin_composer->avatar ?? '' }}" alt="User Image">
+    <div class="app-sidebar__user">
+        <img class="app-sidebar__user-avatar object-fit-cover" width="40" height="40" src="{{ asset('admin_assets/images/avatar.jpeg') }}" alt="User Image">
         <div>
-            <p class="app-sidebar__user-name">{{ $admin_composer->full_name ?? '' }}</p>
-            <p class="app-sidebar__user-designation">Quản Lý</p>
+            <p class="app-sidebar__user-name">{{ 'Vũ Long An' }}</p>
+            <p class="app-sidebar__user-designation">Admin</p>
         </div>
     </div>
     <ul class="app-menu">
-{{--        <li><a class="app-menu__item active" href="{{ route('admin.dashboard.index') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{ __('Trang chủ') }}</span></a></li>--}}
-        <li><a class="app-menu__item @if(currentRoute('admin.dashboard.index')) active @endif" href="#" ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{ __('Trang chủ') }}</span></a></li>
-        <li class="treeview @if(currentRoute('smartphone.index') || currentRoute('brands.index')) is-expanded @endif">
-            <a class="app-menu__item @if(currentRoute('smartphone.index') || currentRoute('brands.index')) active @endif" href="#" data-toggle="treeview">
+        <li><a class="app-menu__item @if(currentRoute('admin.dashboard.index')) active @endif" href="{{ route('admin.dashboard.index') }}" ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{ __('Trang chủ') }}</span></a></li>
+        <li class="treeview @if(currentRoute('smartphone') || currentRoute('brands')) is-expanded @endif">
+            <a class="app-menu__item @if(currentRoute('smartphone') || currentRoute('brands')) active @endif" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">{{ __('Quản lý sản phẩm') }}</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-{{--                <li><a class="treeview-item" href="{{ route('admin.products.index') }}"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách sản phẩm') }}</a></li>--}}
-{{--                <li><a class="treeview-item" href="{{ route('admin.categories.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh mục sản phẩm') }}</a></li>--}}
-                <li><a class="treeview-item @if(currentRoute('smartphone.index')) active @endif" href="{{ route('smartphone.index') }}"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách điện thoại thông minh') }}</a></li>
-                <li><a class="treeview-item @if(currentRoute('brands.index')) active @endif" href="{{ route('brands.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách thương hiệu') }}</a></li>
+                <li><a class="treeview-item @if(currentRoute('smartphone')) active @endif" href="{{ route('smartphone.index') }}"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách điện thoại') }}</a></li>
+                <li><a class="treeview-item @if(currentRoute('brands')) active @endif" href="{{ route('brands.index') }}"  rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh sách thương hiệu') }}</a></li>
                 <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i>{{ __('Danh mục sản phẩm') }}</a></li>
             </ul>
         </li>
