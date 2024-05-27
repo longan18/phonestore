@@ -2,7 +2,8 @@
 
 use App\Modules\Admin\ {
     ProductSmartphone\Http\Controllers\ProductSmartphoneController,
-    ProductSmartphonePrice\Http\Controllers\ProductSmartphonePriceController
+    ProductSmartphonePrice\Http\Controllers\ProductSmartphonePriceController,
+    Product\Http\Controllers\ProductController
 };
 
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,6 @@ Route::prefix('product-smartphone')->name('smartphone.')->group(function () {
     Route::get('/{product:slug}/show', [ProductSmartphoneController::class, 'show'])->name('show');
     Route::post('/', [ProductSmartphoneController::class, 'store'])->name('store');
     Route::post('/{product:id}/update', [ProductSmartphoneController::class, 'update'])->name('update');
-    Route::post('/update-status', [ProductSmartphoneController::class, 'update'])->name('update-status');
 });
 
 // product smartphone option
@@ -24,5 +24,9 @@ Route::prefix('product-smartphone')->name('smartphone.option.')->group(function 
     Route::get('/{product:slug}/option/{option:id}/show', [ProductSmartphonePriceController::class, 'show'])->name('show');
     Route::post('/option', [ProductSmartphonePriceController::class, 'store'])->name('store');
     Route::post('/{option:id}/option/update', [ProductSmartphonePriceController::class, 'update'])->name('update');
-    Route::post('/option/update-status', [ProductSmartphonePriceController::class, 'update'])->name('update-status');
+    Route::post('/option/{option:id}/update-status', [ProductSmartphonePriceController::class, 'updateStatus'])->name('update-status');
 });
+
+// update status product
+Route::post('/{product:slug}/update-status', [ProductController::class, 'updateStatus'])->name('product.update-status');
+

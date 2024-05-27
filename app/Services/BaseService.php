@@ -5,6 +5,8 @@ namespace App\Services;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class BaseRepository.
@@ -408,5 +410,28 @@ abstract class BaseService
         }
 
         return $models;
+    }
+
+    /**
+     * Update status
+     * @param $model
+     * @param $request
+     *
+     * @return bool
+     */
+    public function updateStatus($model, $request)
+    {
+        DB::beginTransaction();
+        try {
+            $model->update($request->all());
+
+            DB::commit();
+            return true;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+        }
+
+        return false;
     }
 }

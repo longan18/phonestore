@@ -1,6 +1,9 @@
 const COMMON = (function () {
     let modules = {};
 
+    modules.STOP_SELLING = 1;
+    modules.PUBLISH = 2;
+
     modules.confirmDelete = function (handle) {
         swal({
             title: "Bạn có chắc chắn muốn xóa không?",

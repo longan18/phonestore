@@ -84,8 +84,8 @@ class ProductSmartphoneController extends Controller
 
             return $result ? $this->responseSuccess(message: __('Tạo sản phẩm thành công!'))
                 : $this->responseFailed(message: __('Tạo sản phẩm thất bại!'));
-        } catch (\Throwable $e) {
-            Log::error($e->getMessage());
+        } catch (\Exception $exception) {
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
             return $this->responseFailed(message: __('Tạo sản phẩm thất bại!'));
         }
     }
@@ -101,8 +101,8 @@ class ProductSmartphoneController extends Controller
 
             return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'))
                 : $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
-        } catch (\Throwable $e) {
-            Log::error($e->getMessage());
+        } catch (\Exception $exception) {
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
             return $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
         }
     }

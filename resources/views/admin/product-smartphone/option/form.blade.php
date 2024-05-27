@@ -34,7 +34,9 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="d-flex justify-content-between">
-                    <h3 class="tile-title">{{ __('Thêm option sản phẩm').' '. $product->slug }}</h3>
+                    <h3 class="tile-title">{{ !empty($productSmartphonePrice->id) ? __('Chỉnh sửa option sản phẩm').' '. $product->slug : __('Thêm option sản phẩm').' '. $product->slug }}
+                        <span class="{{ $product->status_action->color }}">- {{ $product->status_action->text }}</span>
+                    </h3>
                 </div>
                 @if(!empty($product->slug))
                     <ul>
@@ -117,24 +119,6 @@
                                 <label>{{ __('Quantity') }}<span class="text-danger">*</span></label>
                                 <input name="quantity" value="{{ $productSmartphonePrice->quantity ?? '' }}" class="form-control" type="text" placeholder="Nhập số lượng sản phẩm">
                                 <div class="error-message error_quantity"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label>{{ __('Status') }}<span class="text-danger">*</span></label>
-                                <select name="status" class="form-control @if(empty($productSmartphonePrice)) text-danger @endif">
-                                    @if(!empty($productSmartphonePrice))
-                                        @if($productSmartphonePrice->status == \App\Enums\Status::StopSelling->value)
-                                            <option value="{{ \App\Enums\Status::StopSelling->value }}">{{ \App\Enums\Status::StopSelling->getText() }}</option>
-                                            <option value="{{ \App\Enums\Status::Publish->value }}">{{ \App\Enums\Status::Publish->getText() }}</option>
-                                        @endif
-
-                                            <option value="{{ \App\Enums\Status::Publish->value }}">{{ \App\Enums\Status::Publish->getText() }}</option>
-                                            <option value="{{ \App\Enums\Status::StopSelling->value }}">{{ \App\Enums\Status::StopSelling->getText() }}</option>
-                                    @else
-                                        <option value="{{ \App\Enums\Status::StopSelling->value }}">{{ \App\Enums\Status::StopSelling->getText() }}</option>
-                                    @endif
-
-                                </select>
-                                <div class="error-message error_status"></div>
                             </div>
                             <div class="row mb-10">
                                 <div class="col-md-12 d-flex justify-content-end">

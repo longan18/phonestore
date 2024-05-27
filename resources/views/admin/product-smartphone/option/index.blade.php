@@ -34,7 +34,7 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="d-flex justify-content-between">
-                    <h3 class="tile-title">{{ __('Option sản phẩm').' '. $product->slug }}</h3>
+                    <h3 class="tile-title">{{ __('Option sản phẩm').' '. $product->slug }} <span class="{{ $product->status_action->color }}">- {{ $product->status_action->text }}</span></h3>
                     <p>
                         <a class="btn btn-primary icon-btn"
                            href="{{ route('smartphone.option.create', ['product' => $product->slug]) }}"><i

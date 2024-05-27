@@ -7,11 +7,5 @@ namespace App\Modules\Admin\ProductSmartphonePrice\Models\Traits;
  */
 trait ProductSmartphonePriceMethod
 {
-    /**
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'id';
-    }
+
 }

@@ -62,11 +62,11 @@ const PRODUCT = (function () {
         });
     };
 
-    modules.updateStatus = function (id, data = {}) {
+    modules.updateStatus = function (url, status = {}, elm) {
         $.ajax({
             type: 'POST',
-            url: `/admin/products/${id}`,
-            data,
+            url: url,
+            data: status,
             dataType: 'json',
             beforeSend: function () {
                 COMMON.loading(true);
@@ -74,7 +74,20 @@ const PRODUCT = (function () {
             success: function (res) {
                 if (res.success) {
                     toastr.success(res.message);
-                    modules.getList('/admin/products/');
+                    let elmMsg = elm.parents('tr').find('td.msg-status');
+                    if (res.data == COMMON.STOP_SELLING) {
+                        elm.removeClass('bg-lg-FFF-20Ef0D').addClass('bg-lg-FFF-EF0D0D');
+                        elm.attr('data-status', COMMON.STOP_SELLING);
+                        elmMsg.removeClass('text-success').addClass('text-danger');
+                        elmMsg.text('Dừng bán');
+                    } else {
+                        elm.removeClass('bg-lg-FFF-EF0D0D').addClass('bg-lg-FFF-20Ef0D');
+                        elm.attr('data-status', COMMON.PUBLISH);
+                        elmMsg.removeClass('text-danger').addClass('text-success');
+                        elmMsg.text('Đăng bán');
+                    }
+
+                    // modules.getList('/admin/products/');
                 } else {
                     toastr.error('Đã xảy ra lỗi hệ thống');
                 }
@@ -159,10 +172,13 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.update-status', function () {
-        let value = $(this).val();
-        let slug  = $(this).data('slug');
-        console.log({value, slug});
-        PRODUCT.updateStatus(id, {status})
+        let status = $(this).val();
+        let statusCheck  = $(this).attr('data-status');
+        let url = $(this).data('url');
+
+        if (status != statusCheck) {
+            PRODUCT.updateStatus(url, {status}, $(this));
+        }
     });
 
     $(`#image-upload`).change(function (data) {

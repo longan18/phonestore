@@ -90,4 +90,23 @@ class ProductSmartphonePriceController extends Controller
             return $this->responseFailed(message: __('Cập nhật option thất bại!'));
         }
     }
+
+    /**
+     * @param ProductSmartphonePrice $productPrice
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updateStatus(ProductSmartphonePrice $option, Request $request)
+    {
+        try {
+            $result = $this->productSmartphonePrice->updateStatus($option, $request);
+
+            return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'), data: $request->status)
+                : $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
+        } catch (\Exception $exception) {
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+            return $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
+        }
+    }
 }
