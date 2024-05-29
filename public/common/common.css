@@ -214,7 +214,41 @@ option {
     color: #FFFFFF;
 }
 
-
 .fw-700 {
     font-weight: 700;
+}
+
+.text-hover {
+    color: #3a3a3a !important;
+    transform: scale(1); /* Kích thước ban đầu */
+    transition: all 0.3s ease; /* Áp dụng cho tất cả thuộc tính */
+}
+
+.text-hover:hover {
+    color: red!important;
+    transform: scale(1.1); /* Phóng to khi hover */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Thêm bóng đổ khi hover */
+}
+
+.flag-new-product {
+    width: 130px;
+    padding: 2px 0px 2px 8px;
+    border-radius: 12px 0px 50px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    background-color: #f8cece;
+    color: #901d1d;
+}
+
+.item-shop-product {
+    color: #3a3a3a !important;
+    transform: scale(1); /* Kích thước ban đầu */
+    transition: all 0.3s ease; /* Áp dụng cho tất cả thuộc tính */
+}
+
+.item-shop-product:hover {
+    color: red!important;
+    transform: scale(1.05); /* Phóng to khi hover */
 }
