@@ -13,7 +13,7 @@
         <td class="{{ $product->status_action->color }} msg-status fw-700"><b>{{ $product->status_action->text }}</b></td>
         <td>{{ formatTime($product->created_at) }}</td>
         <td>
-            <button class="btn btn-warning edit-product" data-url="{{ route('smartphone.show', ['product' => $product->slug]) }}" type="button">{{ __('Sửa') }}</button>
+            <a href="{{ route('smartphone.show', ['product' => $product->slug]) }}" class="btn btn-warning">{{ __('Sửa') }}</a>
             <button class="btn btn-danger delete-product" data-id="#" type="button">{{ __('Xóa') }}</button>
             <select class="btn border-0 update-status {{ $product->status_action->bg_btn }}"
                     data-url="{{ route('product.update-status', ['product' => $product->slug]) }}"

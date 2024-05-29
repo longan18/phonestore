@@ -112,7 +112,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Price') }}<span class="text-danger">*</span></label>
-                                <input name="price" value="{{ !empty($productSmartphonePrice->price) ? formatCurrency($productSmartphonePrice->price) : '' }}" class="form-control" type="text" placeholder="Nhập tiền sản phẩm">
+                                <input name="price" data-name="price" value="{{ !empty($productSmartphonePrice->price) ? formatCurrency($productSmartphonePrice->price) : '' }}" class="form-control" type="text" placeholder="Nhập tiền sản phẩm">
                                 <div class="error-message error_price"></div>
                             </div>
                             <div class="mb-3">

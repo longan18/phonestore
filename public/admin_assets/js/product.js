@@ -121,14 +121,20 @@ const PRODUCT = (function () {
     };
 
     modules.filter = function () {
-        let data = {
-            key_search: $("input[name='key_search']").val().trim()
-        };
-        $(document).find('.filter-product').map((i, e) => {
-            data = {...data, [$(e).data('name')]: $(e).val()};
-        });
+        const form = $(`#fillter-product`);
+        const formData = new FormData(form.get(0));
+        let data = {};
+        for (const [key, value] of formData.entries()) {
+            data[key] = value;
+        }
 
-        return data;
+        return data
+        // let data = {
+        //     key_search: $("input[name='key_search']").val().trim()
+        // };
+        // $(document).find('.filter-product').map((i, e) => {
+        //     data = {...data, [$(e).data('name')]: $(e).val()};
+        // });
     };
 
     return modules;
@@ -142,18 +148,15 @@ $(document).ready(function () {
         PRODUCT.getList($(this).attr('href'), PRODUCT.filter());
     });
 
-    $(document).on('keyup', "input[name='key_search']", COMMON.debounce(function () {
-        PRODUCT.getList('/admin/products/', PRODUCT.filter());
-    }, 500));
+    $(document).on('click', '.fillter-product', function (e) {
+        e.preventDefault();
+        PRODUCT.getList($(`#fillter-product`).attr('action'), PRODUCT.filter());
+    });
 
-    $(document).on('keyup, change', '.filter-product', COMMON.debounce(function () {
-        PRODUCT.getList('/admin/products/', PRODUCT.filter());
-    }, 500));
-
-    $(document).on('keyup', 'input[name="price"]', COMMON.debounce(function () {
-        let data = $(this).val().replaceAll(',', '');
-        $(this).val(data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-    }, 200));
+    // $(document).on('keyup', 'input[name="price"]', COMMON.debounce(function () {
+    //     let data = $(this).val().replaceAll(',', '');
+    //     $(this).val(data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+    // }, 200));
 
 
     $(document).on('click', '.delete-product', function () {
@@ -165,10 +168,6 @@ $(document).ready(function () {
                 )
             })
         })
-    });
-
-    $(document).on('click', '.edit-product', function () {
-        window.location.href = $(this).data('url');
     });
 
     $(document).on('click', '.update-status', function () {

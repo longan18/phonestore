@@ -25,5 +25,4 @@
 <!-- Font-icon css-->
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-@vite('resources/scss/common.scss')
 @yield('css-after')

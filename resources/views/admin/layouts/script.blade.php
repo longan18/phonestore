@@ -35,7 +35,20 @@
             });
     }
 
+
     $(document).ready(function() {
+        $(document).on('input', 'input[data-name="price"]', function () {
+            let value = $(this).val();
+            let valueReplace = value.replace(/[^0-9]/g, '');
+            let valuePrice = Number(valueReplace);
+
+            if (valuePrice == 0) {
+                valuePrice = '';
+            }
+
+            $(this).val(formattedPrice(valuePrice));
+        });
+
         // Select2 Multiple
         $('.select2-multiple').select2({
             placeholder: "Lựa chọn",
@@ -46,5 +59,16 @@
             format: 'dd/mm/yyyy',
             autoclose: true
         });
+
+        const formattedPrice = (value) => {
+            let valuePrice = value.toLocaleString('vi-VN',
+                {
+                    style: 'currency',
+                    currency: 'VND'
+                }
+            ).slice(0, -2);
+
+            return valuePrice.replace(/\./g, ',');
+        }
     });
 </script>

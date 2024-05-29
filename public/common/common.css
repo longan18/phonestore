@@ -1,3 +1,19 @@
+.w-10 {
+    width: 10% !important;
+}
+
+.w-15 {
+    width: 15% !important;
+}
+
+.w-20 {
+    width: 20% !important;
+}
+
+.w-60 {
+    width: 60% !important;
+}
+
 .w-40 {
     width: 40% !important;
 }
@@ -132,18 +148,6 @@
     font-size: 20px;
 }
 
-.w-10 {
-    width: 10% !important;
-}
-
-.w-15 {
-    width: 15% !important;
-}
-
-.w-20 {
-    width: 20% !important;
-}
-
 .datepicker.datepicker-dropdown {
     top: 277px !important;
 }
@@ -177,4 +181,40 @@
     position: absolute;
     top: 17px;
     right: 14px
+}
+
+.bg-lg-FFF-EF0D0D {
+    background: linear-gradient(270deg, #FFF -11.66%, #ef0d0d 115.31%);
+}
+.bg-lg-FFF-20Ef0D {
+    background: linear-gradient(270deg, #FFF -11.66%, #20ef0d 115.31%);
+}
+.bg-lg-FFF-E7Ef06 {
+    background: linear-gradient(270deg, #FFF -11.66%, #e7ef06 115.31%);
+}
+
+option {
+    color: #000000;
+}
+
+.btn-blue {
+    border-radius: 4px;
+    border: none;
+    color: #FFFFFF;
+    background-color: rgba(14, 101, 234, 0.76);
+}
+
+.btn-blue:hover {
+    background-color: rgba(14, 101, 234, 0.76);
+    color: #FFFFFF;
+}
+
+.btn-blue:active {
+    background-color: rgba(14, 101, 234, 0.76);
+    color: #FFFFFF;
+}
+
+
+.fw-700 {
+    font-weight: 700;
 }
