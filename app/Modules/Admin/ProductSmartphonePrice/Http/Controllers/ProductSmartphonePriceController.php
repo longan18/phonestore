@@ -33,7 +33,7 @@ class ProductSmartphonePriceController extends Controller
      */
     public function index(Product $product)
     {
-        $options = $this->productSmartphonePrice->getByItemId($product->smartphone->id);
+        $options = $this->productSmartphonePrice->getByProductId($product->id);
         return view('admin.product-smartphone.option.index', compact('product', 'options'));
     }
 

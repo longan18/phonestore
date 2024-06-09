@@ -42,7 +42,7 @@ class ProductSmartphonepriceImport implements ToModel, WithHeadingRow, WithColum
         }
 
         return new ProductSmartphonePrice([
-            'item_id' => $row['item_id'],
+            'product_id' => $row['product_id'],
             'ram_id' => $row['ram_id'],
             'storage_capacity_id' => $row['storage_capacity_id'],
             'remaining_capacity_is_approx' => $row['remaining_capacity_is_approx'],

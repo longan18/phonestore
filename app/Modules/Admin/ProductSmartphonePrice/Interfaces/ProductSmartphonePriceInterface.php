@@ -17,5 +17,11 @@ interface ProductSmartphonePriceInterface
      * @param $itemId
      * @return mixed
      */
-    public function getByItemId($itemId);
+    public function getByProductId($itemId);
+
+    /**
+     * @param $requestArray
+     * @return mixed
+     */
+    public function getOptionProduct($requestArray);
 }

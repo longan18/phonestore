@@ -4,8 +4,27 @@
     {{ __('Trang chủ') }}
 @endsection
 
+@section('style_css')
+    @vite('resources/scss/client/item-product.scss')
+@endsection
+
 @section('content')
     @include('client.layouts.banner_home')
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hero__item set-bg w-100 object-fit-cover" data-setbg="{{ asset('client_assets/img/hero/banner.jpg') }}">
+                    <div class="hero__text">
+                        <span>FRUIT FRESH</span>
+                        <h2>Vegetable <br />100% Organic</h2>
+                        <p>Free Pickup and Delivery Available</p>
+                        <a href="#" class="primary-btn">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {{--    @include('client.home.brand_slide')--}}
     <section class="featured spad">
         <div class="container">
@@ -16,21 +35,26 @@
                     </div>
                 </div>
             </div>
-            <div class="row featured__filter">
-                @for($i = 0; $i <= 10; $i++)
-                    @php
-                        $dataFake = [
-                            'name' => fake()->name,
-                            'current_price' => '29,590,000',
-                            'sell_price' => '30,590,000',
-                            'new_product' => rand(0, 1),
-                            'link_detail' => '#'
-                        ];
-                    @endphp
-
-                    <x-product-shop-item :product="$dataFake" />
-                @endfor
+            <div class="listproduct">
+               @foreach($products as $item)
+                   <x-product-shop-item :product="$item"/>
+               @endforeach
             </div>
+{{--            <div class="row featured__filter">--}}
+{{--                @for($i = 0; $i <= 10; $i++)--}}
+{{--                    @php--}}
+{{--                        $dataFake = [--}}
+{{--                            'name' => fake()->name,--}}
+{{--                            'current_price' => '29,590,000',--}}
+{{--                            'sell_price' => '30,590,000',--}}
+{{--                            'new_product' => rand(0, 1),--}}
+{{--                            'link_detail' => '#'--}}
+{{--                        ];--}}
+{{--                    @endphp--}}
+
+{{--                    <x-product-shop-item :product="$dataFake" />--}}
+{{--                @endfor--}}
+{{--            </div>--}}
         </div>
     </section>
 
@@ -311,4 +335,7 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script_js')
+    <script src="{{ asset('client_assets/js/product-item.js') }}"></script>
 @endsection

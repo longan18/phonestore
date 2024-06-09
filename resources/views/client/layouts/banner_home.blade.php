@@ -1,7 +1,8 @@
 <section class="hero">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 w-100 mb-5">
+{{--            <div class="col-lg-12 w-100 mb-5">--}}
+            <div class="col-lg-12 w-100">
                 <div class="hero__search">
                     <div class="hero__search__form">
                         <form action="#">
@@ -23,16 +24,6 @@
                     <a href="#">
                         <div class="text-hover"><i class="fa fa-mobile"></i><span class="ml-2">Điện thoại thông minh</span></div>
                     </a>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="hero__item set-bg w-100 object-fit-cover" data-setbg="{{ asset('client_assets/img/hero/banner.jpg') }}">
-                    <div class="hero__text">
-                        <span>FRUIT FRESH</span>
-                        <h2>Vegetable <br />100% Organic</h2>
-                        <p>Free Pickup and Delivery Available</p>
-                        <a href="#" class="primary-btn">SHOP NOW</a>
-                    </div>
                 </div>
             </div>
         </div>

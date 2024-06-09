@@ -1,24 +1,44 @@
-<div class="col-6 col-md-4 col-lg-3 item-shop-product">
-    <div class="featured__item">
-        <div class="featured__item__pic">
-            <img src="{{ asset('images/img-product-600x600.jpg') }}" alt="">
-            @if($product['new_product'])
-                <div class="flag-new-product">
-                    <b>Sản phẩm mới</b>
-                </div>
-            @endif
-            <ul class="featured__item__pic__hover">
-                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+<div class="item d-flex flex-column justify-content-between">
+    <a href="{{ route('client.product.detail', ['product' => $product->slug]) }}">
+        <div class="item-label">
+            <span class="lb-tragop">Trả góp 0%</span>
+        </div>
+        <div class="item-img item-img_42">
+            <img class="thumb" src="https://cdn.tgdd.vn/Products/Images/42/305659/iphone-15-pro-max-black-thumbnew-600x600.jpg" alt="iPhone 15 Pro Max">
+        </div>
+        <h3>{{ $product->name }}</h3>
+        <div class="item-compare gray-bg">
+            <ul>
+                <li>{{ $product->productSmartphone->widescreen.'"' }}</li>
+                <li>{{ $product->productSmartphone->screen_technology }}</li>
             </ul>
         </div>
-        <div class="featured__item__text">
-            <h6><a href="#">{{ $product['name'] }}</a></h6>
-            <div class="d-flex justify-content-between">
-                <div class="currency-text">29,590,000<sup>đ</sup></div>
-                <div class="sell-text">30,590,000<sup>đ</sup></div>
-            </div>
+        <div class="prods-group">
+            <ul>
+                @php
+                    $uniqueArray = [];
+                    $arrayPrice = [];
+                    foreach($product->productSmartphonePrice as $item) {
+                        $ram_storageCapacity = $item->ram->value.' - '.$item->storageCapacity->value;
+                         if (!in_array($ram_storageCapacity, $uniqueArray)) {
+                                $uniqueArray[] = $ram_storageCapacity;
+                                $arrayPrice[] = ['id' => $item->id, 'price' => $item->price];
+                         }
+                    }
+                @endphp
+
+                @foreach($uniqueArray as $key => $value)
+                    <li class="merge__item {{ $key == 0 ? 'act' : '' }}" data-url="" data-id="{{ $arrayPrice[$key]['id'] }}"
+                        data-price="{{ $arrayPrice[$key]['price'] }}">{{ $value }}</li>
+                @endforeach
+            </ul>
         </div>
+    </a>
+    <div>
+        <div class="box-p d-none">
+            <p class="price-old black">40.990.000₫</p>
+            <span class="percent">-12%</span>
+        </div>
+        <strong><span class="price">{{ formatCurrency($arrayPrice[0]['price']) }}</span><sup>đ</sup></strong>
     </div>
 </div>

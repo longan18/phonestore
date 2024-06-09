@@ -7,6 +7,9 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/scss/common.scss',
+                'resources/scss/client/top-bar.scss',
+                'resources/scss/client/item-product.scss',
             ],
             refresh: true,
         }),

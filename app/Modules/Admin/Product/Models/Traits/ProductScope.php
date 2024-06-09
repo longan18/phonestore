@@ -21,7 +21,7 @@ trait ProductScope
         ];
 
         if ($categoryId == CATEGORY_SAMRTPHONE) {
-            array_push($withs, 'productSmartphone.productSmartphonePrice');
+            array_push($withs, 'productSmartphone', 'productSmartphonePrice');
         }
 
         return $query->with($withs)
@@ -43,16 +43,9 @@ trait ProductScope
                     }
             )->when(
                 !empty($request->start_price) || !empty($request->end_price),
-                function ($q) use ($request) {
-                    $q->join('product_smartphone', 'products.id', '=', 'product_smartphone.product_id')
-                        ->join('product_smartphone_price', 'product_smartphone.id', '=', 'product_smartphone_price.item_id');
-
-                    if (!empty($request->start_price) && !empty($request->end_price)) {
-                        $q->whereBetween('product_smartphone_price.price', [str_replace(',', '', $request->start_price), str_replace(',', '', $request->end_price)]);
-                    } elseif (!empty($request->start_price)) {
-                        $q->where('product_smartphone_price.price', '>=', str_replace(',', '', $request->start_price));
-                    } elseif (!empty($request->end_price)) {
-                        $q->where('product_smartphone_price.price', '<=', str_replace(',', '', $request->end_price));
+                function ($q) use ($request, $categoryId) {
+                    if ($categoryId == CATEGORY_SAMRTPHONE) {
+                        return $this->querySmartphonePrice($q, $request);
                     }
                 }
             )->when(
@@ -67,5 +60,20 @@ trait ProductScope
                     }
                 }
             );
+    }
+
+    private function querySmartphonePrice($query, $request)
+    {
+        $query = $query->join('product_smartphone_price', 'products.id', '=', 'product_smartphone_price.product_id');
+
+        if (!empty($request->start_price) && !empty($request->end_price)) {
+            $query->whereBetween('product_smartphone_price.price', [str_replace(',', '', $request->start_price), str_replace(',', '', $request->end_price)]);
+        } elseif (!empty($request->start_price)) {
+            $query->where('product_smartphone_price.price', '>=', str_replace(',', '', $request->start_price));
+        } elseif (!empty($request->end_price)) {
+            $query->where('product_smartphone_price.price', '<=', str_replace(',', '', $request->end_price));
+        }
+
+        return $query->select('products.*')->groupBy('products.id');
     }
 }

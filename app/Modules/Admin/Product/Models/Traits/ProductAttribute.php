@@ -5,6 +5,7 @@ namespace App\Modules\Admin\Product\Models\Traits;
 use App\Enums\Status;
 use App\Enums\TagMedia;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @ProductAttribute

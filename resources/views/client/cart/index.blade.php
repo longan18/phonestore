@@ -12,7 +12,7 @@
                     <div class="breadcrumb__text">
                         <h2>{{ __('Giỏ hàng') }}</h2>
                         <div class="breadcrumb__option">
-                            <a href="{{ route('client.home.index') }}">{{ __('Trang chủ') }}</a>
+                            <a href="#">{{ __('Trang chủ') }}</a>
                             <span>{{ __('Giỏ hàng') }}</span>
                         </div>
                     </div>

@@ -34,7 +34,7 @@ class ProductSmartphonePrice extends Model
 
     protected $fillable = [
         'id',
-        'item_id',
+        'product_id',
         'ram_id',
         'storage_capacity_id',
         'remaining_capacity_is_approx',

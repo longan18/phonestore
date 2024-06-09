@@ -1,1 +1,35 @@
+@import "./each";
+
+$colors: '757575','DD2222';
+
+@each $color in $colors {
+    .color-#{$color} {
+        color: #{'#'}#{$color} !important;
+    }
+}
+
+
+.text-hover {
+    color: #3a3a3a !important;
+    transform: scale(1); /* Kích thước ban đầu */
+    transition: all 0.3s ease; /* Áp dụng cho tất cả thuộc tính */
+
+    &:hover {
+        color: red!important;
+        transform: scale(1.1); /* Phóng to khi hover */
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Thêm bóng đổ khi hover */
+    }
+}
+
+.noselect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.act {
+    border-color: #2f80ed !important;
+    color: #2f80ed !important;
+}
 

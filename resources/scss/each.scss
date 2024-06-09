@@ -1,0 +1,13 @@
+@use "./array";
+
+@each $width in array.$widths {
+    .w-#{$width} {
+        width: #{$width}#{"%"} !important;
+    }
+}
+
+@each $fs in array.$fontSizes {
+    .fs-#{$fs} {
+        font-size: #{$fs}#{"px"} !important;
+    }
+}

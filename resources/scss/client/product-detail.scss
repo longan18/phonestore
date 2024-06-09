@@ -1,0 +1,19 @@
+.item-attr {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 123px));
+    gap: 20px;
+
+    > div:hover {
+        cursor: pointer;
+        border-color: #2f80ed !important;
+        color: #2f80ed !important;
+    }
+
+    .border-non-act {
+        border: 1px solid #c5c3c3;
+    }
+
+    .h-43px {
+        height: 43px;
+    }
+}

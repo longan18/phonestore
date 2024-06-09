@@ -31,18 +31,18 @@
                         <div class="form-block">
                             <div class="mb-4">
                                 @if(session('errorMessage'))
-                                <span class="color-red font-20">{{ session('errorMessage') }}</span>
+                                <span class="color-red fs-20">{{ session('errorMessage') }}</span>
                                 @endif
                                 <h3>{{ __('Đăng nhập') }}</h3>
                             </div>
-                            <form action="{{ route('client.login') }}" method="post">
+                            <form action="#" method="post">
                                 @csrf
                                 <div class="form-group first mb-0 mt-3">
                                     <label for="user_name">{{ __('Số điện thoại/Email:') }}</label>
                                     <input type="text" class="form-control" id="user_name" name="phone">
                                 </div>
                                 @error('phone')
-                                <span class="color-red font-12">{{ $message }}</span>
+                                <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
 
                                 <div class="form-group last mb-0 mt-3">
@@ -50,7 +50,7 @@
                                     <input type="password" class="form-control" id="password" name="password">
                                 </div>
                                 @error('password')
-                                <span class="color-red font-12">{{ $message }}</span>
+                                <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
 
                                 <div class="d-flex mb-5 align-items-center mt-5">
@@ -78,7 +78,7 @@
                                 </div>
 
                                 <span class="d-block text-center my-4 text-muted">{{ __('Bạn mới biết đến shop?') }}
-                                    <a href="{{ route('client.registerView') }}" style="text-decoration: none"><b style="color: red; cursor: pointer">{{ __('Đăng ký') }}</b></a>
+                                    <a href="{{ route('client.page-register') }}" style="text-decoration: none"><b style="color: red; cursor: pointer">{{ __('Đăng ký') }}</b></a>
                                 </span>
                             </form>
                         </div>

@@ -39,7 +39,7 @@
                                 <ul>
                                     @if(auth()->user())
                                         <li><a href="#">{{ __('Hồ sơ') }}</a></li>
-                                        <li><a href="{{ route('client.logout') }}">{{ __('Đăng xuất') }}</a></li>
+                                        <li><a href="#">{{ __('Đăng xuất') }}</a></li>
                                     @else
 
                                     @endif
@@ -47,7 +47,7 @@
                             </div>
                         @else
                             <div class="header__top__right__auth">
-                                <a href="#">{{ __('Đăng nhập') }}</a>
+                                <a href="{{ route('client.page-login')}}">{{ __('Đăng nhập') }}</a>
                             </div>
                         @endif
                     </div>
@@ -65,7 +65,7 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="#">{{ __('Trang chủ') }}</a></li>
+                        <li class="active"><a href="{{ route('client.home') }}">{{ __('Trang chủ') }}</a></li>
                         <li><a href="./shop-grid.html">{{ __('Gian hàng') }}</a></li>
 {{--                        <li><a href="#">Pages</a>--}}
 {{--                            <ul class="header__menu__dropdown">--}}
@@ -83,10 +83,17 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a href="#"><i class="fa fa-heart"></i>
+                                <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite">0</div>
+                            </a></li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-shopping-bag"></i>
+                                <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite">0</div>
+                            </a>
+                        </li>
                     </ul>
-{{--                    <div class="header__cart__price">item: <span>$150.00</span></div>--}}
+                    <div class="header__cart__price">item: <span>{{ shorten_numbers(29590000) }}<sup>đ</sup></span></div>
                 </div>
             </div>
         </div>

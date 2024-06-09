@@ -45,6 +45,7 @@ class ProductSmartphoneController extends Controller
     public function index(Request $request): Application|Factory|View|JsonResponse
     {
         $products = $this->product->search($request, CATEGORY_SAMRTPHONE);
+
         if ($request->ajax()) {
             $view = view('admin.product-smartphone.table', compact('products'))->render();
             $paginate = view('admin.pagination.index')->with(['data' => $products])->render();

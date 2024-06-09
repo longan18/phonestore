@@ -54,7 +54,7 @@ if (! function_exists('formatCurrency')) {
     function formatCurrency($currency, string $currencyUnit = '', bool $after = true): int|string
     {
         if (isset($currency) && $currency != '') {
-            $format = number_format($currency, 0, ',', ',');
+            $format = number_format($currency, 0, ',', '.');
             if ($after && isset($format)) {
                 return $format . $currencyUnit;
             }
@@ -81,6 +81,22 @@ if (! function_exists('currentRoute')) {
         }
 
         return false;
+    }
+}
+
+if (!function_exists('shorten_numbers')) {
+    /**
+     * 1000 => 1K
+     * 16000000 => 16M
+     * 1234567890 => 1.2B
+     *
+     * @param $number
+     * @return string
+     */
+    function shorten_numbers($number) {
+        $units = ['', 'K', 'M', 'B', 'T'];
+        $power = floor(log($number, 1000));
+        return round($number / pow(1000, $power), 1) . $units[$power];
     }
 }
 

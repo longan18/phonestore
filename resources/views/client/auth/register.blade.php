@@ -32,7 +32,7 @@
                             <div class="mb-4">
                                 <h3>{{ __('Đăng ký') }}</h3>
                             </div>
-                            <form action="{{ route('client.register') }}" method="post">
+                            <form action="#" method="post">
                                 @csrf
 
                                 <div class="form-group first mb-0 mt-3 {{ old('phone') ? 'field--not-empty' : '' }}">
@@ -40,7 +40,7 @@
                                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                                 </div>
                                 @error('name')
-                                <span class="color-red font-12">{{ $message }}</span>
+                                <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
 
                                 <div class="form-group first mb-0 mt-3 {{ old('phone') ? 'field--not-empty' : '' }}">
@@ -48,7 +48,7 @@
                                     <input type="number" class="form-control" id="phone" name="phone" value="{{ old('phone') }}">
                                 </div>
                                 @error('phone')
-                                <span class="color-red font-12">{{ $message }}</span>
+                                <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
 
                                 <div class="form-group first mb-0 mt-3 {{ old('email') ? 'field--not-empty' : '' }}">
@@ -56,7 +56,7 @@
                                     <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}">
                                 </div>
                                 @error('email')
-                                <span class="color-red font-12">{{ $message }}</span>
+                                <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
 
                                 <div class="form-group last mb-0 mt-3">
@@ -64,7 +64,7 @@
                                     <input type="password" class="form-control" id="password" name="password">
                                 </div>
                                 @error('password')
-                                <span class="color-red font-12">{{ $message }}</span>
+                                <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
 
                                 <div class="form-group last mb-5 mt-3">
@@ -86,7 +86,7 @@
                                     </a>
                                 </div>
                                 <span class="d-block text-center my-4 text-muted">{{ __('Bạn đã có tài khoản?') }}
-                                    <a href="{{ route('client.loginView') }}" style="text-decoration: none"><b style="color: red; cursor: pointer">{{ __('Đăng nhập') }}</b></a>
+                                    <a href="{{ route('client.page-login') }}" style="text-decoration: none"><b style="color: red; cursor: pointer">{{ __('Đăng nhập') }}</b></a>
                                 </span>
                             </form>
                         </div>

@@ -75,7 +75,6 @@ h6 {
 
 p {
 	font-size: 16px;
-	font-family: "Cairo", sans-serif;
 	color: #6f6f6f;
 	font-weight: 400;
 	line-height: 26px;
@@ -1711,8 +1710,6 @@ ol {
 
 .product__details__text .primary-btn {
 	padding: 16px 28px 14px;
-	margin-right: 6px;
-	margin-bottom: 5px;
 }
 
 .product__details__text .heart-icon {

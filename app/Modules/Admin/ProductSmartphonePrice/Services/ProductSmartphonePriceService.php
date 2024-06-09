@@ -39,7 +39,7 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
            $dataArr['price'] = str_replace(',', '', $dataArr['price']);
            $dataArr['id'] = $request->id ?? null;
 
-           $model = $this->model::upsertWithReturn($dataArr, ['id', 'item_id'], $this->model->getFillable());
+           $model = $this->model::upsertWithReturn($dataArr, ['id', 'product_id'], $this->model->getFillable());
            $this->media->uploadAvatar($model, $request);
 
             DB::commit();
@@ -52,10 +52,19 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
         return false;
     }
 
-    public function getByItemId($itemId)
+    public function getByProductId($itemId)
     {
         return $this->with(['ram', 'color', 'storageCapacity'])
-            ->where('item_id', $itemId)
+            ->where('product_id', $itemId)
+            ->get();
+    }
+
+    public function getOptionProduct($data)
+    {
+        return $this->with(['ram', 'color', 'storageCapacity'])
+            ->where('product_id', $data['product_id'])
+            ->where('ram_id', $data['ram_id'])
+            ->where('storage_capacity_id', $data['storage_capacity_id'])
             ->get();
     }
 }
