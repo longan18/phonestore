@@ -20,5 +20,6 @@
 <link rel="stylesheet" href="{{ asset('client_assets/css/style.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('client_assets/css/my_style.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('common/common.css') }}" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ asset('common/toastr.min.css') }}">
 @vite(['resources/scss/common.scss','resources/scss/client/top-bar.scss'])
 @yield('style_css')

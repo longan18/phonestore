@@ -1,5 +1,5 @@
 $(function () {
-    $("li").on('click', function (event) {
+    $("li.merge__item ").on('click', function (event) {
         event.preventDefault();
         let price = $(this).data('price');
         $(this).parents('.prods-group').find('.merge__item').removeClass('act');

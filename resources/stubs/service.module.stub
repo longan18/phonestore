@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 use App\Modules\{{ path }}\Interfaces\{{ nameModule }}Interface;
 use App\Modules\{{ path }}\Models\{{ nameModule }};
-use App\Modules\Media\Interfaces\MediaInterface;
 use App\Services\BaseService;
 
 /**
@@ -19,11 +18,9 @@ class {{ nameModule }}Service extends BaseService implements {{ nameModule }}Int
 
     /**
      * @param {{ nameModule }} ${{ name }}
-     * @param MediaInterface $media
      */
-    public function __construct({{ nameModule }} ${{ name }}, MediaInterface $media)
+    public function __construct({{ nameModule }} ${{ name }})
     {
         $this->model = ${{ name }};
-        $this->media = $media;
     }
 }

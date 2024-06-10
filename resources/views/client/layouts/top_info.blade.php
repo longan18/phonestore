@@ -27,22 +27,18 @@
                                 <li><a href="#">{{ __('English') }}</a></li>
                             </ul>
                         </div>
-                        @if(auth()->user())
+                        @if(auth()->guard(GUARD_WEB)->check())
                             <div class="header__top__right__language">
                                 <div>
                                     <a href="#" style="color: #1c1c1c">
                                         <i class="fa fa-user"></i>
-{{--                                        {{ auth()->user()->name }}--}}
+                                        {{ auth()->guard(GUARD_WEB)->user()->name }}
                                     </a>
                                 </div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    @if(auth()->user())
-                                        <li><a href="#">{{ __('Hồ sơ') }}</a></li>
-                                        <li><a href="#">{{ __('Đăng xuất') }}</a></li>
-                                    @else
-
-                                    @endif
+                                    <li><a href="{{ route('client.infor.index', ['user' => auth()->guard(GUARD_WEB)->user()->id]) }}">{{ __('Hồ sơ') }}</a></li>
+                                    <li><a href="{{ route('client.logout') }}">{{ __('Đăng xuất') }}</a></li>
                                 </ul>
                             </div>
                         @else

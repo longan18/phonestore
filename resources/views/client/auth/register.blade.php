@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="{{ asset('client_assets/css/style_login.css') }}">
 
     <title>{{ __('Đăng ký') }}</title>
+    <style>
+        input {
+            font-size: 17px !important;
+        }
+    </style>
 </head>
 <body>
 <div class="content">
@@ -28,63 +33,57 @@
             <div class="col-md-6 contents">
                 <div class="row justify-content-center">
                     <div class="col-md-12">
-                        <div class="form-block">
+                        <div class="form-block btn-pill">
                             <div class="mb-4">
                                 <h3>{{ __('Đăng ký') }}</h3>
                             </div>
-                            <form action="#" method="post">
+                            <form action="{{ route('client.register') }}" method="post">
                                 @csrf
 
-                                <div class="form-group first mb-0 mt-3 {{ old('phone') ? 'field--not-empty' : '' }}">
+                                <div class="form-group first mb-0 mt-4 {{ old('phone') ? 'field--not-empty' : '' }}">
                                     <label for="name">{{ __('Họ tên:') }}</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+                                    <input type="text" class="form-control" name="name" value="" autocomplete="off">
                                 </div>
                                 @error('name')
                                 <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
 
-                                <div class="form-group first mb-0 mt-3 {{ old('phone') ? 'field--not-empty' : '' }}">
+                                <div class="form-group first mb-0 mt-4 {{ old('phone') ? 'field--not-empty' : '' }}">
                                     <label for="phone">{{ __('Số điện thoại:') }}</label>
-                                    <input type="number" class="form-control" id="phone" name="phone" value="{{ old('phone') }}">
+                                    <input type="text" class="form-control" name="phone" value="" autocomplete="off">
                                 </div>
                                 @error('phone')
                                 <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
 
-                                <div class="form-group first mb-0 mt-3 {{ old('email') ? 'field--not-empty' : '' }}">
+                                <div class="form-group first mb-0 mt-4 {{ old('email') ? 'field--not-empty' : '' }}">
                                     <label for="email">{{ __('Email:') }}</label>
-                                    <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}">
+                                    <input type="text" class="form-control" name="email" value="" autocomplete="off">
                                 </div>
                                 @error('email')
                                 <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
 
-                                <div class="form-group last mb-0 mt-3">
+                                <div class="form-group last mb-0 mt-4">
                                     <label for="password">{{ __('Mật khẩu:') }}</label>
-                                    <input type="password" class="form-control" id="password" name="password">
+                                    <input type="password" class="form-control" name="password" autocomplete="off">
                                 </div>
                                 @error('password')
                                 <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
-
-                                <div class="form-group last mb-5 mt-3">
-                                    <label for="password_confirmation">{{ __('Mật khẩu:') }}</label>
-                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                                <div class="form-group last mb-5 mt-4">
+                                    <label for="password_confirmation">{{ __('Nhập lại mật khẩu:') }}</label>
+                                    <input type="password" class="form-control" name="password_confirmation" autocomplete="off">
+                                    @error('password_confirmation')
+                                    <span class="color-red fs-12">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
-                                <button type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-auth-action" style="background-color: #38d39f">{{ __('Đăng ký') }}</button>
-                                <span class="d-block text-center my-4 text-muted">{{ __('Lựa chọn đăng ký khác') }}</span>
-                                <div class="social-login text-center">
-                                    <a href="#" class="facebook">
-                                        <span class="icon-facebook mr-3"></span>
-                                    </a>
-                                    <a href="#" class="twitter">
-                                        <span class="icon-twitter mr-3"></span>
-                                    </a>
-                                    <a href="#" class="google">
-                                        <span class="icon-google mr-3"></span>
-                                    </a>
-                                </div>
+                                @if(session()->has('status') && !session()->get('status'))
+                                    <div class="text-center mb-2 text-danger"><span>Đăng ký thất bại, vui lòng thử lại</span></div>
+                                @endif
+                                <button type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-auth-action font-weight-bold"
+                                        style="background-color: #38d39f">{{ __('Đăng ký') }}</button>
                                 <span class="d-block text-center my-4 text-muted">{{ __('Bạn đã có tài khoản?') }}
                                     <a href="{{ route('client.page-login') }}" style="text-decoration: none"><b style="color: red; cursor: pointer">{{ __('Đăng nhập') }}</b></a>
                                 </span>

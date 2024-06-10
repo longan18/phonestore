@@ -39,6 +39,9 @@ class Authenticate extends Middleware
             if ($this->guards[0] == GUARD_ADMIN) {
                 return route('admin.page-login');
             }
+            if ($this->guards[0] == GUARD_WEB) {
+                return route('client.page-login');
+            }
         }
     }
 }

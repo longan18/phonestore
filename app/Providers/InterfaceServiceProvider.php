@@ -18,8 +18,12 @@ use App\Modules\Admin\Ram\Interfaces\RamInterface;
 use App\Modules\Admin\Ram\Services\RamService;
 use App\Modules\Admin\StorageCapacity\Interfaces\StorageCapacityInterface;
 use App\Modules\Admin\StorageCapacity\Services\StorageCapacityService;
+use App\Modules\Client\Account\Interfaces\AccountUserInterface;
+use App\Modules\Client\Account\Services\AccountUserService;
 use App\Modules\Client\Home\Interfaces\HomeInterface;
 use App\Modules\Client\Home\Services\HomeService;
+use App\Modules\Client\Profile\Interfaces\ProfileInterface;
+use App\Modules\Client\Profile\Services\ProfileService;
 use App\Modules\Client\Shop\Interfaces\ShopInterface;
 use App\Modules\Client\Shop\Services\ShopService;
 use App\Modules\Media\Interfaces\MediaInterface;
@@ -27,6 +31,7 @@ use App\Modules\Media\Services\MediaService;
 use App\Modules\ShoppingCart\Interfaces\ShoppingCartInterface;
 use App\Modules\ShoppingCart\Services\ShoppingCartService;
 use App\Modules\ShoppingItem\Interfaces\ShoppingItemInterface;
+use App\Modules\ShoppingItem\Services\ShoppingItemService;
 use App\Modules\ShoppingSession\Interfaces\ShoppingSessionInterface;
 use App\Modules\ShoppingSession\Services\ShoppingSessionService;
 use Illuminate\Support\ServiceProvider;
@@ -54,7 +59,9 @@ class InterfaceServiceProvider extends ServiceProvider
         $this->app->singleton(ShopInterface::class, ShopService::class);
         $this->app->singleton(ShoppingCartInterface::class, ShoppingCartService::class);
         $this->app->singleton(ShoppingSessionInterface::class, ShoppingSessionService::class);
-        $this->app->singleton(ShoppingItemInterface::class, ShoppingItemInterface::class);
+        $this->app->singleton(ShoppingItemInterface::class, ShoppingItemService::class);
+        $this->app->singleton(AccountUserInterface::class, AccountUserService::class);
+        $this->app->singleton(ProfileInterface::class, ProfileService::class);
     }
 
     /**
