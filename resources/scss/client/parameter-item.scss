@@ -1,0 +1,55 @@
+.modal-body {
+    &::-webkit-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+        overflow-y: scroll;
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .parameter-item {
+        p {
+            -webkit-margin-before: 0;
+            -webkit-margin-after: 0;
+            -webkit-margin-start: 0;
+            -webkit-margin-end: 0;
+            text-rendering: geometricPrecision;
+        }
+
+        .parameter-ttl {
+            background-color: #f1f1f1;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .ulist {
+            li {
+                border-bottom: 1px solid #f1f1f1;
+                display: flex;
+                padding: 10px;
+
+                .ctLeft {
+                    font-weight: bold;
+                    line-height: 21px;
+                    width: 30%;
+                }
+
+                .ctRight {
+                    line-height: 21px;
+                    padding-left: 10px;
+                    width: 70%;
+
+                    > ul {
+                        display: block;
+                        list-style-type: disc;
+
+                        li {
+                            padding: 0px;
+                            border: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

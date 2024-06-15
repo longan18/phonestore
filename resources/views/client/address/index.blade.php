@@ -60,7 +60,7 @@
         </div>
 
         <!-- Modal -->
-        <x-modal-address title="Thêm mới địa chỉ giao hàng">
+        <x-modal-basic-center title="Thêm mới địa chỉ giao hàng">
             <div style="display: grid; gap: 16px">
                 <div>
                     <label class="w-50">Chọn tỉnh/thành phố</label>
@@ -92,7 +92,7 @@
                     <p class="text-danger error-msg m-0"></p>
                 </div>
             </div>
-        </x-modal-address>
+        </x-modal-basic-center>
     </section>
 @endsection
 

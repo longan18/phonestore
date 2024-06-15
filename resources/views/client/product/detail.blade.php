@@ -5,7 +5,10 @@
 @endsection
 
 @section('style_css')
-    @vite('resources/scss/client/product-detail.scss')
+    @vite([
+        'resources/scss/client/product-detail.scss',
+        'resources/scss/client/parameter-item.scss',
+    ])
 @endsection
 
 @section('content')
@@ -59,11 +62,20 @@
                             @include('client.product.option')
                         </div>
 
-                        <div class="primary-btn mt-5 col-9 col-md-6 cursor-pointer noselect" id="btn-add-cart"
-                        data-url="{{ route('client.add-cart') }}">
-                            <i class="fa fa-shopping-cart fs-20"></i>
-                            {{ __('Thêm vào giỏ hàng') }}
+                        <div class="d-flex">
+                            <div class="primary-btn mt-5 col-9 col-md-6 cursor-pointer noselect mr-2" id="btn-add-cart"
+                                 data-url="{{ route('client.add-cart') }}">
+                                <i class="fa fa-shopping-cart fs-20"></i>
+                                {{ __('Thêm vào giỏ hàng') }}
+                            </div>
+                            <div id="show-modal" class="border text-primary border-primary mt-5 w-100 cursor-pointer d-flex justify-content-center align-items-center p-0">
+                                <div>
+                                    {{ __('Xem cấu hình chi tiết') }}
+                                    <i class="fa fa-caret-right"></i>
+                                </div>
+                            </div>
                         </div>
+
                         <ul>
                             <li><b>{{ __('Số lượng hiện có:') }}</b> <span></span></li>
                             <li><b>{{ __('Vận chuyển:') }}</b><span>vận chuyển từ 3 - 5 ngày.</span></li>
@@ -81,23 +93,33 @@
                 <div class="col-lg-12">
                     <div class="product__details__tab">
                         <ul class="nav nav-tabs" role="tablist">
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"--}}
+{{--                                   aria-selected="true">{{ __('Mô tả') }}</a>--}}
+{{--                            </li>--}}
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                   aria-selected="true">{{ __('Mô tả') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-3" role="tab"
                                    aria-selected="false">{{ __('Đánh giá') }} <span>(1)</span></a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                <div class="product__details__tab__desc">
-                                    <h6>{{ __('Mô tả sản phẩm') }}</h6>
-
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+{{--                            <div class="tab-pane active" id="tabs-1" role="tabpanel">--}}
+{{--                                <div class="product__details__tab__desc">--}}
+{{--                                    <h6>{{ __('Mô tả sản phẩm') }}</h6>--}}
+{{--                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.--}}
+{{--                                        Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.--}}
+{{--                                        Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam--}}
+{{--                                        sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo--}}
+{{--                                        eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.--}}
+{{--                                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent--}}
+{{--                                        sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac--}}
+{{--                                        diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante--}}
+{{--                                        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;--}}
+{{--                                        Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.--}}
+{{--                                        Proin eget tortor risus.</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+                            <div class="tab-pane active" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Đánh giá sản phẩm</h6>
                                     <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
@@ -119,6 +141,10 @@
             </div>
         </div>
     </section>
+
+    <x-modal-scroll title="Thông số kỹ thuật {{ $product->name }}">
+        <x-specifications :product="$product" :specifications="$product->productSmartphone"></x-specifications>
+    </x-modal-scroll>
 
     @include('client.modal.notify_cart')
 @endsection

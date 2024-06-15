@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/scss/common.scss',
                 'resources/scss/client/top-bar.scss',
                 'resources/scss/client/item-product.scss',
+                'resources/scss/client/parameter-item.scss',
             ],
             refresh: true,
         }),
