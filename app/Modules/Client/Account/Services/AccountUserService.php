@@ -52,4 +52,10 @@ class AccountUserService extends BaseService implements AccountUserInterface
         $data = $request->only($this->model::AUTH);
         return Auth::guard(GUARD_WEB)->attempt($data);
     }
+
+    public function getAddressByUser($id)
+    {
+        return $this->model->with(['addressShippings.address'])
+            ->where('id', $id)->get();
+    }
 }

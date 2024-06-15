@@ -94,6 +94,10 @@ if (!function_exists('shorten_numbers')) {
      * @return string
      */
     function shorten_numbers($number) {
+        if ($number == 0) {
+            return  '0K';
+        }
+
         $units = ['', 'K', 'M', 'B', 'T'];
         $power = floor(log($number, 1000));
         return round($number / pow(1000, $power), 1) . $units[$power];

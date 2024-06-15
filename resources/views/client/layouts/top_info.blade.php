@@ -6,7 +6,6 @@
                     <div class="header__top__left">
                         <ul>
                             <li><i class="fa fa-envelope"></i> admin-shop@gmail.com</li>
-                            <li>Free Shipping từ {{ number_format(200000) }}đ</li>
                         </ul>
                     </div>
                 </div>
@@ -30,14 +29,14 @@
                         @if(auth()->guard(GUARD_WEB)->check())
                             <div class="header__top__right__language">
                                 <div>
-                                    <a href="#" style="color: #1c1c1c">
+                                    <a href="{{ route('client.infor.index', ['user' => userInfo()->id]) }}" style="color: #1c1c1c">
                                         <i class="fa fa-user"></i>
-                                        {{ auth()->guard(GUARD_WEB)->user()->name }}
+                                        {{ userInfo()->name }}
                                     </a>
                                 </div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li><a href="{{ route('client.infor.index', ['user' => auth()->guard(GUARD_WEB)->user()->id]) }}">{{ __('Hồ sơ') }}</a></li>
+                                    <li><a href="{{ route('client.infor.index', ['user' => userInfo()->id]) }}">{{ __('Hồ sơ') }}</a></li>
                                     <li><a href="{{ route('client.logout') }}">{{ __('Đăng xuất') }}</a></li>
                                 </ul>
                             </div>
@@ -63,14 +62,6 @@
                     <ul>
                         <li class="active"><a href="{{ route('client.home') }}">{{ __('Trang chủ') }}</a></li>
                         <li><a href="./shop-grid.html">{{ __('Gian hàng') }}</a></li>
-{{--                        <li><a href="#">Pages</a>--}}
-{{--                            <ul class="header__menu__dropdown">--}}
-{{--                                <li><a href="./shop-details.html">Shop Details</a></li>--}}
-{{--                                <li><a href="./shoping-cart.html">Shoping Cart</a></li>--}}
-{{--                                <li><a href="./checkout.html">Check Out</a></li>--}}
-{{--                                <li><a href="./blog-details.html">Blog Details</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </li>--}}
                         <li><a href="./blog.html">{{ __('Blog') }}</a></li>
                         <li><a href="./contact.html">{{ __('Liên hệ') }}</a></li>
                     </ul>
@@ -89,7 +80,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="header__cart__price">item: <span>{{ shorten_numbers(29590000) }}<sup>đ</sup></span></div>
+                    <div class="header__cart__price">item: <span>{{ shorten_numbers(0) }}<sup>đ</sup></span></div>
                 </div>
             </div>
         </div>

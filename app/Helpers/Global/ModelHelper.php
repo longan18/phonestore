@@ -25,7 +25,17 @@ if (!function_exists('adminInfo')) {
      */
     function adminInfo(): Guard|StatefulGuard
     {
-        return Auth::guard('admin');
+        return Auth::guard(GUARD_ADMIN);
+    }
+}
+
+if (!function_exists('userInfo')) {
+    /**
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    function userInfo()
+    {
+        return Auth::guard(GUARD_WEB)->user();
     }
 }
 

@@ -54,13 +54,7 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-6 d-flex justify-content-between">
-                        <a href="{{ route('client.infor.index', ['user' => auth()->guard(GUARD_WEB)->user()->id]) }}"><h4 class="@if(request()->routeIs('client.infor.index')) text-danger @endif">Thông tin chi tiết</h4></a>
-                        <a href="#"><h4>Địa chỉ giao hàng</h4></a>
-                        <a href="#"><h4>Đơn hàng</h4></a>
-                    </div>
-                </div>
+                <x-infor></x-infor>
                 @include('client.infor.form')
             </div>
         </div>

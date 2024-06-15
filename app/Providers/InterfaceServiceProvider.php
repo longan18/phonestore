@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Modules\Address\Interfaces\AddressInterface;
+use App\Modules\Address\Interfaces\AddressShippingInterface;
+use App\Modules\Address\Services\AddressService;
+use App\Modules\Address\Services\AddressShippingService;
 use App\Modules\Admin\Account\Interfaces\AccountAdminInterface;
 use App\Modules\Admin\Account\Services\AccountAdminService;
 use App\Modules\Admin\Brand\Interfaces\BrandInterface;
@@ -62,6 +66,8 @@ class InterfaceServiceProvider extends ServiceProvider
         $this->app->singleton(ShoppingItemInterface::class, ShoppingItemService::class);
         $this->app->singleton(AccountUserInterface::class, AccountUserService::class);
         $this->app->singleton(ProfileInterface::class, ProfileService::class);
+        $this->app->singleton(AddressInterface::class, AddressService::class);
+        $this->app->singleton(AddressShippingInterface::class, AddressShippingService::class);
     }
 
     /**

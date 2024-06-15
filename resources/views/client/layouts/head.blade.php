@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
 <!-- Css Styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('client_assets/css/bootstrap.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('client_assets/css/font-awesome.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('client_assets/css/elegant-icons.css') }}" type="text/css">

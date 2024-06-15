@@ -7,5 +7,8 @@ namespace App\Modules\Client\Account\Models\Traits;
  */
 trait AccountAttribute
 {
-
+    public function getCountAddressAttribute()
+    {
+        return $this->addressShippings->count();
+    }
 }
