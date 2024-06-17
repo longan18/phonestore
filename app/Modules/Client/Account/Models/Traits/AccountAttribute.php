@@ -22,6 +22,11 @@ trait AccountAttribute
         return $this->addressShippings->count();
     }
 
+    public function getCountShoppingItemAttribute()
+    {
+        return $this->shoppingSession->shoppingItems->count();
+    }
+
     /**
      * @return Collection
      */

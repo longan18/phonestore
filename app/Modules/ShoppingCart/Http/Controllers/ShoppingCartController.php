@@ -22,23 +22,21 @@ use Illuminate\Support\Number;
 class ShoppingCartController extends Controller
 {
     protected $shoppingcart;
-    protected $productSmartphonePrice;
 
     /**
-     * @param ShoppingCartInterface $shoppingcart
-     * @param ProductSmartphonePriceInterface $productSmartphonePrice
+     * @param
      */
     public function __construct(
-        ShoppingCartInterface $shoppingcart,
-        ProductSmartphonePriceInterface $productSmartphonePrice
+        ShoppingCartInterface $shoppingCart
     ) {
-        $this->shoppingcart = $shoppingcart;
-        $this->productSmartphonePrice = $productSmartphonePrice;
+        $this->shoppingcart = $shoppingCart;
     }
 
     public function addCart(Request $request)
     {
-        $productPrice = $this->productSmartphonePrice->getById($request->item_id);
+        $result = $this->shoppingcart->storeCart($request->all());
 
+        return $result ? $this->responseSuccess(message: __('Sản phẩm đã được thêm vào giỏ hàng'), data: $result)
+                : $this->responseFailed(message: __('Sản phẩm chưa được thêm vào giỏ hàng, vui lòng thử lại!'));
     }
 }

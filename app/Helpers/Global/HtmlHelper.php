@@ -94,7 +94,7 @@ if (!function_exists('shorten_numbers')) {
      * @return string
      */
     function shorten_numbers($number) {
-        if ($number == 0) {
+        if ($number == null) {
             return  '0K';
         }
 

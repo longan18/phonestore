@@ -61,10 +61,10 @@ class AddressService extends BaseService implements AddressInterface
         DB::beginTransaction();
         try {
             $address = $this->model->create($request->all());
-            $address->addressShippings()->create(['user_id' => userInfo()->id]);
+            $addressShipping = $address->addressShippings()->create(['user_id' => userInfo()->id]);
 
             DB::commit();
-            return $address;
+            return $addressShipping;
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");

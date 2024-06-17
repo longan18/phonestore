@@ -23,42 +23,47 @@ const PRODUCT_DETAIL = (function () {
 
 $(function () {
     $('#btn-add-cart').on('click', function () {
-        const product_id = $('.product-details').data('product');
-        const quantity = $("input[name='quantity']").val();
-        const url = $(this).data('url');
-        const item_id = $(document).find('.item-price.act').data('item');
+        let product_id = $('.product-details').data('product');
+        let item_id = $(".parent-item:not(.d-none)").find('.act').data('id');
+        let quantity = $('input[name="quantity"]').val();
 
-        console.log(item_id)
-
-        const datas = {
-            product_id,
-            quantity,
-            item_id
+        if (check_auth == false) {
+            window.location.href = url_login;
         }
 
         $.ajax({
             type: 'POST',
-            url: url,
-            data: datas,
+            url: url_add_cart,
+            data: { product_id, item_id, quantity },
             beforeSend: function () {
-
+                $('#preloder').css('display', 'block');
+                $('#preloder .loader').css('display', 'block');
             },
             success: function (res) {
                 if (res.success) {
-
+                    if (res.data.quantity_item > 99) {
+                        $('.item-icon-shopping-cart').text('+99')
+                    } else {
+                        $('.item-icon-shopping-cart').text(res.data.quantity_item)
+                    }
+                    $('.item-total-price-cart').text(res.data.total_price)
+                    $(NOTIFY_CART).modal('show');
+                } else {
+                    toastr.error(res.message);
                 }
             },
-            error: function (res) {
+            error: function (jqXHR) {
 
             },
             complete: function () {
-
+                $('#preloder').css('display', 'none');
+                $('#preloder .loader').css('display', 'none');
             }
         })
     });
 
     $(document).on('click', '.item-price', function () {
-        actByClass($('.item-price'), $(this));
+        actByClass($($(this)).parent('.parent-item').find('.item-price'), $(this));
 
         let price = $(this).data('price');
 
@@ -67,64 +72,20 @@ $(function () {
         PRODUCT_DETAIL.handleQuantity();
     });
 
-    $('.item-attr-detail').on('click', function () {
+    $(document).on('click', '.item-attr-detail', function () {
         actByClass($('.item-attr-detail'), $(this));
+        let key = $(this).data('key');
+        let price = $(`.parent-item[data-key="${key}"]`).find('.act').data('price');
 
-        const ram_id = $(this).data('ram');
-        const storage_capacity_id = $(this).data('storage-capacity');
-        const product_id = $('.product-details').data('product');
-        const url = $('.product-details').data('url');
+        $(`.parent-item[data-key!="${key}"]`).addClass('d-none');
+        $(`.parent-item[data-key="${key}"]`).removeClass('d-none');
 
-        const datas = {
-            ram_id,
-            storage_capacity_id,
-            product_id
-        }
+        $('.price').text(price.toLocaleString('de-DE'));
+        $('.current-price').data('price', price);
 
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: datas,
-            beforeSend: function () {
-
-            },
-            success: function (res) {
-                if (res.success) {
-                    let html = '';
-
-                    let act = 0;
-                    $.map(res.data.colors, (color, colorId) => {
-                        let price = Number(res.data.prices[colorId]);
-                        let itemId = res.data.ids[colorId];
-
-                        if (act == 0) {
-                            $('.price').text(price.toLocaleString('de-DE'));
-                            $('.current-price').data('price', price);
-                            $('.total-price').text(price.toLocaleString('de-DE'));
-                            $("input[name='quantity']").val(1);
-                        }
-
-                        html += elmColor(colorId, price, color, itemId, act);
-                        act = 1;
-                    })
-
-                    $('#color').empty().append(html);
-                }
-            },
-            error: function (res) {
-
-            },
-            complete: function () {
-
-            }
-        });
+        PRODUCT_DETAIL.handleQuantity();
     });
 
-    const elmColor = (idColor, priceColor, bgColor, itemId, act) => {
-        return `<div data-color="${idColor}" data-price="${priceColor}" data-item="${itemId}"
-             class="item-price text-center h-43px border-non-act ${act == 0 ? 'act' : ''}"
-             style="background-color: ${bgColor};"></div>`;
-    }
     const actByClass = (elm, elmThis) => {
         elm.removeClass('act');
         elmThis.addClass('act');
@@ -137,6 +98,4 @@ $(function () {
     $(document).on('change', "input[name='quantity']", function () {
         PRODUCT_DETAIL.handleQuantity();
     });
-
-    // $(NOTIFY_CART).modal('show');
 });

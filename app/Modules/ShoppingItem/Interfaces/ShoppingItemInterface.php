@@ -7,5 +7,5 @@ namespace App\Modules\ShoppingItem\Interfaces;
  */
 interface ShoppingItemInterface
 {
-
+    public function updateOrCreateShoppingItem($shoppingSession, $data);
 }

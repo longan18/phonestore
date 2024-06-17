@@ -66,21 +66,21 @@ class AddressController extends Controller
             'address_detail.required' => 'Địa chỉ chi tiết không được để trống',
         ]);
 
-        $address = $this->address->storeAddress($request);
+        $addressShipping = $this->address->storeAddress($request);
 
-        if ($address) {
+        if ($addressShipping) {
             $view = view('components.item-address')->with([
-                'province' => $address->province->name,
-                'district' => $address->district->name,
-                'ward' => $address->ward->name,
-                'act' => AddressShippingEnum::IN_ACTIVE,
-                'addresDetail' => $address->address_detail,
-                'id' => $address->id,
+                'province' => $addressShipping->address->province->name,
+                'district' => $addressShipping->address->district->name,
+                'ward' => $addressShipping->address->ward->name,
+                'act' => AddressShippingEnum::IN_ACTIVE->value,
+                'addresDetail' => $addressShipping->address->address_detail,
+                'id' => $addressShipping->id,
             ])->render();
             return $this->responseSuccess(
                 message: __('Thêm địa chỉ thành công!'),
                 data: [
-                    'address' => $address,
+                    'address' => $addressShipping->address,
                     'html' => $view
                 ]
             );

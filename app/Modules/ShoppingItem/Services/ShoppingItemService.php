@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 use App\Modules\ShoppingItem\Interfaces\ShoppingItemInterface;
 use App\Modules\ShoppingItem\Models\ShoppingItem;
-use App\Modules\Media\Interfaces\MediaInterface;
 use App\Services\BaseService;
 
 /**
@@ -19,11 +18,32 @@ class ShoppingItemService extends BaseService implements ShoppingItemInterface
 
     /**
      * @param ShoppingItem $shoppingitem
-     * @param MediaInterface $media
      */
-    public function __construct(ShoppingItem $shoppingitem, MediaInterface $media)
+    public function __construct(ShoppingItem $shoppingitem)
     {
         $this->model = $shoppingitem;
-        $this->media = $media;
+    }
+
+    public function updateOrCreateShoppingItem($shoppingSession, $data)
+    {
+        $shoppingItem = $this->model->where('shopping_session_id', $shoppingSession)
+            ->where('product_id', $data['product_id'])
+            ->where('item_id', $data['item_id'])
+            ->first();
+
+        if ($shoppingItem == null) {
+            $this->model->create([
+                 'shopping_session_id' => $shoppingSession,
+                 'product_id' => $data['product_id'],
+                 'item_id' => $data['item_id'],
+                 'quantity' => $data['quantity'],
+                 'price' => $data['price'],
+            ]);
+        } else {
+            $shoppingItem->update([
+                'quantity' => $shoppingItem->quantity + $data['quantity'],
+            ]);
+        }
+
     }
 }

@@ -76,11 +76,11 @@
                         <li>
                             <a href="#">
                                 <i class="fa fa-shopping-bag"></i>
-                                <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite">0</div>
+                                <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite item-icon-shopping-cart">{{ optional(userInfo())->count_shopping_item ?? 0 }}</div>
                             </a>
                         </li>
                     </ul>
-                    <div class="header__cart__price">item: <span>{{ shorten_numbers(0) }}<sup>đ</sup></span></div>
+                    <div class="header__cart__price">item: <span><span class="item-total-price-cart">{{ shorten_numbers(optional(userInfo())->shoppingSession->price_total ?? null) }}</span><sup>đ</sup></span></div>
                 </div>
             </div>
         </div>

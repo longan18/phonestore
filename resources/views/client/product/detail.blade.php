@@ -28,7 +28,7 @@
             </div>
         </div>
     </section>
-    <section class="product-details spad" data-product="{{ $product->id }}" data-url="{{ route('client.product.option-price') }}">
+    <section class="product-details spad" data-product="{{ $product->id }}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
@@ -146,9 +146,14 @@
         <x-specifications :product="$product" :specifications="$product->productSmartphone"></x-specifications>
     </x-modal-scroll>
 
-    @include('client.modal.notify_cart')
+    <x-modal-notify-cart></x-modal-notify-cart>
 @endsection
 
 @section('script')
+    <script>
+        var url_add_cart = `{{ route('client.add-cart') }}`
+        var check_auth = {{ auth()->guard(GUARD_WEB)->check() ? 'true' : 'false' }};
+        var url_login = `{{ route('client.page-login') }}`
+    </script>
     <script src="{{ asset('client_assets/js/product_detail.js') }}" type="module"></script>
 @endsection

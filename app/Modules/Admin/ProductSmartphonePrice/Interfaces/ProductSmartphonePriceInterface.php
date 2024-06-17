@@ -23,5 +23,5 @@ interface ProductSmartphonePriceInterface
      * @param $requestArray
      * @return mixed
      */
-    public function getOptionProduct($requestArray);
+    public function getOptionProduct($productSmartphonePrice);
 }

@@ -59,12 +59,26 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
             ->get();
     }
 
-    public function getOptionProduct($data)
+    public function getOptionProduct($productSmartphonePrice)
     {
-        return $this->with(['ram', 'color', 'storageCapacity'])
-            ->where('product_id', $data['product_id'])
-            ->where('ram_id', $data['ram_id'])
-            ->where('storage_capacity_id', $data['storage_capacity_id'])
-            ->get();
+        foreach($productSmartphonePrice as $key => $item) {
+            $data_result['data'][$item->ram_id . '-' . $item->storage_capacity_id][] = [
+                'item_id' => $item->id,
+                'price' => $item->price,
+                'color_id' => $item->color_id,
+                'color' => $item->color->hex_color,
+                'ram_id' => $item->ram_id,
+                'ram' => $item->ram->value,
+                'storage_capacity_id' => $item->storage_capacity_id,
+                'storage_capacity' => $item->storageCapacity->value,
+                'quantity' => $item->quantity
+            ];
+
+            $data_result['key'][$item->ram_id . '-' . $item->storage_capacity_id] = $item->ram->value . '-' . $item->storageCapacity->value;
+        }
+
+        $data_result['key'] = array_unique($data_result['key']);
+
+        return $data_result;
     }
 }
