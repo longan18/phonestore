@@ -2,8 +2,8 @@
 
 namespace App\Modules\Admin\Product\Models\Traits;
 
-use App\Enums\Status;
-use App\Enums\TagMedia;
+use App\Enums\StatusEnum;
+use App\Enums\TagMediaEnum;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +17,7 @@ trait ProductAttribute
      */
     public function getAvatarAttribute(): mixed
     {
-        return optional($this->getMedia(TagMedia::Avatar->value)->first())->getUrl()
+        return optional($this->getMedia(TagMediaEnum::Avatar->value)->first())->getUrl()
             ?? asset('admin_assets/images/avatar.jpeg');
     }
 
@@ -26,7 +26,7 @@ trait ProductAttribute
      */
     public function getSubImageAttribute(): mixed
     {
-        $result = $this->getMedia(TagMedia::SubImage->value);
+        $result = $this->getMedia(TagMediaEnum::SubImage->value);
 
         return $result->map(
             function ($data) {
@@ -51,15 +51,15 @@ trait ProductAttribute
         $data = collect();
 
         switch ($this->status) {
-            case Status::StopSelling->value:
-                $data->text = Status::StopSelling->getText();
-                $data->color = Status::StopSelling->getColor();
-                $data->bg_btn = Status::StopSelling->getColorBtn();
+            case StatusEnum::StopSelling->value:
+                $data->text = StatusEnum::StopSelling->getText();
+                $data->color = StatusEnum::StopSelling->getColor();
+                $data->bg_btn = StatusEnum::StopSelling->getColorBtn();
                 break;
-            case Status::Publish->value:
-                $data->text = Status::Publish->getText();
-                $data->color = Status::Publish->getColor();
-                $data->bg_btn = Status::Publish->getColorBtn();
+            case StatusEnum::Publish->value:
+                $data->text = StatusEnum::Publish->getText();
+                $data->color = StatusEnum::Publish->getColor();
+                $data->bg_btn = StatusEnum::Publish->getColorBtn();
                 break;
         }
 

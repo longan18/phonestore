@@ -2,7 +2,7 @@
 
 namespace App\Modules\Admin\Brand\Services;
 
-use App\Enums\TagMedia;
+use App\Enums\TagMediaEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -73,7 +73,7 @@ class BrandService extends BaseService implements BrandInterface
     public function delete($brand): ?bool
     {
         $brand = $this->getById($brand);
-        $this->media->deleteExistingFile($brand->getMedia(TagMedia::Avatar->value)->first());
+        $this->media->deleteExistingFile($brand->getMedia(TagMediaEnum::Avatar->value)->first());
         return $brand->delete();
     }
 }

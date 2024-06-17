@@ -2,16 +2,14 @@
 
 namespace App\Providers;
 
-use App\Modules\Address\Interfaces\AddressInterface;
-use App\Modules\Address\Interfaces\AddressShippingInterface;
-use App\Modules\Address\Services\AddressService;
-use App\Modules\Address\Services\AddressShippingService;
 use App\Modules\Admin\Account\Interfaces\AccountAdminInterface;
 use App\Modules\Admin\Account\Services\AccountAdminService;
 use App\Modules\Admin\Brand\Interfaces\BrandInterface;
 use App\Modules\Admin\Brand\Services\BrandService;
 use App\Modules\Admin\Color\Interfaces\ColorInterface;
 use App\Modules\Admin\Color\Services\ColorService;
+use App\Modules\Admin\Customer\Interfaces\CustomerInterface;
+use App\Modules\Admin\Customer\Services\CustomerService;
 use App\Modules\Admin\Product\Interfaces\ProductInterface;
 use App\Modules\Admin\Product\Services\ProductService;
 use App\Modules\Admin\ProductSmartphone\Interfaces\ProductSmartphoneInterface;
@@ -24,6 +22,10 @@ use App\Modules\Admin\StorageCapacity\Interfaces\StorageCapacityInterface;
 use App\Modules\Admin\StorageCapacity\Services\StorageCapacityService;
 use App\Modules\Client\Account\Interfaces\AccountUserInterface;
 use App\Modules\Client\Account\Services\AccountUserService;
+use App\Modules\Client\Address\Interfaces\AddressInterface;
+use App\Modules\Client\Address\Interfaces\AddressShippingInterface;
+use App\Modules\Client\Address\Services\AddressService;
+use App\Modules\Client\Address\Services\AddressShippingService;
 use App\Modules\Client\Home\Interfaces\HomeInterface;
 use App\Modules\Client\Home\Services\HomeService;
 use App\Modules\Client\Profile\Interfaces\ProfileInterface;
@@ -68,6 +70,7 @@ class InterfaceServiceProvider extends ServiceProvider
         $this->app->singleton(ProfileInterface::class, ProfileService::class);
         $this->app->singleton(AddressInterface::class, AddressService::class);
         $this->app->singleton(AddressShippingInterface::class, AddressShippingService::class);
+        $this->app->singleton(CustomerInterface::class, CustomerService::class);
     }
 
     /**

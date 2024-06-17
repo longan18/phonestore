@@ -10,7 +10,7 @@
             </div>
         </ur>
         <div class="d-flex flex-column justify-content-center w-10 mb-3">
-            <button class="w-100 mb-1 btn {{ $act ? 'btn-warning' : 'btn-primary' }} act-address" data-id="{{ $id }}"><i class="fa fa-tags"></i></button>
+            <button class="w-100 mb-1 btn {{ $act ? 'btn-warning' : 'btn-primary' }} act-address" data-id="{{ $id }}"><i class="fa fa-tag"></i></button>
             <button class="w-100 btn btn-danger remove-address" data-id="{{ $id }}"><i class="fa fa-trash"></i></button>
         </div>
     </div>

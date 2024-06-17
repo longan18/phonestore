@@ -2,7 +2,7 @@
 
 namespace App\Modules\Admin\Account\Services;
 
-use App\Enums\TagMedia;
+use App\Enums\TagMediaEnum;
 use App\Modules\Admin\Account\Interfaces\AccountAdminInterface;
 use App\Modules\Admin\Account\Models\Admin;
 use App\Modules\Media\Interfaces\MediaInterface;
@@ -52,30 +52,6 @@ class AccountAdminService extends BaseService implements AccountAdminInterface
         $update = $admin->update($request->except('file'));
 
         return $this->uploadAvatar($update, $request, $admin);
-    }
-
-    /**
-     * @param $update
-     * @param $request
-     * @param $model
-     *
-     * @return bool
-     */
-    private function uploadAvatar($update, $request, $model): bool
-    {
-        if ($update) {
-            if ($request->hasFile('avatar')) {
-                $media = $this->mediaInterface->upload($request->file('avatar'), directory: 'admin');
-            }
-            if (!empty($media) && $model->hasMedia(TagMedia::Avatar->value)) {
-                $this->mediaInterface->deleteExistingFile($model->getMedia(TagMedia::Avatar->value)->first());
-            }
-            empty($media) ?: $model->syncMedia($media, TagMedia::Avatar->value);
-
-            return true;
-        }
-
-        return false;
     }
 
     /**

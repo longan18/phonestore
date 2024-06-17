@@ -2,7 +2,7 @@
 
 namespace App\Modules\Admin\Brand\Models\Traits;
 
-use App\Enums\TagMedia;
+use App\Enums\TagMediaEnum;
 
 /**
  * @BrandAttribute
@@ -14,7 +14,7 @@ trait BrandAttribute
      */
     public function getAvatarAttribute(): mixed
     {
-        return optional($this->getMedia(TagMedia::Avatar->value)->first())->getUrl()
+        return optional($this->getMedia(TagMediaEnum::Avatar->value)->first())->getUrl()
             ?? asset('admin_assets/images/avatar.jpeg');
     }
 }

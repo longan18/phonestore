@@ -2,7 +2,7 @@
 
 namespace App\Modules\Admin\Product\Services;
 
-use App\Enums\TagMedia;
+use App\Enums\TagMediaEnum;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 

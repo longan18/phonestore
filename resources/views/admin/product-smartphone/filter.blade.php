@@ -1,4 +1,4 @@
-<div class="w-60 mb-3">
+<div class="mb-3">
     <form action="{{ route('smartphone.index') }}" id="fillter-product" method="GET">
         <div class="row">
             <div class="col-12 col-md-4">
@@ -14,8 +14,8 @@
                 <label class="m-0 mr-2"><b>{{ __('Trạng thái:') }}</b></label>
                 <select class="form-control w-100 filter-product" name="status">
                     <option value=>{{ __('Tất cả') }}</option>
-                    <option value="{{ \App\Enums\Status::StopSelling->value }}">{{ __('Dừng bán') }}</option>
-                    <option value="{{ \App\Enums\Status::Publish->value }}">{{ __('Đang bán') }}</option>
+                    <option value="{{ \App\Enums\StatusEnum::StopSelling->value }}">{{ __('Dừng bán') }}</option>
+                    <option value="{{ \App\Enums\StatusEnum::Publish->value }}">{{ __('Đang bán') }}</option>
                 </select>
             </div>
             <div class="col-12 col-md-4">

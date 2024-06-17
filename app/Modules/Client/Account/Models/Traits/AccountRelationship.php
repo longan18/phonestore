@@ -2,7 +2,7 @@
 
 namespace App\Modules\Client\Account\Models\Traits;
 
-use App\Modules\Address\Models\AddressShipping;
+use App\Modules\Client\Address\Models\AddressShipping;
 
 /**
  * @AccountRelationship

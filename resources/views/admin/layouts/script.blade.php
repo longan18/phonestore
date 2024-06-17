@@ -70,5 +70,13 @@
 
             return valuePrice.replace(/\./g, ',');
         }
+
+        $('#show-modal').on('click', function () {
+            $('#modal').modal('show');
+        })
+
+        $('#close-modal').on('click', function () {
+            $('#modal').modal('hide');
+        })
     });
 </script>

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Admin\ProductSmartphone\Services;
 
-use App\Enums\TagMedia;
+use App\Enums\TagMediaEnum;
 use App\Modules\Admin\Product\Interfaces\ProductInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

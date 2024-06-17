@@ -1,7 +1,7 @@
 <?php
 
+use App\Modules\Client\Address\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Route;
-use App\Modules\Address\Http\Controllers\AddressController;
 
 Route::name('address.')->prefix('/address-shipping')->group(function () {
     Route::get('/', [AddressController::class, 'index'])->name('index');

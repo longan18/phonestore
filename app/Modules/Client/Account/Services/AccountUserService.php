@@ -2,6 +2,7 @@
 
 namespace App\Modules\Client\Account\Services;
 
+use App\Enums\StatusAccountEnum;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -50,12 +51,25 @@ class AccountUserService extends BaseService implements AccountUserInterface
     public function login($request)
     {
         $data = $request->only($this->model::AUTH);
-        return Auth::guard(GUARD_WEB)->attempt($data);
+        if (Auth::guard(GUARD_WEB)->attempt($data)) {
+            userInfo()->update(['status' => StatusAccountEnum::ACTIVE->value]);
+            return true;
+        }
+
+        return false;
+    }
+
+    public function logout()
+    {
+        userInfo()->update(['status' => StatusAccountEnum::IN_ACTIVE->value]);
+        Auth::guard(GUARD_WEB)->logout();
+
+        return true;
     }
 
     public function getAddressByUser($id)
     {
         return $this->model->with(['addressShippings.address'])
-            ->where('id', $id)->get();
+            ->where('id', $id)->first();
     }
 }

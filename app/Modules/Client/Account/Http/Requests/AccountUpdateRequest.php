@@ -27,6 +27,7 @@ class AccountUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        dd(!$this->route('user') && !$this->filled('password'));
         return [
             'name' => 'bail|required',
             'email' => 'bail|required|email|unique:users,email',
@@ -44,11 +45,16 @@ class AccountUpdateRequest extends FormRequest
             ],
             'password' => [
                 'bail',
-                Rule::requiredIf(fn () => !$this->route('user')),
+                Rule::requiredIf(function () {
+                    return !$this->route('user') && $this->filled('password');
+                }),
                 'min:6',
                 'confirmed',
             ],
-            'password_confirmation' => 'bail|required',
+            'password_confirmation' => [
+                'bail',
+                Rule::requiredIf(fn () => !$this->route('user')),
+            ],
         ];
     }
 }

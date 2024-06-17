@@ -85,7 +85,7 @@ class AccountController extends Controller
      */
     public function logout()
     {
-        Auth::guard(GUARD_WEB)->logout();
+        $this->account->logout();
         return redirect()->back();
     }
 }

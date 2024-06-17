@@ -2,7 +2,7 @@
 
 namespace App\Modules\Media\Services;
 
-use App\Enums\TagMedia;
+use App\Enums\TagMediaEnum;
 use Exception;
 use App\Modules\Media\Interfaces\MediaInterface;
 use App\Modules\Media\Models\Media;
@@ -47,11 +47,11 @@ class MediaService extends BaseService implements MediaInterface
             if ($request->hasFile('avatar')) {
                 $media = $this->upload($request->file('avatar'), directory: $directory);
             }
-            if (!empty($media) && $model->hasMedia(TagMedia::Avatar->value)) {
-                $this->deleteExistingFile($model->getMedia(TagMedia::Avatar->value)->first());
+            if (!empty($media) && $model->hasMedia(TagMediaEnum::Avatar->value)) {
+                $this->deleteExistingFile($model->getMedia(TagMediaEnum::Avatar->value)->first());
             }
 
-            empty($media) ?: $model->syncMedia($media, TagMedia::Avatar->value);
+            empty($media) ?: $model->syncMedia($media, TagMediaEnum::Avatar->value);
         }
     }
 
@@ -75,7 +75,7 @@ class MediaService extends BaseService implements MediaInterface
                 $this->deleteExistingFile($model->getSubImageByIdMethod($request->sub_image_remove), false);
                 $model->detachMedia($request->sub_image_remove);
             }
-            empty($media) ?: $model->attachMedia($media, TagMedia::SubImage->value);
+            empty($media) ?: $model->attachMedia($media, TagMediaEnum::SubImage->value);
         }
     }
 
