@@ -74,13 +74,13 @@
                                 <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite">0</div>
                             </a></li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('client.cart.index') }}">
                                 <i class="fa fa-shopping-bag"></i>
-                                <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite item-icon-shopping-cart">{{ optional(userInfo())->count_shopping_item ?? 0 }}</div>
+                                <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite item-icon-shopping-cart">{{ $quantityCart ?? 0 }}</div>
                             </a>
                         </li>
                     </ul>
-                    <div class="header__cart__price">item: <span><span class="item-total-price-cart">{{ shorten_numbers(optional(userInfo())->shoppingSession->price_total ?? null) }}</span><sup>đ</sup></span></div>
+                    <div class="header__cart__price">item: <span><span class="item-total-price-cart">{{ shorten_numbers($totalCart ?? null) }}</span><sup>đ</sup></span></div>
                 </div>
             </div>
         </div>

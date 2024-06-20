@@ -8,4 +8,9 @@ namespace App\Modules\ShoppingCart\Interfaces;
 interface ShoppingCartInterface
 {
     public function storeCart($data);
+    public function getCartByUser($userId);
+
+    public function deleteItemCart($itemId);
+
+    public function updateCartItem($request);
 }

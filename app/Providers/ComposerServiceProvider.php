@@ -48,5 +48,19 @@ class ComposerServiceProvider extends ServiceProvider
                 );
             }
         );
+
+        View::composer(
+            [
+                'client.layouts.top_info',
+            ],
+            function ($view) {
+                $view->with(
+                    [
+                        'quantityCart' => userInfo()->count_shopping_item ?? null,
+                        'totalCart' => userInfo()->shoppingSession->price_total ?? null,
+                    ]
+                );
+            }
+        );
     }
 }

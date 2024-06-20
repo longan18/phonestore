@@ -40,6 +40,9 @@ $(function () {
                 $('#preloder .loader').css('display', 'block');
             },
             success: function (res) {
+                $('#preloder').css('display', 'none');
+                $('#preloder .loader').css('display', 'none');
+
                 if (res.success) {
                     if (res.data.quantity_item > 99) {
                         $('.item-icon-shopping-cart').text('+99')
@@ -55,12 +58,23 @@ $(function () {
             error: function (jqXHR) {
 
             },
-            complete: function () {
-                $('#preloder').css('display', 'none');
-                $('#preloder .loader').css('display', 'none');
-            }
         })
     });
+
+    $('input[name="quantity"]').on('input', function () {
+        $(this).val(convertNumber($(this).val()));
+        PRODUCT_DETAIL.handleQuantity();
+    });
+
+    const convertNumber = (value) => {
+        let valueInput = Number(value.replace(/[^0-9]/g, ''));
+
+        if (valueInput == 0) {
+            valueInput = 1;
+        }
+
+        return valueInput;
+    }
 
     $(document).on('click', '.item-price', function () {
         actByClass($($(this)).parent('.parent-item').find('.item-price'), $(this));
@@ -92,10 +106,6 @@ $(function () {
     }
 
     $(document).on('click', '.quantity .qtybtn', function () {
-        PRODUCT_DETAIL.handleQuantity();
-    });
-
-    $(document).on('change', "input[name='quantity']", function () {
         PRODUCT_DETAIL.handleQuantity();
     });
 });

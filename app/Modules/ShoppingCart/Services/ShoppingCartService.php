@@ -76,4 +76,55 @@ class ShoppingCartService extends BaseService implements ShoppingCartInterface
 
         return false;
     }
+
+    public function getCartByUser($userId)
+    {
+        return $this->shoppingSession->with(['shoppingItems'])
+            ->where('user_id', $userId)
+            ->first();
+    }
+
+    public function deleteItemCart($itemId)
+    {
+        DB::beginTransaction();
+        try {
+            $this->shoppingItem->deleteById($itemId);
+            $shoppingItem = $this->shoppingItem->getShoppingItemByShoppingSessionId(userInfo()->shoppingSession->id);
+
+            userInfo()->shoppingSession->update([
+                'quantity_total' => $shoppingItem->count(),
+                'price_total' => $shoppingItem->sum('total_price_item'),
+            ]);
+
+            DB::commit();
+            return true;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+        }
+
+        return false;
+    }
+
+    public function updateCartItem($request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->shoppingItem->updateUpsertShoppingItem($request);
+            $shoppingItem = $this->shoppingItem->getShoppingItemByShoppingSessionId(userInfo()->shoppingSession->id);
+
+            userInfo()->shoppingSession->update([
+                'quantity_total' => $shoppingItem->count(),
+                'price_total' => $shoppingItem->sum('total_price_item'),
+            ]);
+
+            DB::commit();
+            return true;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+        }
+
+        return false;
+    }
 }

@@ -1901,8 +1901,8 @@ ol {
 }
 
 .shoping__cart__table table tbody tr td {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	border-bottom: 1px solid #ebebeb;
 }
 
@@ -1980,6 +1980,10 @@ ol {
 	float: right;
 }
 
+.cart-btn-right:hover {
+    background-color: #bbb9b9;
+}
+
 .shoping__discount {
 	margin-top: 45px;
 }
@@ -2031,15 +2035,14 @@ ol {
 	margin-bottom: 28px;
 }
 
-.shoping__checkout ul li {
+.shoping__checkout > div {
 	font-size: 16px;
 	color: #1c1c1c;
 	font-weight: 700;
-	list-style: none;
-	overflow: hidden;
-	border-bottom: 1px solid #ebebeb;
-	padding-bottom: 13px;
-	margin-bottom: 18px;
+}
+
+.border-ebebeb {
+    border-bottom: 1px solid #ebebeb;
 }
 
 .shoping__checkout ul li:last-child {
@@ -2048,10 +2051,9 @@ ol {
 	margin-bottom: 0;
 }
 
-.shoping__checkout ul li span {
+.shoping__checkout span {
 	font-size: 18px;
 	color: #dd2222;
-	float: right;
 }
 
 .shoping__checkout .primary-btn {

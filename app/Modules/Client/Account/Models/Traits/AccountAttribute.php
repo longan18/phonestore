@@ -24,7 +24,12 @@ trait AccountAttribute
 
     public function getCountShoppingItemAttribute()
     {
-        return $this->shoppingSession->shoppingItems->count();
+        $result = null;
+        if ($this->shoppingSession) {
+            $result = $this->shoppingSession->shoppingItems->count();
+        }
+
+        return $result;
     }
 
     /**
