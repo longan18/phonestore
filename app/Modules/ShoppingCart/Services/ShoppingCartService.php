@@ -91,13 +91,18 @@ class ShoppingCartService extends BaseService implements ShoppingCartInterface
             $this->shoppingItem->deleteById($itemId);
             $shoppingItem = $this->shoppingItem->getShoppingItemByShoppingSessionId(userInfo()->shoppingSession->id);
 
-            userInfo()->shoppingSession->update([
+            $dataUpdate = [
                 'quantity_total' => $shoppingItem->count(),
                 'price_total' => $shoppingItem->sum('total_price_item'),
-            ]);
+            ];
+
+            userInfo()->shoppingSession->update($dataUpdate);
 
             DB::commit();
-            return true;
+            return [
+                'quantity_total' => $shoppingItem->count(),
+                'price_total' => $shoppingItem->sum('total_price_item'),
+            ];
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");

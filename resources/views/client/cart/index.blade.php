@@ -201,6 +201,9 @@
                     itemRemove.remove();
 
                     if (res.success) {
+                        console.log(res.data.price_total)
+                        $('.item-total-price-cart').text(shortenNumbers(res.data.price_total != 0 ? res.data.price_total : null));
+                        $('.item-icon-shopping-cart').text(res.data.quantity_total);
                         toastr.success(res.message);
                     } else {
                         toastr.error(res.message);
@@ -257,10 +260,11 @@
 
             elmCartItem.find('.price-total').text(formattedPrice(elmCartItem.attr('data-price') * valQty));
 
-            newValue = Number(totalPriceCart) + Number(totalPriceElm);
+            let newValue = Number(totalPriceCart) + Number(totalPriceElm);
             $('.value-price-total').attr('data-value', newValue);
             elmCartItem.attr('data-quantity', valQty);
             $('.value-price-total').text(formattedPrice(newValue));
+            $('.item-total-price-cart').text(shortenNumbers(newValue));
         }
 
         const convertNumber = (value) => {
@@ -281,6 +285,18 @@
             ).slice(0, -2);
 
             return valuePrice;
+        }
+
+        const shortenNumbers = number => {
+            if (number === null) {
+                return '0K';
+            }
+
+            const units = ['', 'K', 'M', 'B', 'T'];
+            const power = Math.floor(Math.log10(number) / 3);
+            const shortened = number / Math.pow(1000, power);
+            const formatted = shortened.toFixed(1); //
+            return formatted.endsWith('.0') ? formatted.slice(0, -2) + units[power] : formatted + units[power];
         }
     </script>
 

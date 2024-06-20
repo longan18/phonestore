@@ -58,7 +58,7 @@ class ShoppingCartController extends Controller
     {
         $result = $this->shoppingCart->deleteItemCart($request->id);
 
-        return $result ? $this->responseSuccess(message: __('Xóa sản phẩm thành công'))
+        return $result ? $this->responseSuccess(message: __('Xóa sản phẩm thành công'), data: $result)
             : $this->responseFailed(message: __('Xóa sản phẩm thất bại, vui lòng thử lại!'));
     }
 
