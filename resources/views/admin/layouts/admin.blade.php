@@ -14,6 +14,5 @@
 </main>
 @include('admin.layouts.script')
 
-@yield('script-after')
 </body>
 </html>

@@ -13,10 +13,10 @@
             <a href="{{ route('address.index', ['user' => $user->id]) }}" class="d-inline-block btn py-0 btn-warning d-flex align-items-center">
                 <i class="fa fa-truck"></i>Địa chỉ giao hàng
             </a>
-            <a href="#" class="d-inline-block btn py-0 btn-success d-flex align-items-center">
+            <a href="{{ route('cart.index', ['user' => $user->id]) }}" class="d-inline-block btn py-0 btn-success d-flex align-items-center">
                 <i class="fa fa-shopping-cart"></i>Giỏ hàng
             </a>
-            <a href="#" class="d-inline-block btn py-0 btn-danger d-flex align-items-center">
+            <a href="{{ route('order.show-order-user', ['user' => $user->id]) }}" class="d-inline-block btn py-0 btn-danger d-flex align-items-center">
                 <i class="fa fa-money"></i>Đơn hàng
             </a>
         </td>

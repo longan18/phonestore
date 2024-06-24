@@ -23,7 +23,9 @@
         <div class="quantity">
             <label class="color-757575"><b>{{ __('Số lượng') }}</b></label>
             <div class="mx-3 pro-qty">
+                <span class="dec qtybtn noselect">-</span>
                 <input type="text" value="1" name="quantity" min="1" autocomplete="off">
+                <span class="inc qtybtn noselect">+</span>
             </div>
             <label class="color-757575 quantity-current" data-quantity-current="{{ reset($dataResult['data'])[0]['quantity'] }}"><b>{{ reset($dataResult['data'])[0]['quantity'] }}</b> {{ __('sản phẩm có sẵn') }}</label>
         </div>

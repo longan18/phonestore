@@ -22,7 +22,7 @@
                         <h2>Thông tin</h2>
                         <div class="breadcrumb__option">
                             <a href="{{ route('client.home') }}">{{ __('Trang chủ') }}</a>
-                            <span>thông tin</span>
+                            <span>Địa chỉ giao hàng</span>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                             @endforelse
                         </div>
                         <div class="d-flex justify-content-end">
-                            @if($addressShipping->count() < 10)
+                            @if($addressShipping->count() < 5)
                                 <button class="btn btn-success" id="show-modal">Thêm mới</button>
                             @endif
                         </div>

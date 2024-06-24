@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 use App\Modules\ShoppingSession\Interfaces\ShoppingSessionInterface;
 use App\Modules\ShoppingSession\Models\ShoppingSession;
-use App\Modules\Media\Interfaces\MediaInterface;
 use App\Services\BaseService;
 
 /**
@@ -15,15 +14,11 @@ use App\Services\BaseService;
  */
 class ShoppingSessionService extends BaseService implements ShoppingSessionInterface
 {
-    protected $media;
-
     /**
      * @param ShoppingSession $shoppingsession
-     * @param MediaInterface $media
      */
-    public function __construct(ShoppingSession $shoppingsession, MediaInterface $media)
+    public function __construct(ShoppingSession $shoppingsession)
     {
         $this->model = $shoppingsession;
-        $this->media = $media;
     }
 }

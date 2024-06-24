@@ -9,7 +9,7 @@ interface ShoppingItemInterface
 {
     public function updateOrCreateShoppingItem($shoppingSession, $data);
 
-    public function getShoppingItemByShoppingSessionId($shoppingSessionId);
+    public function getShoppingItemByShoppingSessionId($shoppingSessionId, $perPage = null, $page = null);
 
     public function updateUpsertShoppingItem($data);
 }

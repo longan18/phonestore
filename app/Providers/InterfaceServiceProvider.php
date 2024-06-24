@@ -34,6 +34,10 @@ use App\Modules\Client\Shop\Interfaces\ShopInterface;
 use App\Modules\Client\Shop\Services\ShopService;
 use App\Modules\Media\Interfaces\MediaInterface;
 use App\Modules\Media\Services\MediaService;
+use App\Modules\OrderDetail\Interfaces\OrderDetailInterface;
+use App\Modules\OrderDetail\Services\OrderDetailService;
+use App\Modules\OrderItem\Interfaces\OrderItemInterface;
+use App\Modules\OrderItem\Services\OrderItemService;
 use App\Modules\ShoppingCart\Interfaces\ShoppingCartInterface;
 use App\Modules\ShoppingCart\Services\ShoppingCartService;
 use App\Modules\ShoppingItem\Interfaces\ShoppingItemInterface;
@@ -71,6 +75,8 @@ class InterfaceServiceProvider extends ServiceProvider
         $this->app->singleton(AddressInterface::class, AddressService::class);
         $this->app->singleton(AddressShippingInterface::class, AddressShippingService::class);
         $this->app->singleton(CustomerInterface::class, CustomerService::class);
+        $this->app->singleton(OrderDetailInterface::class, OrderDetailService::class);
+        $this->app->singleton(OrderItemInterface::class, OrderItemService::class);
     }
 
     /**

@@ -26,4 +26,3 @@
         placeholder: "Lựa chọn",
     });
 </script>
-@yield('script_js')

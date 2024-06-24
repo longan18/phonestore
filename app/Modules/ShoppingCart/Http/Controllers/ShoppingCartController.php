@@ -3,19 +3,10 @@
 namespace App\Modules\ShoppingCart\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Admin\ProductSmartphonePrice\Interfaces\ProductSmartphonePriceInterface;
+use App\Modules\Client\Address\Interfaces\AddressShippingInterface;
 use App\Modules\ShoppingItem\Interfaces\ShoppingItemInterface;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
-use App\Modules\ShoppingCart\Http\Requests\ShoppingCartRequest;
 use App\Modules\ShoppingCart\Interfaces\ShoppingCartInterface;
-use App\Modules\ShoppingCart\Models\ShoppingCart;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Number;
 
 /**
  * @ShoppingCartController
@@ -24,25 +15,40 @@ class ShoppingCartController extends Controller
 {
     protected $shoppingcart;
     protected $shoppingItem;
+    protected $addressShipping;
 
     /**
      * @param ShoppingCartInterface $shoppingCart
      * @param ShoppingItemInterface $shoppingCart
+     * @param AddressShippingInterface $addressShipping
      */
     public function __construct(
         ShoppingCartInterface $shoppingCart,
-        ShoppingItemInterface $shoppingItem
+        ShoppingItemInterface $shoppingItem,
+        AddressShippingInterface $addressShipping,
     ) {
         $this->shoppingCart = $shoppingCart;
         $this->shoppingItem = $shoppingItem;
+        $this->addressShipping = $addressShipping;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $shoppingSession = userInfo()->shoppingSession ?? null;
-        $shoppingItems = $shoppingSession ? $this->shoppingItem->getShoppingItemByShoppingSessionId(userInfo()->shoppingSession->id) : null;
+        $shoppingItems = $shoppingSession ? $this->shoppingItem->getShoppingItemByShoppingSessionId(userInfo()->shoppingSession->id, 5, $request->page) : null;
+        $addressAct = $this->addressShipping->getAddressActByUserId(userInfo()->id);
 
-        return view('client.cart.index', compact('shoppingSession', 'shoppingItems'));
+        if ($request->ajax()) {
+            $viewTable = view('client.cart.table', compact('shoppingItems'))->render();
+            $viewCheckOut = view('client.cart.checkout', compact('shoppingSession', 'shoppingItems', 'addressAct'))->render();
+            $paginate = view('client.pagination.index')->with(['data' => $shoppingItems])->render();
+
+            return $this->responseSuccess(data: ['htmlTable' => $viewTable, 'htmlCheckout' => $viewCheckOut, 'pagination' => $paginate]);
+        }
+
+        return view('client.cart.index',
+            compact('shoppingSession', 'shoppingItems', 'addressAct')
+        );
     }
 
 

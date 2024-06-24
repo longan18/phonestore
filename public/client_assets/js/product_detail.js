@@ -58,6 +58,10 @@ $(function () {
             error: function (jqXHR) {
 
             },
+            complete: function () {
+                $('#preloder').css('display', 'none');
+                $('#preloder .loader').css('display', 'none');
+            }
         })
     });
 

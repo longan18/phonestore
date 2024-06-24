@@ -44,7 +44,7 @@
                         <h2>Thông tin</h2>
                         <div class="breadcrumb__option">
                             <a href="{{ route('client.home') }}">{{ __('Trang chủ') }}</a>
-                            <span>thông tin</span>
+                            <span>Thông tin chi tiết</span>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,6 @@
         </div>
     </section>
 
-    @include('client.modal.notify_cart')
 @endsection
 
 @section('script')

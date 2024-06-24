@@ -11,7 +11,7 @@
 <script type="text/javascript" src="{{ asset('admin_assets/js/plugins/chart.js') }}"></script>
 <script src="{{ asset('common/ckeditor.js') }}"></script>
 <script src="{{ asset('common/bootstrap-datepicker.min.js') }}"></script>
-<script type="text/javascript">
+<script>
     if(document.location.hostname == 'pratikborsadiya.in') {
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -36,6 +36,25 @@
     }
 
 
+    const formattedPrice = (value, replace = true) => {
+        let valuePrice = value.toLocaleString('vi-VN',
+            {
+                style: 'currency',
+                currency: 'VND'
+            }
+        ).slice(0, -2);
+
+        let result = '';
+
+        if(replace) {
+            result = valuePrice.replace(/\./g, ',');
+        } else {
+            result = valuePrice;
+        }
+
+        return result;
+    }
+
     $(document).ready(function() {
         $(document).on('input', 'input[data-name="price"]', function () {
             let value = $(this).val();
@@ -49,7 +68,6 @@
             $(this).val(formattedPrice(valuePrice));
         });
 
-        // Select2 Multiple
         $('.select2-multiple').select2({
             placeholder: "Lựa chọn",
             allowClear: true
@@ -60,18 +78,11 @@
             autoclose: true
         });
 
-        const formattedPrice = (value) => {
-            let valuePrice = value.toLocaleString('vi-VN',
-                {
-                    style: 'currency',
-                    currency: 'VND'
-                }
-            ).slice(0, -2);
-
-            return valuePrice.replace(/\./g, ',');
-        }
-
         $('#show-modal').on('click', function () {
+            $('#modal').modal('show');
+        })
+
+        $('.class-show-modal').on('click', function () {
             $('#modal').modal('show');
         })
 
@@ -80,3 +91,4 @@
         })
     });
 </script>
+@yield('script-after')

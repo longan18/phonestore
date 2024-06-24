@@ -27,7 +27,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->foreign('address_id')->references('id')
-                ->on('address')
+                ->on('address_shipping')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });

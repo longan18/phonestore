@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('admin')->group(
     function () {
         Route::group(['middleware' => ['auth:admin']], function () {
+            includeRouteFiles(__DIR__.'/admin/order');
+            includeRouteFiles(__DIR__.'/admin/cart');
             includeRouteFiles(__DIR__.'/admin/customer');
             includeRouteFiles(__DIR__.'/admin/address');
             includeRouteFiles(__DIR__.'/admin/dashboard');

@@ -3,8 +3,6 @@
 @section('title')
     {{ __('Danh sách địa chỉ giao hàng') }}
 @endsection
-@section('css-after')
-@endsection
 
 @section('content')
     <div class="app-title">
@@ -31,7 +29,7 @@
                         <th>{{ __('Tỉnh/thành phố') }}</th>
                         <th>{{ __('Quận/huyện/thị xã') }}</th>
                         <th>{{ __('Phường/xã') }}</th>
-                        <th>{{ __('Địa chỉ chi tiết') }}</th>
+                        <th style="width: 720px">{{ __('Địa chỉ chi tiết') }}</th>
                         <th class="text-center">{{ __('Trạng thái') }}</th>
                         <th>{{ __('Ngày tạo') }}</th>
                     </tr>
@@ -46,7 +44,7 @@
                             <td>{{ $item->ward }}</td>
                             <td>{{ $item->address_detail }}</td>
                             @if($item->active == \App\Enums\AddressShippingEnum::ACTIVE->value)
-                                <td class="text-center"><i class="fa fa-tag text-warning"></i></td>
+                                <td class="text-center"><i class="fa fa-tag text-warning" style="font-size: 20px"></i></td>
                             @else
                                 <td></td>
                             @endif

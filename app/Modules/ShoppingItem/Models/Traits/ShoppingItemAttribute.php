@@ -7,5 +7,18 @@ namespace App\Modules\ShoppingItem\Models\Traits;
  */
 trait ShoppingItemAttribute
 {
+    public function getRamAttribute()
+    {
+        return $this->productPrice->ram;
+    }
 
+    public function getStorageCapacityAttribute()
+    {
+        return $this->productPrice->storageCapacity;
+    }
+
+    public function getColorAttribute()
+    {
+        return $this->productPrice->color;
+    }
 }

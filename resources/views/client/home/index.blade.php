@@ -336,6 +336,6 @@
         </div>
     </section>
 @endsection
-@section('script_js')
+@section('script')
     <script src="{{ asset('client_assets/js/product-item.js') }}"></script>
 @endsection

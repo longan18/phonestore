@@ -47,7 +47,7 @@ class ShoppingItemService extends BaseService implements ShoppingItemInterface
 
     }
 
-    public function getShoppingItemByShoppingSessionId($shoppingSessionId)
+    public function getShoppingItemByShoppingSessionId($shoppingSessionId, $perPage = null, $page = null)
     {
         return $this->model->with([
             'product',
@@ -55,9 +55,9 @@ class ShoppingItemService extends BaseService implements ShoppingItemInterface
             'productPrice.storageCapacity',
             'productPrice.color',
         ])->where('shopping_session_id', $shoppingSessionId)
-            ->groupBy('id') // Group by ID của ShoppingItem để tính tổng cho từng item
-            ->select('shopping_items.*', DB::raw('shopping_items.quantity * SUM(price) as total_price_item')) // Chọn tất cả cột của ShoppingItem và thêm cột total_price
-            ->get();
+            ->groupBy('id')
+            ->select('shopping_items.*', DB::raw('shopping_items.quantity * SUM(price) as total_price_item'))
+            ->paginate($perPage, page: $page);
     }
 
     public function updateUpsertShoppingItem($data)

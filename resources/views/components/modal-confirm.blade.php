@@ -9,9 +9,6 @@
             <div class="modal-footer border-0 pt-0">
                 @if(isset($footer))
                     {{ $footer }}
-                @else
-                    <button type="button" class="btn btn-secondary" id="close-modal">Close</button>
-                    <button type="submit" id="confirm-success" class="btn btn-primary">Save changes</button>
                 @endif
             </div>
         </div>

@@ -7,5 +7,4 @@ namespace App\Modules\ShoppingSession\Interfaces;
  */
 interface ShoppingSessionInterface
 {
-
 }

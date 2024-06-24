@@ -202,10 +202,7 @@
     /*-------------------
 		Quantity change
 	--------------------- */
-    var proQty = $('.pro-qty');
-    proQty.prepend('<span class="dec qtybtn noselect">-</span>');
-    proQty.append('<span class="inc qtybtn noselect">+</span>');
-    proQty.on('click', '.qtybtn', function () {
+    $(document).on('click', '.qtybtn', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
         if ($button.hasClass('inc')) {
@@ -218,6 +215,7 @@
                 newVal = 0;
             }
         }
+
         $button.parent().find('input').val(newVal);
     });
 

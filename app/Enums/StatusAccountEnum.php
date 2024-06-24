@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Enums;
-interface textMsg
-{
-    public function getText();
-    public function getColor();
-}
+
+use App\Enums\interfaces\textMsg;
 
 enum StatusAccountEnum: int implements textMsg
 {

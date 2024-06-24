@@ -35,17 +35,19 @@
                             <span>{{ 'Thông tin người dùng '.$user->name }} <span class="{{ $user->status_act->color }}">{{ ' - '.$user->status_act->text }}</span> </span>
                         @endempty
                     </h3>
-                    <div class="d-flex">
-                        <a href="{{ route('address.index', ['user' => $user->id]) }}" class="btn btn-warning d-flex align-items-center mr-2">
-                            <i class="fa fa-truck"></i>Địa chỉ giao hàng
-                        </a>
-                        <a href="#" class="btn btn-success d-flex align-items-center mr-2">
-                            <i class="fa fa-shopping-cart"></i>Giỏ hàng
-                        </a>
-                        <a href="#" class="btn btn-danger d-flex align-items-center">
-                            <i class="fa fa-money"></i>Đơn hàng
-                        </a>
-                    </div>
+                    @if(!empty($user))
+                        <div class="d-flex">
+                            <a href="{{ route('address.index', ['user' => $user->id]) }}" class="btn btn-warning d-flex align-items-center mr-2">
+                                <i class="fa fa-truck"></i>Địa chỉ giao hàng
+                            </a>
+                            <a href="{{ route('cart.index', ['user' => $user->id]) }}" class="btn btn-success d-flex align-items-center mr-2">
+                                <i class="fa fa-shopping-cart"></i>Giỏ hàng
+                            </a>
+                            <a href="{{ route('order.show-order-user', ['user' => $user->id]) }}" class="btn btn-danger d-flex align-items-center">
+                                <i class="fa fa-money"></i>Đơn hàng
+                            </a>
+                        </div>
+                    @endif
                 </div>
 
                 <form id="handle-user"

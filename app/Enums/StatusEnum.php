@@ -2,14 +2,10 @@
 
 namespace App\Enums;
 
-interface textMsg
-{
-    public function getText();
-    public function getColor();
-    public function getColorBtn();
-}
+use App\Enums\interfaces\colorBtn;
+use App\Enums\interfaces\textMsg;
 
-enum StatusEnum: int implements textMsg
+enum StatusEnum: int implements textMsg, colorBtn
 {
     case Publish = 2;
 
