@@ -3,6 +3,7 @@
 namespace App\Modules\OrderDetail\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Admin\Payment\Http\VnPay;
 use App\Modules\OrderDetail\Interfaces\OrderDetailInterface;
 use App\Modules\OrderDetail\Models\OrderDetail;
 use App\Modules\OrderItem\Interfaces\OrderItemInterface;
@@ -13,33 +14,45 @@ use Illuminate\Http\Request;
  */
 class OrderDetailController extends Controller
 {
-    protected $orderdetail;
+    protected $orderDetail;
     protected $orderItem;
+    protected $vnPay;
 
     /**
      * @param OrderDetailInterface $orderdetail
      * @param OrderItemInterface $orderItem
+     * @param VnPay $vnPay
      */
     public function __construct(
-        OrderDetailInterface $orderdetail,
-        OrderItemInterface $orderItem
+        OrderDetailInterface $orderDetail,
+        OrderItemInterface $orderItem,
+        VnPay $vnPay
     ) {
-        $this->orderdetail = $orderdetail;
+        $this->orderDetail = $orderDetail;
         $this->orderItem = $orderItem;
+        $this->vnPay = $vnPay;
     }
 
     public function index(Request $request)
     {
-        $orderDetails = $this->orderdetail->getOrderDetailByUserId($request->all(), userInfo()->id, perPage: 5);
+        $orderDetails = $this->orderDetail->getOrderDetailByUserId(userInfo()->id, perPage: 5);
 
         return view('client.order.index', compact('orderDetails'));
     }
 
     public function store(Request $request)
     {
-        $result = $this->orderdetail->storeOrder($request->all());
+        $orderDetail = $this->orderDetail->storeOrder($request->all());
 
-        return $result ? $this->responseSuccess(message: __('Đơn hàng của bạn đã được tạo, vui lòng chờ xác nhận của cửa hàng!'))
+        if ($orderDetail && $request->payment == 'vn_pay') {
+            $response = $this->vnPay->payment($orderDetail);
+            if ($response['code'] == 00) {
+                return $this->responseSuccess(message: __('Đơn hàng của bạn đã được tạo, vui lòng chờ xác nhận của cửa hàng!'),
+                data: $response['url']);
+            }
+        }
+
+        return $orderDetail ? $this->responseSuccess(message: __('Đơn hàng của bạn đã được tạo, vui lòng chờ xác nhận của cửa hàng!'))
                     : $this->responseFailed(message: __('Đã có lỗi xảy ra, vui lòng thử lại trong vài phút'));
     }
 
@@ -47,5 +60,13 @@ class OrderDetailController extends Controller
     {
         $orderItems = $this->orderItem->getOrderItemByOrderDetailId($order->id, perPage: 10);
         return view('client.order.show', compact('orderItems'));
+    }
+
+    public function cancelOrder(Request $request)
+    {
+        $result = $this->orderDetail->updateStatusOrder($request);
+
+        return $result ? $this->responseSuccess(message: __('Hủy đơn hàng thành công!'))
+            : $this->responseFailed(message: __('Hủy đơn hàng thất bại!'));
     }
 }

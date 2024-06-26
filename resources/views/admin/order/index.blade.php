@@ -54,6 +54,10 @@
 @endsection
 
 @section('script-after')
-    <script src="{{ asset('admin_assets/js/order.js') }}" type="module"></script>
+{{--    <script src="{{ asset('admin_assets/js/order.js') }}" type="module"></script>--}}
+    <script>
+        var url_update_status = `{{ route('order.update-status') }}`;
+    </script>
+    <script src="{{ asset('admin_assets/js/order.js') }}"></script>
 @endsection
 

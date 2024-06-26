@@ -40,7 +40,7 @@
 @if($shoppingItems && $shoppingItems->total())
     @if(!empty($addressAct))
         <div class="d-flex" data-address-act="{{ $addressAct->id }}" @if($shoppingSession) data-shopping-session="{{ $shoppingSession->id }}" @endif >
-            <button class="btn btn-success w-50 mr-2 font-weight-bold" id="checkout-vnpay" style="font-size: 20px">Chuyển khoản qua VnPay</button>
+            <button class="btn btn-success w-50 mr-2 font-weight-bold" id="checkout-vnpay" style="font-size: 20px">Thanh toán qua VnPay</button>
             <button class="btn btn-primary w-50 font-weight-bold" id="checkout-postpaid" style="font-size: 20px">Thanh toán trả sau</button>
         </div>
     @else

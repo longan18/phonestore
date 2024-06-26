@@ -5,19 +5,25 @@ namespace App\Modules\Admin\Order\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Client\Account\Models\User;
 use App\Modules\OrderDetail\Interfaces\OrderDetailInterface;
+use App\Modules\OrderDetail\Models\OrderDetail;
+use App\Modules\OrderItem\Interfaces\OrderItemInterface;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     protected $orderDetail;
+    protected $orderItem;
 
     /**
      * @param OrderDetailInterface $orderDetail
+     * @param OrderItemInterface $orderItem
      */
     public function __construct(
-        OrderDetailInterface $orderDetail
+        OrderDetailInterface $orderDetail,
+        OrderItemInterface $orderItem
     ){
         $this->orderDetail = $orderDetail;
+        $this->orderItem = $orderItem;
     }
 
     public function index(Request $request)
@@ -30,7 +36,7 @@ class OrderController extends Controller
 
             return $this->responseSuccess(data: ['html' => $view, 'pagination' => $paginate]);
         }
-        
+
         return view('admin.order.index', compact('orderDetails'));
     }
 
@@ -38,5 +44,19 @@ class OrderController extends Controller
     {
         $orderDetails = $this->orderDetail->getOrderDetailByUserId($user->id, perPage: 10);
         return view('admin.order.index', compact('orderDetails', 'user'));
+    }
+
+    public function show(OrderDetail $order)
+    {
+        $orderItems = $this->orderItem->getOrderItemByOrderDetailId($order->id, perPage: 10);
+        return view('admin.order.show', compact('orderItems'));
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $result = $this->orderDetail->updateStatusOrder($request);
+
+        return $result ? $this->responseSuccess(message: __('Cập nhật đơn hàng thành công!'))
+            : $this->responseFailed(message: __('Cập nhật đơn hàng thất bại!'));
     }
 }

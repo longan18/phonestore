@@ -82,6 +82,9 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <div class="render-paginate">
+                            {{ $orderItems->links('pagination.custom') }}
+                        </div>
                     </div>
                 </div>
             </div>

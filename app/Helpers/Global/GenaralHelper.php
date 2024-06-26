@@ -15,3 +15,12 @@ if (!function_exists('escapeLike')) {
         return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $keyword);
     }
 }
+
+if (!function_exists('getCurrentDomain')) {
+    function getCurrentDomain($param)
+    {
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+        $host = $_SERVER['HTTP_HOST'];
+        return $protocol . "://" . $host.$param;
+    }
+}

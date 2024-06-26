@@ -41,15 +41,18 @@ trait OrderDetailAttribute
         switch ($this->status) {
             case StatusOrder::ORDER_WRATING->value:
                 $data->text = StatusOrder::ORDER_WRATING->getText();
+                $data->text_admin = StatusOrder::ORDER_WRATING->getTextAdmin();
                 $data->color = StatusOrder::ORDER_WRATING->getColor();
                 break;
             case StatusOrder::ORDER_CONFIRMED->value:
                 $data->text = StatusOrder::ORDER_CONFIRMED->getText();
-                $data->color = StatusOrder::ORDER_CONFIRMED->getColor();;
+                $data->text_admin = StatusOrder::ORDER_CONFIRMED->getTextAdmin();
+                $data->color = StatusOrder::ORDER_CONFIRMED->getColor();
                 break;
             case StatusOrder::ORDER_CANCEL->value:
                 $data->text = StatusOrder::ORDER_CANCEL->getText();
-                $data->color = StatusOrder::ORDER_CANCEL->getColor();;
+                $data->text_admin = StatusOrder::ORDER_CANCEL->getTextAdmin();
+                $data->color = StatusOrder::ORDER_CANCEL->getColor();
                 break;
         }
 

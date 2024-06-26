@@ -434,4 +434,20 @@ abstract class BaseService
 
         return false;
     }
+
+    public function upsertData(array $data, array $columns)
+    {
+        DB::beginTransaction();
+        try {
+            $this->model::upsert($data, $columns);
+
+            DB::commit();
+            return true;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+        }
+
+        return false;
+    }
 }

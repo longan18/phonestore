@@ -56,8 +56,10 @@
                                                 <li><b>Tổng số lượng sản phẩm:</b> {{ $item->quantity_total }}</li>
                                                 <li><b>Tổng tiền thanh toán:</b> <span class="text-danger font-weight-bold">{{ formatCurrency($item->price_total) }} <sup>đ</sup></span></li>
                                                 <li><b>Trạng thái đơn hàng: </b> <span class="{{ $item->status_order->color }}"><i>{{ $item->status_order->text }}</i></span></li>
-                                                <li><b>Trạng thái thanh toán: </b> <span class="{{ $item->status_order_payment->color  }}"><i>{{ $item->status_order_payment->text }}</i></span></li>
-                                                <li><b>Thông tin thanh toán: </b> <i>{{ $item->note }}</i></li>
+                                                @if($item->status != \App\Enums\StatusOrder::ORDER_CANCEL->value)
+                                                    <li><b>Trạng thái thanh toán: </b> <span class="{{ $item->status_order_payment->color  }}"><i>{{ $item->status_order_payment->text }}</i></span></li>
+                                                    <li><b>Thông tin thanh toán: </b> <i>{{ $item->note }}</i></li>
+                                                @endif
                                                 <li><b>Thời gian tạo đơn hàng:</b> {{ $item->created_at }}</li>
                                             </ol>
                                         </div>
@@ -68,13 +70,18 @@
                                                 <li><b>Quận / huyện / thị xã:</b> {{ $item->district }}</li>
                                                 <li><b>Phường / xã:</b> {{ $item->ward }}</li>
                                                 <li><b>Địa chỉ chi tiết:</b> {{ $item->address_detail }}</li>
-                                                <li><b>Trạng thái giao hàng:</b> <span class="{{ $item->status_order_shipping->color }}"><i>{{ $item->status_order_shipping->text }}</i></span></li>
+                                                @if($item->status != \App\Enums\StatusOrder::ORDER_CANCEL->value)
+                                                    <li><b>Trạng thái giao hàng:</b> <span class="{{ $item->status_order_shipping->color }}"><i>{{ $item->status_order_shipping->text }}</i></span></li>
+                                                @endif
                                             </ol>
                                         </div>
                                     </div>
                                     <div class="w-16">
                                         <a href="{{ route('client.order.show', ['order' => $item->uuid]) }}" class="btn btn-warning w-100">Xem chi tiết đơn hàng</a>
-                                        <button class="btn btn-danger w-100 mt-2">Hủy đơn hàng</button>
+                                        @if($item->status_shipping == \App\Enums\StatusShippingOrder::ORDER_SHIP_WRATING->value
+                                               && $item->status != \App\Enums\StatusOrder::ORDER_CANCEL->value)
+                                            <button class="btn btn-danger w-100 mt-2 cancel-order" data-value="{{ \App\Enums\StatusOrder::ORDER_CANCEL->value }}" data-order="{{ $item->id }}">Hủy đơn hàng</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -95,5 +102,46 @@
 @endsection
 
 @section('script')
+    <script>
+        $(function () {
+            @if(session()->has('data_vnpay'))
+                @php($data_vnpay = session()->get('data_vnpay'))
+                @if($data_vnpay['check_payment'])
+                    toastr.success('Đơn hàng {{ $data_vnpay['uuid'] }} đã được thanh toán thành công');
+                @else
+                    toastr.error('Đơn hàng {{ $data_vnpay['uuid'] }} thanh toán thất bại');
+                @endif
+            @endif
 
+            $('.cancel-order').on('click', function () {
+                const id = $(this).data('order');
+                const status = $(this).data('value');
+                const client = true;
+
+                $.ajax({
+                    type: 'POST',
+                    url: `{{ route('client.order.cancel-order') }}`,
+                    data: {id, status, client},
+                    beforeSend: function () {
+                        $('.loading').removeClass('d-none')
+                    },
+                    success: function (res) {
+                        if (res.success) {
+                            toastr.success(res.message);
+                        } else if(res.failed) {
+                            toastr.error(res.message);
+                        }
+                        setTimeout(() => window.location.reload(), 700);
+                    },
+                    error: function (Xhtp) {
+                        toastr.error(Xhtp.responseJson.message);
+                        setTimeout(() => window.location.reload(), 700);
+                    },
+                    complete: function () {
+                        setTimeout(() => $('.loading').addClass('d-none'), 700);
+                    }
+                });
+            });
+        })
+    </script>
 @endsection

@@ -102,10 +102,10 @@ class ProductSmartphoneController extends Controller
             $result = $this->productSmartphone->handle($request);
 
             return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'))
-                : $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
+                : $this->responseFailed(message: __('Cập nhật sản phẩm thất bại!'));
         } catch (\Exception $exception) {
             Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
-            return $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
+            return $this->responseFailed(message: __('Cập nhật sản phẩm thất bại!'));
         }
     }
     
