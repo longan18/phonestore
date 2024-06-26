@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'admin.dashboard.index')->name('admin.dashboard.index');
+Route::get('/', [\App\Modules\Admin\Home\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard.index');

@@ -79,7 +79,8 @@
                                     <div class="w-16">
                                         <a href="{{ route('client.order.show', ['order' => $item->uuid]) }}" class="btn btn-warning w-100">Xem chi tiết đơn hàng</a>
                                         @if($item->status_shipping == \App\Enums\StatusShippingOrder::ORDER_SHIP_WRATING->value
-                                               && $item->status != \App\Enums\StatusOrder::ORDER_CANCEL->value)
+                                               && $item->status != \App\Enums\StatusOrder::ORDER_CANCEL->value
+                                               && $item->status_payment != \App\Enums\StatusPaymentOrder::ORDER_PAYMENT_PAID->value)
                                             <button class="btn btn-danger w-100 mt-2 cancel-order" data-value="{{ \App\Enums\StatusOrder::ORDER_CANCEL->value }}" data-order="{{ $item->id }}">Hủy đơn hàng</button>
                                         @endif
                                     </div>

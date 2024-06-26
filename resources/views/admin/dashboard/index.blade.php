@@ -52,9 +52,15 @@
     <div class="row">
         <div class="col-md-6">
             <div class="tile">
-                <h3 class="tile-title">Monthly Sales</h3>
+                <h3 class="tile-title m-0">{{ $title }}</h3>
+                <p class="text-danger"><i>{{ $description }}</i></p>
                 <div class="embed-responsive embed-responsive-16by9">
                     <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+                </div>
+                <div class="d-flex justify-content-end mt-3">
+                    <a href="{{ route('admin.dashboard.index', ['query_total' => 'week']) }}" class="btn btn-warning mr-3">8 Tuần gần nhất</a>
+                    <a href="{{ route('admin.dashboard.index', ['query_total' => 'month']) }}" class="btn btn-blue mr-3">4 Tháng gần nhất</a>
+                    <a href="{{ route('admin.dashboard.index', ['query_total' => 'year']) }}" class="btn btn-danger">4 Năm gần nhất</a>
                 </div>
             </div>
         </div>
@@ -71,50 +77,24 @@
 
 @section('script-after')
     <script type="text/javascript">
+        var dataController = @json($data);
+
         var data = {
-            labels: ["January", "February", "March", "April", "May"],
+            labels: dataController.map(row => row.time),
             datasets: [
                 {
-                    label: "My First dataset",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: [65, 59, 80, 81, 56]
-                },
-                {
-                    label: "My Second dataset",
                     fillColor: "rgba(151,187,205,0.2)",
                     strokeColor: "rgba(151,187,205,1)",
                     pointColor: "rgba(151,187,205,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: [28, 48, 40, 19, 86]
-                }
+                    data: dataController.map(row => row.total)
+                },
             ]
         };
-        var pdata = [
-            {
-                value: 300,
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
-                label: "Complete"
-            },
-            {
-                value: 50,
-                color:"#F7464A",
-                highlight: "#FF5A5E",
-                label: "In-Progress"
-            }
-        ]
 
         var ctxl = $("#lineChartDemo").get(0).getContext("2d");
         var lineChart = new Chart(ctxl).Line(data);
-
-        var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-        var pieChart = new Chart(ctxp).Pie(pdata);
     </script>
 @endsection

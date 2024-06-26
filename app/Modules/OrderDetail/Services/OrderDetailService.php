@@ -177,6 +177,6 @@ class OrderDetailService extends BaseService implements OrderDetailInterface
                 $q->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $params['end_date']))));
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(3);
+            ->paginate(10);
     }
 }

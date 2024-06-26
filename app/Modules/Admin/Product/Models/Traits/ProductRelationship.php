@@ -6,6 +6,8 @@ use App\Modules\Admin\Brand\Models\Brand;
 use App\Modules\Admin\Category\Models\Category;
 use App\Modules\Admin\ProductSmartphone\Models\ProductSmartphone;
 use App\Modules\Admin\ProductSmartphonePrice\Models\ProductSmartphonePrice;
+use App\Modules\OrderItem\Models\OrderItem;
+use App\Modules\ShoppingItem\Models\ShoppingItem;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -45,5 +47,15 @@ trait ProductRelationship
     public function productSmartphonePrice(): HasMany
     {
         return $this->hasMany(ProductSmartphonePrice::class, 'product_id', 'id');
+    }
+
+    public function shoppingItems()
+    {
+        return $this->hasMany(ShoppingItem::class, 'product_id', 'id');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'product_id', 'id');
     }
 }

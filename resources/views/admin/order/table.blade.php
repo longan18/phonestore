@@ -28,7 +28,11 @@ use App\Enums\StatusPaymentOrder;
             </ol>
         </td>
         <td>
-            <select class="w-100 form-control filter-order status-order">
+            <select class="w-100 form-control filter-order status-order"
+                @if($item->status_shipping == StatusShippingOrder::ORDER_SHIP_SUCCESSFUL->value)
+                        disabled
+                @endif
+            >
                 <option value="{{ $item->status }}">{{ $item->status_order->text_admin }}</option>
                 @foreach(StatusOrder::cases() as $itemStatus)
                     @if($item->status != $itemStatus->value && $item->status != StatusOrder::ORDER_CANCEL->value)
@@ -54,7 +58,8 @@ use App\Enums\StatusPaymentOrder;
         </td>
         <td>
             <select class="w-100 form-control filter-order status-shipping"
-                @if($item->status == StatusOrder::ORDER_WRATING->value || $item->status == StatusOrder::ORDER_CANCEL->value)
+                @if($item->status == StatusOrder::ORDER_WRATING->value || $item->status == StatusOrder::ORDER_CANCEL->value
+                || $item->status_shipping == StatusShippingOrder::ORDER_SHIP_SUCCESSFUL->value)
                         disabled
                 @endif
             >

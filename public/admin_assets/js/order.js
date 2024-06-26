@@ -52,4 +52,49 @@ $(document).ready(function () {
         e.preventDefault();
         ORDER.getList($(`#fillter-order`).attr('action'), ORDER.filter());
     });
+
+    $(".status-order").on('change', function () {
+        const id = $(this).parents('tr').data('order');
+        const status = $(this).val();
+        updateStatus({id, status});
+    })
+
+    $(".status-payment").on('change', function () {
+        const id = $(this).parents('tr').data('order');
+        const status_payment = $(this).val();
+        updateStatus({id, status_payment});
+    })
+
+    $(".status-shipping").on('change', function () {
+        const id = $(this).parents('tr').data('order');
+        const status_shipping = $(this).val();
+        updateStatus({id, status_shipping});
+    })
+
+    const updateStatus = (data) => {
+        $.ajax({
+            type: 'POST',
+            url: url_update_status,
+            data: data,
+            beforeSend: function () {
+                $('.loading').removeClass('d-none')
+            },
+            success: function (res) {
+                if (res.success) {
+                    toastr.success(res.message);
+
+                    setTimeout(() => window.location.reload(), 700);
+                } else {
+                    toastr.error(res.message);
+                }
+            },
+            error: function (Xhtp) {
+
+            },
+            complete: function () {
+                setTimeout(() => $('.loading').addClass('d-none'), 700);
+            }
+        });
+    }
 });
+

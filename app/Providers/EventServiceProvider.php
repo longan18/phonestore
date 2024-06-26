@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Modules\Admin\Brand\Models\Brand;
+use App\Modules\Admin\Product\Models\Product;
+use App\Modules\ShoppingSession\Models\ShoppingSession;
+use App\Observers\BrandObserver;
+use App\Observers\ProductObserver;
+use App\Observers\ShoppingSessionObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -25,7 +31,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        ShoppingSession::observe(ShoppingSessionObserver::class);
+        Brand::observe(BrandObserver::class);
+        Product::observe(ProductObserver::class);
     }
 
     /**
