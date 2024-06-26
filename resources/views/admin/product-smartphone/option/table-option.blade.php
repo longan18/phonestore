@@ -13,7 +13,7 @@
             <a href="{{ route('smartphone.option.show', ['product' => $product->slug, 'option' => $option->id]) }}" class="btn btn-warning mr-1">
                 {{ __('Sửa') }}
             </a>
-            <button class="btn btn-danger delete-product mr-1" data-id="#" type="button">{{ __('Xóa') }}</button>
+            <button class="btn btn-danger delete-product-option mr-1" data-slug="{{ $product->slug }}" data-id="{{ $option->id }}" type="button">{{ __('Xóa') }}</button>
             <select class="btn border-0 update-status {{ $option->status_action->bg_btn }}"
                     data-url="{{ route('smartphone.option.update-status', ['option' => $option->id]) }}"
                     data-status="{{ $option->status }}"

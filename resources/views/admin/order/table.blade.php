@@ -22,21 +22,21 @@
             </ol>
         </td>
         <td>
-            <select class="w-100 form-control filter-product">
+            <select class="w-100 form-control filter-order">
                 @foreach(\App\Enums\StatusOrder::cases() as $item)
                     <option value="{{ $item->value }}">{{ $item->getTextAdmin() }}</option>
                 @endforeach
             </select>
         </td>
         <td>
-            <select class="w-100 form-control filter-product">
+            <select class="w-100 form-control filter-order">
                 @foreach(\App\Enums\StatusPaymentOrder::cases() as $item)
                     <option value="{{ $item->value }}">{{ $item->getText() }}</option>
                 @endforeach
             </select>
         </td>
         <td>
-            <select class="w-100 form-control filter-product">
+            <select class="w-100 form-control filter-order">
                 @foreach(\App\Enums\StatusShippingOrder::cases() as $item)
                     <option value="{{ $item->value }}">{{ $item->getText() }}</option>
                 @endforeach

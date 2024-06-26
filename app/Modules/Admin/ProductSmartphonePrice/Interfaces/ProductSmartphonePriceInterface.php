@@ -24,4 +24,6 @@ interface ProductSmartphonePriceInterface
      * @return mixed
      */
     public function getOptionProduct($productSmartphonePrice);
+
+    public function deleteOption($id);
 }

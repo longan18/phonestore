@@ -14,7 +14,7 @@
         <td>{{ formatTime($product->created_at) }}</td>
         <td>
             <a href="{{ route('smartphone.show', ['product' => $product->slug]) }}" class="btn btn-warning">{{ __('Sửa') }}</a>
-            <button class="btn btn-danger delete-product" data-id="#" type="button">{{ __('Xóa') }}</button>
+            <button class="btn btn-danger delete-product" data-id="{{ $product->id }}" type="button">{{ __('Xóa') }}</button>
             <select class="btn border-0 update-status {{ $product->status_action->bg_btn }}"
                     data-url="{{ route('product.update-status', ['product' => $product->slug]) }}"
                     data-status="{{ $product->status }}"

@@ -81,4 +81,9 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
 
         return $data_result;
     }
+    
+    public function deleteOption($id)
+    {
+        return $this->deleteById($id);
+    }
 }

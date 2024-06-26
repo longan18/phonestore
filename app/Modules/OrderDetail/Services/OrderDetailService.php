@@ -86,4 +86,37 @@ class OrderDetailService extends BaseService implements OrderDetailInterface
             ->orderBy('created_at', 'desc')
             ->paginate($perPage, page: $page);
     }
+
+    public function search($params)
+    {
+        return $this->model->with('user')->whereHas('user', function($q) use($params) {
+            $q->when(isset($params['key_search']), function($q) use($params) {
+                $q->where('users.email', 'like', '%'. $params['key_search'] . '%')
+                    ->orWhere('users.phone', 'like', '%'. $params['key_search'] . '%');
+            });
+        })
+        ->when(isset($params['status']), function($q) use($params) {
+            $q->where('status', $params['status']);
+        })
+        ->when(isset($params['status_payment']), function($q) use($params) {
+            $q->where('status_payment', $params['status_payment']);
+        })
+        ->when(isset($params['status_shipping']), function($q) use($params) {
+            $q->where('status_shipping', $params['status_shipping']);
+        })
+        ->when(isset($params['start_price']), function($q) use($params) {
+            $q->where('price_total', '>=', str_replace(',', '', $params['start_price']));
+        })
+        ->when(isset($params['end_price']), function($q) use($params) {
+            $q->where('price_total', '<=', str_replace(',', '', $params['end_price']));
+        })
+        ->when(isset($params['start_date']), function($q) use($params) {
+            $q->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', $params['start_date']))));
+        })
+        ->when(isset($params['end_date']), function($q) use($params) {
+            $q->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', $params['end_date']))));
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(3);
+    }
 }

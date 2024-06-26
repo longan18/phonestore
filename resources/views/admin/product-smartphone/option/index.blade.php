@@ -32,7 +32,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="tile">
+            <div class="tile" id="list-product">
                 <div class="d-flex justify-content-between">
                     <h3 class="tile-title">{{ __('Option sản phẩm').' '. $product->slug }} <span class="{{ $product->status_action->color }}">- {{ $product->status_action->text }}</span></h3>
                     <p>

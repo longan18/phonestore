@@ -5,6 +5,7 @@ namespace App\Modules\Admin\Order\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Client\Account\Models\User;
 use App\Modules\OrderDetail\Interfaces\OrderDetailInterface;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -19,9 +20,17 @@ class OrderController extends Controller
         $this->orderDetail = $orderDetail;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $orderDetails = $this->orderDetail->paginate(10);
+        $orderDetails = $this->orderDetail->search($request->all());
+
+        if ($request->ajax()) {
+            $view = view('admin.order.table', compact('orderDetails'))->render();
+            $paginate = view('admin.pagination.index')->with(['data' => $orderDetails])->render();
+
+            return $this->responseSuccess(data: ['html' => $view, 'pagination' => $paginate]);
+        }
+        
         return view('admin.order.index', compact('orderDetails'));
     }
 

@@ -101,7 +101,29 @@ const PRODUCT = (function () {
     modules.delete = function (id, callback) {
         $.ajax({
             type: 'DELETE',
-            url: `/admin/products/${id}`,
+            url: `/admin/product-smartphone/${id}`,
+            dataType: 'json',
+            beforeSend: function () {
+                COMMON.loading(true);
+            },
+            success: function (res) {
+                if (res.success) {
+                    COMMON.notifySuccess(res.message);
+                    callback();
+                } else {
+                    toastr.error(res.message);
+                }
+            },
+            complete: function () {
+                COMMON.loading(false, 300);
+            }
+        });
+    };
+
+    modules.deleteOption = function (id, callback) {
+        $.ajax({
+            type: 'DELETE',
+            url: `/admin/product-smartphone/${id}/options`,
             dataType: 'json',
             beforeSend: function () {
                 COMMON.loading(true);
@@ -163,8 +185,18 @@ $(document).ready(function () {
         COMMON.confirmDelete(() => {
             PRODUCT.delete($(this).data('id'), () => {
                 PRODUCT.getList(
-                    '/admin/products/',
+                    '/admin/product-smartphone/',
                     {key_search: $("input[name='key_search']").val().trim()}
+                )
+            })
+        })
+    });
+
+    $(document).on('click', '.delete-product-option', function () {
+        COMMON.confirmDelete(() => {
+            PRODUCT.deleteOption($(this).data('id'), () => {
+                PRODUCT.getList(
+                    `/admin/product-smartphone/${$(this).data('slug')}/options`
                 )
             })
         })

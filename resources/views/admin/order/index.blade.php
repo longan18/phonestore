@@ -24,7 +24,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="tile" id="list-product">
+            <div class="tile" id="list-order">
                 <div class="d-flex justify-content-between">
                     <h3 class="tile-title">{{ __('Danh sách đơn hàng') }} @if(!empty($user)) <span>- {{ $user->name }}</span> @endif</h3>
                 </div>
@@ -54,5 +54,6 @@
 @endsection
 
 @section('script-after')
+    <script src="{{ asset('admin_assets/js/order.js') }}" type="module"></script>
 @endsection
 

@@ -10,4 +10,6 @@ interface ProductInterface
     public function search($request, $categoryId);
 
     public function createOrUpdate($request);
+
+    public function delete($id);
 }

@@ -28,9 +28,9 @@ class OrderDetailController extends Controller
         $this->orderItem = $orderItem;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $orderDetails = $this->orderdetail->getOrderDetailByUserId(userInfo()->id, perPage: 5);
+        $orderDetails = $this->orderdetail->getOrderDetailByUserId($request->all(), userInfo()->id, perPage: 5);
 
         return view('client.order.index', compact('orderDetails'));
     }

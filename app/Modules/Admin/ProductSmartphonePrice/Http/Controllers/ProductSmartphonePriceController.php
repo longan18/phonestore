@@ -31,9 +31,16 @@ class ProductSmartphonePriceController extends Controller
      * @param Product $product
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function index(Product $product)
+    public function index(Request $request,Product $product)
     {
         $options = $this->productSmartphonePrice->getByProductId($product->id);
+
+        if ($request->ajax()) {
+            $view = view('admin.product-smartphone.option.table-option', compact('product', 'options'))->render();
+
+            return $this->responseSuccess(data: ['html' => $view]);
+        }
+
         return view('admin.product-smartphone.option.index', compact('product', 'options'));
     }
 
@@ -107,6 +114,26 @@ class ProductSmartphonePriceController extends Controller
         } catch (\Exception $exception) {
             Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
             return $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
+        }
+    }
+
+    /**
+     * deleteOption
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deleteOption($id)
+    {
+        try {
+            $result = $this->productSmartphonePrice->deleteOption($id);
+
+            return $result ? $this->responseSuccess(message: __('Xóa option sản phẩm thành công!'))
+                : $this->responseFailed(message: __('Xóa phẩm option thất bại!'));
+        } catch (\Exception $exception) {
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+            
+            return $this->responseFailed(message: __('Xóa phẩm option thất bại!'));
         }
     }
 }

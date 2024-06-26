@@ -63,4 +63,15 @@ class ProductService extends BaseService implements ProductInterface
 
         return $product;
     }
+
+    /**
+     * delete
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function delete($id) 
+    {
+        return $this->deleteById($id);
+    }
 }

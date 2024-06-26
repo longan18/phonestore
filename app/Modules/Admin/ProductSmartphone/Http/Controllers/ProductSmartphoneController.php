@@ -16,6 +16,7 @@ use App\Modules\Admin\ProductSmartphone\Http\Requests\ProductSmartphoneRequest;
 use App\Modules\Admin\ProductSmartphone\Interfaces\ProductSmartphoneInterface;
 use App\Modules\Admin\ProductSmartphone\Models\ProductSmartphone;
 use Illuminate\Support\Facades\Log;
+use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\F;
 
 /**
  * @ProductSmartphoneController
@@ -105,6 +106,26 @@ class ProductSmartphoneController extends Controller
         } catch (\Exception $exception) {
             Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
             return $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
+        }
+    }
+    
+    /**
+     * delete
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function delete($id)
+    {
+        try {
+            $result = $this->product->delete($id);
+
+            return $result ? $this->responseSuccess(message: __('Xóa sản phẩm thành công!'))
+                : $this->responseFailed(message: __('Xóa phẩm thất bại!'));
+        } catch (\Exception $exception) {
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+            
+            return $this->responseFailed(message: __('Xóa phẩm thất bại!'));
         }
     }
 }
