@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\ProductSmartphonePrice\Http\Controllers;
 
+use App\Enums\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Modules\Admin\Product\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
@@ -107,6 +108,11 @@ class ProductSmartphonePriceController extends Controller
     public function updateStatus(ProductSmartphonePrice $option, Request $request)
     {
         try {
+            $countOptionPublish = $this->productSmartphonePrice->countOptionPublishProduct($option->product_id);
+            if ($request->status == StatusEnum::StopSelling->value && $countOptionPublish == 1) {
+                $option->product()->update(['status' => StatusEnum::StopSelling->value]);
+            }
+
             $result = $this->productSmartphonePrice->updateStatus($option, $request);
 
             return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'), data: $request->status)
@@ -132,7 +138,7 @@ class ProductSmartphonePriceController extends Controller
                 : $this->responseFailed(message: __('Xóa phẩm option thất bại!'));
         } catch (\Exception $exception) {
             Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
-            
+
             return $this->responseFailed(message: __('Xóa phẩm option thất bại!'));
         }
     }

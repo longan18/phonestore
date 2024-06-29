@@ -4,7 +4,7 @@
             <span class="lb-tragop">Trả góp 0%</span>
         </div>
         <div class="item-img item-img_42">
-            <img class="thumb" src="https://cdn.tgdd.vn/Products/Images/42/305659/iphone-15-pro-max-black-thumbnew-600x600.jpg" alt="iPhone 15 Pro Max">
+            <img class="thumb" src="{{ asset('images/img-product-600x600.jpg') }}" alt="iPhone 15 Pro Max">
         </div>
         <h3>{{ $product->name }}</h3>
         <div class="item-compare gray-bg">

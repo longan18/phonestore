@@ -3,6 +3,7 @@
 namespace App\Modules\Admin\ProductSmartphonePrice\Models\Traits;
 
 use App\Modules\Admin\Color\Models\Color;
+use App\Modules\Admin\Product\Models\Product;
 use App\Modules\Admin\Ram\Models\Ram;
 use App\Modules\Admin\StorageCapacity\Models\StorageCapacity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,5 +35,10 @@ trait ProductSmartphonePriceRelationship
     public function storageCapacity():BelongsTo
     {
         return $this->belongsTo(StorageCapacity::class, 'storage_capacity_id', 'id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\ProductSmartphonePrice\Services;
 
+use App\Enums\StatusEnum;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -61,6 +62,10 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
 
     public function getOptionProduct($productSmartphonePrice)
     {
+        if ($productSmartphonePrice->count() == 0) {
+            return abort(404);
+        }
+
         foreach($productSmartphonePrice as $key => $item) {
             $data_result['data'][$item->ram_id . '-' . $item->storage_capacity_id][] = [
                 'item_id' => $item->id,
@@ -81,9 +86,16 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
 
         return $data_result;
     }
-    
+
     public function deleteOption($id)
     {
         return $this->deleteById($id);
+    }
+
+    public function countOptionPublishProduct($productId)
+    {
+        return $this->where('product_id', $productId)
+            ->where('status', StatusEnum::Publish->value)
+            ->count();
     }
 }

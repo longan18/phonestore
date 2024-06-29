@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Product\Services;
 
+use App\Enums\StatusEnum;
 use App\Enums\TagMediaEnum;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -70,8 +71,35 @@ class ProductService extends BaseService implements ProductInterface
      * @param  mixed $id
      * @return void
      */
-    public function delete($id) 
+    public function delete($id)
     {
         return $this->deleteById($id);
+    }
+
+    public function getDataPageHome()
+    {
+        return $this->model->where('status', StatusEnum::Publish->value)
+            ->with($this->withDataProduct())
+            ->get();
+    }
+
+    public function getProductBySlug($slug)
+    {
+        return $this->model->where('slug', $slug)
+            ->with($this->withDataProduct())
+            ->first();
+    }
+
+    private function withDataProduct()
+    {
+        return [
+            'productSmartphone',
+            'productSmartphonePrice' => function ($query) {
+                $query->where('status', StatusEnum::Publish->value);
+            },
+            'productSmartphonePrice.ram',
+            'productSmartphonePrice.storageCapacity',
+            'productSmartphonePrice.color'
+        ];
     }
 }

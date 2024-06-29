@@ -26,4 +26,5 @@ interface ProductSmartphonePriceInterface
     public function getOptionProduct($productSmartphonePrice);
 
     public function deleteOption($id);
+    public function countOptionPublishProduct($productId);
 }

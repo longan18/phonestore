@@ -2,7 +2,7 @@
     <form action="#" id="fillter-order" method="GET">
         <div class="row">
             <div class="col-3">
-                <label class="m-0 mr-2">Tìm kiếm theo mã đơn hàng, email khách hàng</label>
+                <label class="m-0 mr-2">Tìm kiếm mã đơn hàng, email, số điện thoại khách hàng</label>
                 <input name="key_search" class="w-100 form-control" type="text" placeholder="Tìm kiếm">
             </div>
             <div class="col-3">
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <label class="m-0 mr-2"><b>{{ __('Ngày:') }}</b></label>
+                <label class="m-0 mr-2">{{ __('Ngày:') }}</label>
                 <div class="d-flex">
                     <input class="form-control w-100 search-status datepicker mr-1 filter-order" placeholder="Khoảng thời gian bắt đầu" name="start_date"/> <b>~</b>
                     <input class="form-control w-100 search-status datepicker ml-1 filter-order" placeholder="Khoảng thời gian kết thúc" name="end_date"/>

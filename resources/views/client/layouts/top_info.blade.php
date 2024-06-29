@@ -61,9 +61,8 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="{{ route('client.home') }}">{{ __('Trang chủ') }}</a></li>
-                        <li><a href="./shop-grid.html">{{ __('Gian hàng') }}</a></li>
-                        <li><a href="./blog.html">{{ __('Blog') }}</a></li>
-                        <li><a href="./contact.html">{{ __('Liên hệ') }}</a></li>
+                        <li><a href="{{ route('client.cart.index') }}">{{ __('Giỏ hàng') }}</a></li>
+                        <li><a href="{{ route('client.order.index') }}">{{ __('Đơn hàng') }}</a></li>
                     </ul>
                 </nav>
             </div>

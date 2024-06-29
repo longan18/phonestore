@@ -3,6 +3,8 @@
 namespace App\Modules\Admin\Product\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Admin\ProductSmartphone\Interfaces\ProductSmartphoneInterface;
+use App\Modules\Admin\ProductSmartphonePrice\Interfaces\ProductSmartphonePriceInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -20,13 +22,18 @@ use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
     protected $product;
+    protected $productSmartphonePrice;
 
     /**
      * @param ProductInterface $product
+     * @param ProductSmartphonePriceInterface $productSmartphone
      */
-    public function __construct(ProductInterface $product)
-    {
+    public function __construct(
+        ProductInterface $product,
+        ProductSmartphonePriceInterface $productSmartphonePrice
+    ) {
         $this->product = $product;
+        $this->productSmartphonePrice = $productSmartphonePrice;
     }
 
     /**
@@ -36,6 +43,12 @@ class ProductController extends Controller
      */
     public function updateStatus(Product $product, Request $request)
     {
+        $countOptionPublish = $this->productSmartphonePrice->countOptionPublishProduct($product->id);
+
+        if ($countOptionPublish == 0) {
+            return $this->responseFailed(message: __('Cập nhật thất bại, bắt buộc phải có một option đang được mở bán'));
+        }
+
         try {
             $result = $this->product->updateStatus($product, $request);
 

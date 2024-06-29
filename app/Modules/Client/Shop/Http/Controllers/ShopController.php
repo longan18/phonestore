@@ -42,12 +42,7 @@ class ShopController extends Controller
 
     public function showProductDetail(Product $product)
     {
-        $product = $this->productInterface->with([
-            'productSmartphone',
-            'productSmartphonePrice.ram',
-            'productSmartphonePrice.storageCapacity',
-            'productSmartphonePrice.color'
-        ])->where('slug', $product->slug)->first();
+        $product = $this->productInterface->getProductBySlug($product->slug);
 
         $dataResult = $this->productSmartphonePriceInterface->getOptionProduct($product->productSmartphonePrice);
 

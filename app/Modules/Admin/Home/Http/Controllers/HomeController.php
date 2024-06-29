@@ -2,9 +2,11 @@
 
 namespace App\Modules\Admin\Home\Http\Controllers;
 
+use App\Enums\StatusOrder;
 use App\Enums\StatusPaymentOrder;
 use App\Enums\StatusShippingOrder;
 use App\Http\Controllers\Controller;
+use App\Modules\Client\Account\Models\User;
 use App\Modules\OrderDetail\Models\OrderDetail;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -14,7 +16,11 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $this->showChartYear();
+        $countUser = User::all()->count();
+        $sumPriceTotalInMonth = $this->sumPriceTotalInMonth();
+        $totalOrderDetailStatusOrderWarting = $this->totalOrderDetailStatusOrder(StatusOrder::ORDER_WRATING->value);
+        $totalOrderDetailStatusOrderCancel = $this->totalOrderDetailStatusOrder(StatusOrder::ORDER_CANCEL->value);
+
         if ($request->query_total == 'month') {
             [$data, $title, $description] = $this->showChartMonth();
         } else if ($request->query_total == 'year') {
@@ -24,11 +30,19 @@ class HomeController extends Controller
         }
 
         return view('admin.dashboard.index',
-            compact('data', 'title','description')
+            compact(
+                'data',
+                'title',
+                'description',
+                'countUser',
+                'sumPriceTotalInMonth',
+                'totalOrderDetailStatusOrderWarting',
+                'totalOrderDetailStatusOrderCancel'
+            )
         );
     }
 
-    protected function showChartWeek()
+    private function showChartWeek()
     {
         $endOfWeek = Carbon::now();
         $startOfWeek = $endOfWeek->copy()->subWeeks(7)->startOfWeek();
@@ -36,10 +50,7 @@ class HomeController extends Controller
 
         $data = [];
         foreach ($period as $key => $week) {
-            $total = OrderDetail::where('status_shipping', StatusShippingOrder::ORDER_SHIP_SUCCESSFUL->value)
-                ->where('status_payment', StatusPaymentOrder::ORDER_PAYMENT_PAID->value)
-                ->whereBetween('created_at', [$week->startOfWeek()->toDateTimeString(), $week->endOfWeek()->toDateTimeString()])
-                ->sum('price_total');
+            $total = $this->sumPriceTotal($week->startOfWeek()->toDateTimeString(), $week->endOfWeek()->toDateTimeString());
 
             $data[] = [
                 'time' => $week->startOfWeek()->format('d/m/Y') . ' - ' . $week->endOfWeek()->format('d/m/Y'),
@@ -53,7 +64,7 @@ class HomeController extends Controller
         return [$data, $title, $description];
     }
 
-    protected function showChartMonth()
+    private function showChartMonth()
     {
         $now = Carbon::now();
         $threeMonthsAgo = $now->copy()->subMonths(3)->startOfMonth();
@@ -67,10 +78,10 @@ class HomeController extends Controller
                 $endOfMonth = $now->copy()->startOfDay();
             }
 
-            $total = OrderDetail::where('status_shipping', StatusShippingOrder::ORDER_SHIP_SUCCESSFUL->value)
-                ->where('status_payment', StatusPaymentOrder::ORDER_PAYMENT_PAID->value)
-                ->whereBetween('created_at', [$startOfMonth->startOfDay()->toDateTimeString(), $endOfMonth->endOfDay()->toDateTimeString()])
-                ->sum('price_total');
+            $total = $this->sumPriceTotal(
+                $startOfMonth->startOfDay()->toDateTimeString(),
+                $endOfMonth->endOfDay()->toDateTimeString()
+            );
 
             $data[] = [
                 'time' => $startOfMonth->format('m/Y'),
@@ -84,7 +95,7 @@ class HomeController extends Controller
         return [$data, $title, $description];
     }
 
-    protected function showChartYear()
+    private function showChartYear()
     {
         $now = Carbon::now();
         $threeYearsAgo = $now->copy()->subYears(3)->startOfYear();
@@ -98,10 +109,7 @@ class HomeController extends Controller
                 $endOfYear = $now->copy()->startOfDay();
             }
 
-            $total = OrderDetail::where('status_shipping', StatusShippingOrder::ORDER_SHIP_SUCCESSFUL->value)
-                ->where('status_payment', StatusPaymentOrder::ORDER_PAYMENT_PAID->value)
-                ->whereBetween('created_at', [$startOfYear, $endOfYear])
-                ->sum('price_total');
+            $total = $this->sumPriceTotal($startOfYear, $endOfYear);
 
             $data[] = [
                 'time' => $startOfYear->format('Y'),
@@ -113,5 +121,33 @@ class HomeController extends Controller
         $description = 'Doanh thu 4 năm gần nhất tính từ năm hiện tại';
 
         return [$data, $title, $description];
+    }
+
+    private function sumPriceTotal($timeStart, $timeEnd)
+    {
+        return $this->queryRootOrderDetail($timeStart, $timeEnd)->sum('price_total');
+    }
+
+    private function queryRootOrderDetail($timeStart, $timeEnd)
+    {
+        return OrderDetail::where('status_shipping', StatusShippingOrder::ORDER_SHIP_SUCCESSFUL->value)
+            ->where('status_payment', StatusPaymentOrder::ORDER_PAYMENT_PAID->value)
+            ->whereBetween('created_at', [$timeStart, $timeEnd]);
+    }
+
+    private function sumPriceTotalInMonth()
+    {
+        $startOfMonth = Carbon::now()->startOfMonth()->toDateTimeString();
+        $startOfDay = Carbon::now()->startOfDay()->toDateTimeString();
+
+        return $this->sumPriceTotal($startOfMonth, $startOfDay);
+    }
+
+    private function totalOrderDetailStatusOrder($status)
+    {
+        return OrderDetail::where('status', $status)
+            ->where('status_payment', StatusPaymentOrder::ORDER_PAYMENT_UNPAID->value)
+            ->get()
+            ->count();
     }
 }

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         // Seeder viet-nam map: php artisan vietnam-map:install
         $this->call([
-            AdminSeeder::class,
+            AccountSeeder::class,
             BrandSeeder::class,
             CategorySeeder::class,
             ProductSeeder::class,

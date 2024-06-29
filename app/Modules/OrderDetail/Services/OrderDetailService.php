@@ -149,12 +149,17 @@ class OrderDetailService extends BaseService implements OrderDetailInterface
 
     public function search($params)
     {
-        return $this->model->with('user')->whereHas('user', function($q) use($params) {
-            $q->when(isset($params['key_search']), function($q) use($params) {
-                $q->where('users.email', 'like', '%'. $params['key_search'] . '%')
-                    ->orWhere('users.phone', 'like', '%'. $params['key_search'] . '%');
-            });
-        })
+        return $this->model->with('user')
+            ->where(function ($q) use ($params) {
+                $q->when(isset($params['key_search']), function ($q) use ($params) {
+                    $q->where('uuid', 'like', '%' . $params['key_search'] . '%');
+                });
+            })->orWhereHas('user', function($q) use($params) {
+                $q->when(isset($params['key_search']), function($q) use($params) {
+                    $q->where('users.email', 'like', '%'. $params['key_search'] . '%')
+                        ->orWhere('users.phone', 'like', '%'. $params['key_search'] . '%');
+                });
+            })
             ->when(isset($params['status']), function($q) use($params) {
                 $q->where('status', $params['status']);
             })

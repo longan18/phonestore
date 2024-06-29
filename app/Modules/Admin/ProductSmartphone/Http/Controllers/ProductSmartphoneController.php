@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Modules\Admin\ProductSmartphone\Http\Requests\ProductSmartphoneRequest;
 use App\Modules\Admin\ProductSmartphone\Interfaces\ProductSmartphoneInterface;
 use App\Modules\Admin\ProductSmartphone\Models\ProductSmartphone;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\F;
 
@@ -108,7 +109,7 @@ class ProductSmartphoneController extends Controller
             return $this->responseFailed(message: __('Cập nhật sản phẩm thất bại!'));
         }
     }
-    
+
     /**
      * delete
      *
@@ -117,14 +118,16 @@ class ProductSmartphoneController extends Controller
      */
     public function delete($id)
     {
+        DB::beginTransaction();
         try {
             $result = $this->product->delete($id);
 
-            return $result ? $this->responseSuccess(message: __('Xóa sản phẩm thành công!'))
-                : $this->responseFailed(message: __('Xóa phẩm thất bại!'));
+            DB::commit();
+            return $this->responseSuccess(message: __('Xóa sản phẩm thành công!'));
         } catch (\Exception $exception) {
+            DB::rollBack();
             Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
-            
+
             return $this->responseFailed(message: __('Xóa phẩm thất bại!'));
         }
     }

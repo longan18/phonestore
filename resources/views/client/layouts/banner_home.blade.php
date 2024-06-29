@@ -20,11 +20,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex">
-                    <a href="#">
-                        <div class="text-hover"><i class="fa fa-mobile"></i><span class="ml-2">Điện thoại thông minh</span></div>
-                    </a>
-                </div>
             </div>
         </div>
     </div>

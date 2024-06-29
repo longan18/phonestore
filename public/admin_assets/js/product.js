@@ -92,6 +92,13 @@ const PRODUCT = (function () {
                     toastr.error('Đã xảy ra lỗi hệ thống');
                 }
             },
+            error: function (res) {
+                if (res.responseJSON.failed) {
+                    toastr.error(res.responseJSON.message);
+                } else {
+                    toastr.error('Đã xảy ra lỗi hệ thống');
+                }
+            },
             complete: function () {
                 COMMON.loading(false, 300);
             }
@@ -151,12 +158,6 @@ const PRODUCT = (function () {
         }
 
         return data
-        // let data = {
-        //     key_search: $("input[name='key_search']").val().trim()
-        // };
-        // $(document).find('.filter-product').map((i, e) => {
-        //     data = {...data, [$(e).data('name')]: $(e).val()};
-        // });
     };
 
     return modules;

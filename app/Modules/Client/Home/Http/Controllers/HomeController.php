@@ -39,11 +39,7 @@ class HomeController extends Controller
 
     public function getDataPageHome()
     {
-        $products = $this->productInterface->with([
-            'productSmartphone',
-            'productSmartphonePrice.ram',
-            'productSmartphonePrice.storageCapacity'
-        ])->get();
+        $products = $this->productInterface->getDataPageHome();
 
         return view('client.home.index', compact('products'));
     }

@@ -3,9 +3,16 @@
 namespace App\Observers;
 
 use App\Modules\Admin\Product\Models\Product;
+use App\Modules\ShoppingItem\Interfaces\ShoppingItemInterface;
 
 class ProductObserver
 {
+    protected $shoppingItem;
+    public function __construct(ShoppingItemInterface $shoppingItem)
+    {
+        $this->shoppingItem = $shoppingItem;
+    }
+
     /**
      * Handle the Product "created" event.
      */
@@ -30,7 +37,15 @@ class ProductObserver
         $product->productSmartphone()->delete();
         $product->productSmartphonePrice()->delete();
         $product->shoppingItems()->delete();
-        $product->orderItems()->delete();
+
+        $shoppingItem = $this->shoppingItem->getShoppingItemByShoppingSessionId(userInfo()->shoppingSession->id);
+
+        $dataUpdate = [
+            'quantity_total' => $shoppingItem->count(),
+            'price_total' => $shoppingItem->sum('total_price_item'),
+        ];
+
+        userInfo()->shoppingSession->update($dataUpdate);
     }
 
     /**
