@@ -9,6 +9,10 @@
             min-height: 100px;
             max-height: 100px;
         }
+
+        tr td {
+            border: 0px;
+        }
     </style>
 @endsection
 
@@ -48,6 +52,8 @@
                     <thead>
                     <tr>
                         <th class="text-center">#</th>
+                        <th>{{ __('Avatar') }}</th>
+                        <th>{{ __('Thumb') }}</th>
                         <th>{{ __('Ram') }}</th>
                         <th>{{ __('Khả năng lưu trữ') }}</th>
                         <th>{{ __('Dung lượng còn lại') }}</th>

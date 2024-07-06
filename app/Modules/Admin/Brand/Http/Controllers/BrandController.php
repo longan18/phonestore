@@ -74,21 +74,13 @@ class BrandController extends Controller
         return view('admin.brand.form', compact('brand'));
     }
 
-    /**
-     * @param $brand
-     *
-     * @return JsonResponse
-     */
-    public function delete($brand): JsonResponse
+    public function updateStatus(Brand $brand, Request $request)
     {
-        try {
-            $this->brandInterface->delete($brand);
+        $result = $this->brandInterface->updateStatusBrand($brand, $request);
 
-            return $this->responseSuccess(message: __('Đã xóa thành công!'));
-        } catch (\Throwable $e) {
-            Log::info($e->getMessage());
-
-            return $this->responseFailed(message: __('Xóa thất bại!'));
-        }
+        return $result ? $this->responseSuccess(message: __('Cập nhật thương hiệu thành công!'), data: [
+            'status' => $result->status,
+            'updated_at' => $result->updated_at->toDateTimeString(),
+        ]) : $this->responseFailed(message: __('Cập nhật thương hiệu thất bại!'));
     }
 }

@@ -47,6 +47,7 @@
                       action="{{ empty($productSmartphonePrice->id) ? route('smartphone.option.store') : route('smartphone.option.update', ['option' => $productSmartphonePrice->id]) }}"
                       data-redirect="{{ route('smartphone.option.index', ['product' => $product->slug]) }}" enctype="multipart/form-data">
                     <input name="id" value="{{ $productSmartphonePrice->id ?? '' }}" type="hidden">
+                    <input name="status" value="{{ $productSmartphonePrice->status ?? '' }}" type="hidden">
                     <input name="product_id" value="{{ $product->smartphone->id ?? '' }}" type="hidden">
                     <div class="row w-100 d-flex justify-content-center">
                         <div class="col-md-12 col-lg-4">
@@ -54,7 +55,7 @@
                                 <label>{{ __('Ảnh option') }}<span class="text-danger">*</span></label>
                                 <div class="avatar-upload">
                                     <div class="avatar-edit">
-                                        <input name="avatar" class="d-none" type='file' id="image-upload"
+                                        <input name="thumb_avatar_option" class="d-none" type="file" id="image-upload"
                                                accept=".png,.jpg,.jpeg"/>
                                         <label for="image-upload">
                                             <div class="btn btn-primary icon-btn">
@@ -67,7 +68,26 @@
                                              height="150" width="150" id="image-preview" alt="User profile picture" src="{{ $productSmartphonePrice->avatar ?? '' }}">
                                     </div>
                                 </div>
-                                <div class="error-message error_avatar"></div>
+                                <div class="error-message error_thumb_avatar_option"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label>{{ __('Ảnh thumb option (200x200)') }}<span class="text-danger">*</span></label>
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit">
+                                        <input name="thumb_option" class="d-none" type="file" id="image-upload-option"
+                                               accept=".png,.jpg,.jpeg"/>
+                                        <label for="image-upload-option">
+                                            <div class="btn btn-primary icon-btn">
+                                                <i class="fa fa-plus"></i>{{ __('Chọn file') }}
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="avatar-preview mt-2 mb-1">
+                                        <img class="profile-user-img img-responsive img-circle object-fit-cover {{ !empty($productSmartphonePrice->thumb_option) ?: 'd-none' }}"
+                                             height="150" width="150" id="image-preview-option" alt="User profile picture" src="{{ $productSmartphonePrice->thumb_option ?? '' }}">
+                                    </div>
+                                </div>
+                                <div class="error-message error_thumb_option"></div>
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Ram') }}<span class="text-danger">*</span></label>

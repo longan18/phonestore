@@ -29,16 +29,6 @@ class BrandSeeder extends Seeder
         $name = [
             'Apple',
             'Samsung',
-            'Xiaomi',
-            'Vivo',
-            'Oppo',
-            'Huawei',
-            'Realme',
-            'Lenovo',
-            'Motorola',
-            'TECNO',
-            'Sony',
-            'ASUS',
         ];
 
         return array_map(function($name) {

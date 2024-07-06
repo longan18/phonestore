@@ -32,5 +32,5 @@ class Color extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['color', 'hex_color'];
+    protected $fillable = ['color'];
 }

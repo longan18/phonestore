@@ -12,54 +12,40 @@ trait ProductScope
      * @param $request
      * @return mixed
      */
-    public function scopeSearch($query, $request, $categoryId): mixed
+    public function scopeSearch($query, $request): mixed
     {
         $withs = [
             'media',
             'brand',
-            'category'
+            'category',
+            'productSmartphone',
+            'productSmartphonePrice'
         ];
 
-        if ($categoryId == CATEGORY_SAMRTPHONE) {
-            array_push($withs, 'productSmartphone', 'productSmartphonePrice');
-        }
-
         return $query->with($withs)
-            ->where('category_id', $categoryId)
-            ->when(
-                !empty($request->key_search),
-                    function ($q) use ($request) {
-                        $q->where('name', 'like', '%' . escapeLike($request->key_search) . '%');
-                    }
-            )->when(
-                !empty($request->brand_id),
+            ->where('category_id', CATEGORY_SAMRTPHONE)
+            ->when(!empty($request->key_search), function ($q) use ($request) {
+                $q->where('name', 'like', '%' . escapeLike($request->key_search) . '%');
+            }
+            )->when(!empty($request->brand_id), function ($q) use ($request) {
+                $q->where('brand_id', $request->brand_id);
+            }
+            )->when(!empty($request->status), function ($q) use ($request) {
+                $q->where('products.status', $request->status);
+            }
+            )->when(!empty($request->start_price) || !empty($request->end_price),
                 function ($q) use ($request) {
-                    $q->where('brand_id', $request->brand_id);
+                    return $this->querySmartphonePrice($q, $request);
                 }
-            )->when(
-                !empty($request->status),
-                    function ($q) use ($request) {
-                        $q->where('products.status', $request->status);
-                    }
-            )->when(
-                !empty($request->start_price) || !empty($request->end_price),
-                function ($q) use ($request, $categoryId) {
-                    if ($categoryId == CATEGORY_SAMRTPHONE) {
-                        return $this->querySmartphonePrice($q, $request);
-                    }
+            )->when(!empty($request->start_date) || !empty($request->end_date), function ($q) use ($request) {
+                if (!empty($request->start_date) && !empty($request->end_date)) {
+                    $q->whereBetween('products.created_at', [convertDateToDateTime($request->start_date), convertDateToDateTime($request->end_date)]);
+                } elseif (!empty($request->start_date)) {
+                    $q->where('products.created_at', '>=', convertDateToDateTime($request->start_date));
+                } elseif (!empty($request->end_date)) {
+                    $q->where('products.created_at', '<=', convertDateToDateTime($request->end_date));
                 }
-            )->when(
-                !empty($request->start_date) || !empty($request->end_date),
-                function ($q) use ($request) {
-                    if (!empty($request->start_date) && !empty($request->end_date)) {
-                        $q->whereBetween('products.created_at', [convertDateToDateTime($request->start_date), convertDateToDateTime($request->end_date)]);
-                    } elseif (!empty($request->start_date)) {
-                        $q->where('products.created_at', '>=', convertDateToDateTime($request->start_date));
-                    } elseif (!empty($request->end_date)) {
-                        $q->where('products.created_at', '<=', convertDateToDateTime($request->end_date));
-                    }
-                }
-            );
+            });
     }
 
     private function querySmartphonePrice($query, $request)

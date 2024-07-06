@@ -27,4 +27,6 @@ interface ProductSmartphonePriceInterface
 
     public function deleteOption($id);
     public function countOptionPublishProduct($productId);
+    public function updateStatusByProductId($productId, $status);
+    public function updateStatusProductPrice($model, $request);
 }

@@ -21,7 +21,10 @@
 <link rel="stylesheet" href="{{ asset('client_assets/css/my_style.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('common/common.css') }}" type="text/css">
 <link rel="stylesheet" type="text/css" href="{{ asset('common/toastr.min.css') }}">
-@vite(['resources/scss/common.scss','resources/scss/client/top-bar.scss'])
+@vite(['resources/scss/client/notify.scss', 'resources/scss/common.scss','resources/scss/client/top-bar.scss'])
 @yield('style_css')
+<style>
+
+</style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 

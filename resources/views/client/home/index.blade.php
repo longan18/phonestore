@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    @include('client.layouts.banner_home')
+    @include('client.home.filter_product_home')
 {{--    @include('client.home.brand_slide')--}}
     <section class="featured spad">
         <div class="container">

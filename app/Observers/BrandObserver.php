@@ -2,10 +2,18 @@
 
 namespace App\Observers;
 
+use App\Enums\StatusEnum;
 use App\Modules\Admin\Brand\Models\Brand;
+use App\Modules\Admin\Product\Interfaces\ProductInterface;
 
 class BrandObserver
 {
+    protected $product;
+    public function __construct(ProductInterface $product)
+    {
+        $this->product = $product;
+    }
+
     /**
      * Handle the Brand "created" event.
      */
@@ -19,7 +27,13 @@ class BrandObserver
      */
     public function updated(Brand $brand): void
     {
-        //
+        if ($brand->status == StatusEnum::UNKNOWN->value) {
+            $this->product->updateStatusByBrandId($brand->id, StatusEnum::UNKNOWN->value);
+        }
+
+        if ($brand->status == StatusEnum::STOP_SELLING->value) {
+            $this->product->updateStatusByBrandId($brand->id, StatusEnum::STOP_SELLING->value);
+        }
     }
 
     /**
@@ -27,7 +41,7 @@ class BrandObserver
      */
     public function deleted(Brand $brand): void
     {
-        $brand->products()->delete();
+
     }
 
     /**

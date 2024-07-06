@@ -8,7 +8,7 @@
         data-price="{{ $shoppingItem->price }}">
         <td class="d-flex align-items-center">
             <div class="">
-                <img src="https://cdn.tgdd.vn/Products/Images/42/305659/iphone-15-pro-max-black-thumbnew-600x600.jpg" alt="" style="width: 100px;">
+                <img src="{{ asset($shoppingItem->productPrice->avatar) }}" alt="" style="width: 100px;">
             </div>
             <div style="margin-left: 20px">
                 <ol class="text-left" style="list-style-type: disc">

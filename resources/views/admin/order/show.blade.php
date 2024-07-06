@@ -54,7 +54,7 @@
                         <tr class="item-cart">
                             <td class="d-flex align-items-center">
                                 <div class="">
-                                    <img src="{{ $item->product->avatar }}" alt="" style="width: 100px;">
+                                    <img src="{{ $item->productPrice->avatar }}" alt="" style="width: 100px;">
                                 </div>
                                 <div style="margin-left: 20px">
                                     <ol class="text-left" style="list-style-type: disc">

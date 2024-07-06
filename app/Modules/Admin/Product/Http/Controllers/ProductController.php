@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Product\Http\Controllers;
 
+use App\Enums\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Modules\Admin\ProductSmartphone\Interfaces\ProductSmartphoneInterface;
 use App\Modules\Admin\ProductSmartphonePrice\Interfaces\ProductSmartphonePriceInterface;
@@ -45,18 +46,15 @@ class ProductController extends Controller
     {
         $countOptionPublish = $this->productSmartphonePrice->countOptionPublishProduct($product->id);
 
-        if ($countOptionPublish == 0) {
+        if ($countOptionPublish == 0 && $request->status != StatusEnum::UNKNOWN->value) {
             return $this->responseFailed(message: __('Cập nhật thất bại, bắt buộc phải có một option đang được mở bán'));
         }
 
-        try {
-            $result = $this->product->updateStatus($product, $request);
+        $result = $this->product->updateStatusProduct($product, $request);
 
-            return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'), data: $request->status)
-                : $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
-        } catch (\Exception $exception) {
-            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
-            return $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
-        }
+        return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'), data: [
+            'status' => $result->status,
+            'updated_at' => $result->updated_at->toDateTimeString(),
+        ]) : $this->responseFailed(message: __('Cập nhật sản phẩm thất bại!'));
     }
 }

@@ -112,4 +112,8 @@ $(function () {
     $(document).on('click', '.quantity .qtybtn', function () {
         PRODUCT_DETAIL.handleQuantity();
     });
+
+    $('.item-price').on('mouseover', function() {
+        $('.product__details__pic__item--large').attr('src', $(this).attr('data-image'));
+    });
 });

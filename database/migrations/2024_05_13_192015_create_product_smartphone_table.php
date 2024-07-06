@@ -21,12 +21,9 @@ return new class extends Migration
             // Màn hình
             $table->string("screen_technology")->nullable(); // Công nghệ màn hình
             $table->string("screen_resolution")->nullable(); // Độ phân giải màn hình
-            $table->string("widescreen", 20)// Màn hình rộng
-            ->comment('The unit is inches and is denoted by Ex: 6.7"');
-            $table->integer("scanning_frequency")->unsigned()// Tần số quét
-            ->comment('The unit is Hertz(Hz) and is denoted by Ex: 120 Hz');
-            $table->integer("maximum_brightness")->unsigned()->nullable() // Độ sáng tối đa
-            ->comment('The unit is nits and is denoted by Ex: 2000 nits');
+            $table->string("widescreen", 200)->nullable(false);// Màn hình rộng
+            $table->string("scanning_frequency", 200)->nullable(false);// Tần số quét
+            $table->string("maximum_brightness", 50)->nullable(false); // Độ sáng tối đa
             $table->string("touch_glass_surface")->nullable(); // Màn hình cảm ứng
             // Camera sau
             $table->string("rear_camera_resolution")->nullable(); // Độ phân giải camera sau
@@ -54,11 +51,9 @@ return new class extends Migration
             $table->string("headphone_jack")->nullable(); // Jack tai nghe
             $table->string("other_connections")->nullable(); // Kết nối khác
             // Pin & Sạc
-            $table->integer("battery_type")->unsigned() // Loại pin
-            ->comment('The unit is mAh and is denoted by Ex: 4422 mAh');
-            $table->string("battery_capacity")->nullable(); // Hỗ trợ sạc tối đa
-            $table->integer("maximum_charging_support")->unsigned()->nullable() // Dung lượng pin
-            ->comment('The unit is W and is denoted by Ex: 20 W');
+            $table->string("battery_type", 50)->nullable(); // Loại pin
+            $table->string("battery_capacity")->nullable(); // Dung lượng pin
+            $table->string("maximum_charging_support", 50)->nullable(); // Hỗ trợ sạc tối đa
             $table->string("charger_included_with_the_device")->nullable(); // Sạc kèm theo máy
             $table->text("battery_technology")->nullable(); // Công nghệ pin
             // Tiện ích
@@ -72,8 +67,7 @@ return new class extends Migration
             $table->string("design")->nullable(); // Thiết kế
             $table->string("material")->nullable(); // Chất liệu
             $table->string("size")->nullable(); // Kích thước
-            $table->integer("mass")->unsigned()->nullable() // Khối lượng
-            ->comment('The unit is G and is denoted by Ex: 221 g');
+            $table->string("mass", 50)->nullable(); // Khối lượng
             $table->string("launch_time")->nullable(); // Thời điểm ra mắt
             $table->timestamps();
             $table->softDeletes();

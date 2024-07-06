@@ -37,7 +37,8 @@
                         <th>{{ __('Tên thương hiệu') }}</th>
                         <th>{{ __('Hình ảnh') }}</th>
                         <th>{{ __('Ngày tạo') }}</th>
-                        <th>{{ __('Tùy chọn') }}</th>
+                        <th>{{ __('Trạng thái') }}</th>
+                        <th class="w-20">{{ __('Tùy chọn') }}</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -17,7 +17,7 @@ trait ProductAttribute
      */
     public function getAvatarAttribute(): mixed
     {
-        return optional($this->getMedia(TagMediaEnum::Avatar->value)->first())->getUrl()
+        return optional($this->getMedia(TagMediaEnum::THUMB_AVATAR_PRODUCT->value)->first())->getUrl()
             ?? asset('admin_assets/images/avatar.jpeg');
     }
 
@@ -26,7 +26,7 @@ trait ProductAttribute
      */
     public function getSubImageAttribute(): mixed
     {
-        $result = $this->getMedia(TagMediaEnum::SubImage->value);
+        $result = $this->getMedia(TagMediaEnum::SUB_IMAGE_PRODUCT->value);
 
         return $result->map(
             function ($data) {
@@ -51,15 +51,19 @@ trait ProductAttribute
         $data = collect();
 
         switch ($this->status) {
-            case StatusEnum::StopSelling->value:
-                $data->text = StatusEnum::StopSelling->getText();
-                $data->color = StatusEnum::StopSelling->getColor();
-                $data->bg_btn = StatusEnum::StopSelling->getColorBtn();
+            case StatusEnum::STOP_SELLING->value:
+                $data->text = StatusEnum::STOP_SELLING->getText();
+                $data->color = StatusEnum::STOP_SELLING->getColor();
+                $data->bg_btn = StatusEnum::STOP_SELLING->getColorBtn();
                 break;
-            case StatusEnum::Publish->value:
-                $data->text = StatusEnum::Publish->getText();
-                $data->color = StatusEnum::Publish->getColor();
-                $data->bg_btn = StatusEnum::Publish->getColorBtn();
+            case StatusEnum::PUBLISH->value:
+                $data->text = StatusEnum::PUBLISH->getText();
+                $data->color = StatusEnum::PUBLISH->getColor();
+                $data->bg_btn = StatusEnum::PUBLISH->getColorBtn();
+                break;
+            case StatusEnum::UNKNOWN->value:
+                $data->text = StatusEnum::UNKNOWN->getText();
+                $data->color = StatusEnum::UNKNOWN->getColor();
                 break;
         }
 

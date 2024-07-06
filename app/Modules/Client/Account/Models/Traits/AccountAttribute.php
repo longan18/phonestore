@@ -13,7 +13,7 @@ trait AccountAttribute
 {
     public function getAvatarAttribute()
     {
-        return optional($this->getMedia(TagMediaEnum::Avatar->value)->first())->getUrl()
+        return optional($this->getMedia(TagMediaEnum::THUMB_AVATAR_PRODUCT->value)->first())->getUrl()
             ?? asset('admin_assets/images/avatar.jpeg');
     }
 

@@ -3,6 +3,7 @@
 namespace App\Modules\Admin\ProductSmartphonePrice\Services;
 
 use App\Enums\StatusEnum;
+use App\Enums\TagMediaEnum;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -41,7 +42,20 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
            $dataArr['id'] = $request->id ?? null;
 
            $model = $this->model::upsertWithReturn($dataArr, ['id', 'product_id'], $this->model->getFillable());
-           $this->media->uploadAvatar($model, $request);
+            $this->media->uploadAvatar(
+                $model,
+                $request,
+                'thumb_avatar_option',
+                TagMediaEnum::THUMB_AVATAR_OPTION->getDirectory(),
+                TagMediaEnum::THUMB_AVATAR_OPTION->value
+            );
+            $this->media->uploadAvatar(
+                $model,
+                $request,
+                'thumb_option',
+                TagMediaEnum::THUMB_OPTION->getDirectory(),
+                TagMediaEnum::THUMB_OPTION->value
+            );
 
             DB::commit();
             return true;
@@ -71,12 +85,13 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
                 'item_id' => $item->id,
                 'price' => $item->price,
                 'color_id' => $item->color_id,
-                'color' => $item->color->hex_color,
+                'color' => $item->color->color,
                 'ram_id' => $item->ram_id,
                 'ram' => $item->ram->value,
                 'storage_capacity_id' => $item->storage_capacity_id,
                 'storage_capacity' => $item->storageCapacity->value,
-                'quantity' => $item->quantity
+                'quantity' => $item->quantity,
+                'avatar' => $item->avatar
             ];
 
             $data_result['key'][$item->ram_id . '-' . $item->storage_capacity_id] = $item->ram->value . '-' . $item->storageCapacity->value;
@@ -95,7 +110,35 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
     public function countOptionPublishProduct($productId)
     {
         return $this->where('product_id', $productId)
-            ->where('status', StatusEnum::Publish->value)
+            ->where('status', StatusEnum::PUBLISH->value)
             ->count();
+    }
+
+    public function updateStatusByProductId($productId, $status)
+    {
+        return $this->model->where('product_id', $productId)->update(['status' => $status]);
+    }
+
+    public function updateStatusProductPrice($model, $request)
+    {
+        DB::beginTransaction();
+        try {
+            $countOptionPublish = $this->countOptionPublishProduct($model->product_id);
+            if (($request->status == StatusEnum::UNKNOWN->value || $request->status == StatusEnum::STOP_SELLING->value)
+                && $countOptionPublish == 1
+            ) {
+                $model->product()->update(['status' => StatusEnum::STOP_SELLING->value]);
+            }
+
+            $this->updateStatus($model, $request);
+
+            DB::commit();
+            return $model;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+        }
+
+        return false;
     }
 }

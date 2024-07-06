@@ -30,28 +30,32 @@ class BrandService extends BaseService implements BrandInterface
     }
 
     /**
-     * @param Request $request
-     *
-     * @return bool
+     * @param $request
+     * @return mixed
      */
-    public function handleBrand(Request $request): bool
+    public function handleBrand($request)
     {
         if ($request->id) {
-            $handle = $this->getById($request->id);
-            $handle->update($request->only('name'));
+            $brand = $this->getById($request->id);
+            $brand->update($request->only('name'));
         } else {
-            $handle = $this->create($request->only('name'));
+            $brand = $this->create($request->only('name'));
         }
 
-        return $this->media->uploadAvatar($handle, $request, 'brand');
+        return $this->media->uploadAvatar(
+            $brand,
+            $request,
+            'thumb_avatar_brand',
+            TagMediaEnum::THUMB_AVATAR_BRAND->getDirectory(),
+            TagMediaEnum::THUMB_AVATAR_BRAND->value
+        );
     }
 
     /**
-     * @param Request $request
-     *
+     * @param $request
      * @return mixed
      */
-    public function search(Request $request): mixed
+    public function search($request)
     {
         return $this->model::search($request)->paginate(PAGE_RECORD);
     }
@@ -73,7 +77,23 @@ class BrandService extends BaseService implements BrandInterface
     public function delete($brand): ?bool
     {
         $brand = $this->getById($brand);
-        $this->media->deleteExistingFile($brand->getMedia(TagMediaEnum::Avatar->value)->first());
+        $this->media->deleteExistingFile($brand->getMedia(TagMediaEnum::THUMB_AVATAR_BRAND->value)->first());
         return $brand->delete();
+    }
+
+    public function updateStatusBrand($model, $request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->updateStatus($model, $request);
+
+            DB::commit();
+            return $model;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+        }
+
+        return false;
     }
 }

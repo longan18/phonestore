@@ -73,21 +73,26 @@ const PRODUCT = (function () {
             },
             success: function (res) {
                 if (res.success) {
-                    toastr.success(res.message);
                     let elmMsg = elm.parents('tr').find('td.msg-status');
-                    if (res.data == COMMON.STOP_SELLING) {
+                    if (res.data.status == COMMON.STOP_SELLING) {
+                        toastr.success(res.message);
                         elm.removeClass('bg-lg-FFF-20Ef0D').addClass('bg-lg-FFF-EF0D0D');
                         elm.attr('data-status', COMMON.STOP_SELLING);
                         elmMsg.removeClass('text-success').addClass('text-danger');
                         elmMsg.text('Dừng bán');
-                    } else {
+                    } else if (res.data.status == COMMON.PUBLISH) {
+                        toastr.success(res.message);
                         elm.removeClass('bg-lg-FFF-EF0D0D').addClass('bg-lg-FFF-20Ef0D');
                         elm.attr('data-status', COMMON.PUBLISH);
                         elmMsg.removeClass('text-danger').addClass('text-success');
                         elmMsg.text('Đăng bán');
+                    } else {
+                        elm.parents('tr').find('.note-unknown').append(`<p class="color-999595"><i>Sản phẩm này đã được xóa vào thời gian <br> ${res.data.updated_at}</i></p>`)
+                        elm.parent().empty();
+                        elmMsg.addClass('color-999595');
+                        elmMsg.text('Không xác định');
+                        COMMON.notifySuccess('Xóa thành công');
                     }
-
-                    // modules.getList('/admin/products/');
                 } else {
                     toastr.error('Đã xảy ra lỗi hệ thống');
                 }
@@ -105,49 +110,49 @@ const PRODUCT = (function () {
         });
     };
 
-    modules.delete = function (id, callback) {
-        $.ajax({
-            type: 'DELETE',
-            url: `/admin/product-smartphone/${id}`,
-            dataType: 'json',
-            beforeSend: function () {
-                COMMON.loading(true);
-            },
-            success: function (res) {
-                if (res.success) {
-                    COMMON.notifySuccess(res.message);
-                    callback();
-                } else {
-                    toastr.error(res.message);
-                }
-            },
-            complete: function () {
-                COMMON.loading(false, 300);
-            }
-        });
-    };
-
-    modules.deleteOption = function (id, callback) {
-        $.ajax({
-            type: 'DELETE',
-            url: `/admin/product-smartphone/${id}/options`,
-            dataType: 'json',
-            beforeSend: function () {
-                COMMON.loading(true);
-            },
-            success: function (res) {
-                if (res.success) {
-                    COMMON.notifySuccess(res.message);
-                    callback();
-                } else {
-                    toastr.error(res.message);
-                }
-            },
-            complete: function () {
-                COMMON.loading(false, 300);
-            }
-        });
-    };
+    // modules.delete = function (id, callback) {
+    //     $.ajax({
+    //         type: 'DELETE',
+    //         url: `/admin/product-smartphone/${id}`,
+    //         dataType: 'json',
+    //         beforeSend: function () {
+    //             COMMON.loading(true);
+    //         },
+    //         success: function (res) {
+    //             if (res.success) {
+    //                 COMMON.notifySuccess(res.message);
+    //                 callback();
+    //             } else {
+    //                 toastr.error(res.message);
+    //             }
+    //         },
+    //         complete: function () {
+    //             COMMON.loading(false, 300);
+    //         }
+    //     });
+    // };
+    //
+    // modules.deleteOption = function (id, callback) {
+    //     $.ajax({
+    //         type: 'DELETE',
+    //         url: `/admin/product-smartphone/${id}/options`,
+    //         dataType: 'json',
+    //         beforeSend: function () {
+    //             COMMON.loading(true);
+    //         },
+    //         success: function (res) {
+    //             if (res.success) {
+    //                 COMMON.notifySuccess(res.message);
+    //                 callback();
+    //             } else {
+    //                 toastr.error(res.message);
+    //             }
+    //         },
+    //         complete: function () {
+    //             COMMON.loading(false, 300);
+    //         }
+    //     });
+    // };
 
     modules.filter = function () {
         const form = $(`#fillter-product`);
@@ -182,24 +187,31 @@ $(document).ready(function () {
     // }, 200));
 
 
+    // $(document).on('click', '.delete-product', function () {
+    //     COMMON.confirmDelete(() => {
+    //         PRODUCT.delete($(this).data('id'), () => {
+    //             PRODUCT.getList(
+    //                 '/admin/product-smartphone/',
+    //                 {key_search: $("input[name='key_search']").val().trim()}
+    //             )
+    //         })
+    //     })
+    // });
+
     $(document).on('click', '.delete-product', function () {
+        let status = $(this).data('status');
+        let url = $(this).data('url');
         COMMON.confirmDelete(() => {
-            PRODUCT.delete($(this).data('id'), () => {
-                PRODUCT.getList(
-                    '/admin/product-smartphone/',
-                    {key_search: $("input[name='key_search']").val().trim()}
-                )
-            })
+            PRODUCT.updateStatus(url, {status}, $(this));
         })
     });
 
     $(document).on('click', '.delete-product-option', function () {
+        let status = $(this).data('status');
+        let url = $(this).data('url');
+
         COMMON.confirmDelete(() => {
-            PRODUCT.deleteOption($(this).data('id'), () => {
-                PRODUCT.getList(
-                    `/admin/product-smartphone/${$(this).data('slug')}/options`
-                )
-            })
+            PRODUCT.updateStatus(url, {status}, $(this));
         })
     });
 
@@ -212,6 +224,12 @@ $(document).ready(function () {
             PRODUCT.updateStatus(url, {status}, $(this));
         }
     });
+
+    $(`#image-upload-option`).change(function (data) {
+        $('#image-preview-option').removeClass('d-none');
+        COMMON.previewImage(data, '#image-preview-option');
+    });
+
 
     $(`#image-upload`).change(function (data) {
         $('#image-preview').removeClass('d-none');

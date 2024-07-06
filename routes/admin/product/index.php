@@ -15,7 +15,6 @@ Route::prefix('product-smartphone')->name('smartphone.')->group(function () {
     Route::get('/{product:slug}/show', [ProductSmartphoneController::class, 'show'])->name('show');
     Route::post('/', [ProductSmartphoneController::class, 'store'])->name('store');
     Route::post('/{product:id}/update', [ProductSmartphoneController::class, 'update'])->name('update');
-    Route::delete('/{product:id}', [ProductSmartphoneController::class, 'delete']);
 });
 
 // product smartphone option

@@ -20,6 +20,46 @@
             border-top: 1px solid #dee2e6 !important;
             border-right: 1px solid #dee2e6 !important;
         }
+
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-container {
+            position: relative;
+            margin: 0 auto;
+            width: 50%; /* Điều chỉnh chiều rộng theo ý muốn */
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+
+        .timeline-content {
+            position: relative;
+            margin-left: 30px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
     </style>
 @endsection
 
@@ -60,7 +100,7 @@
                                 <tr class="item-cart">
                                     <td class="d-flex align-items-center">
                                         <div class="">
-                                            <img src="https://cdn.tgdd.vn/Products/Images/42/305659/iphone-15-pro-max-black-thumbnew-600x600.jpg" alt="" style="width: 100px;">
+                                            <img src="{{ $item->productPrice->avatar }}" alt="" style="width: 100px;">
                                         </div>
                                         <div style="margin-left: 20px">
                                             <ol class="text-left" style="list-style-type: disc">
@@ -86,6 +126,25 @@
                             {{ $orderItems->links('pagination.custom') }}
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Sự kiện 1</h4>
+                    <p class="m-0">Mô tả sự kiện 1</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h4>Sự kiện 1</h4>
+                    <p class="m-0">Mô tả sự kiện 1</p>
                 </div>
             </div>
         </div>

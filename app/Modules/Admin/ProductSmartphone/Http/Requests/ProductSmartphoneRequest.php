@@ -28,7 +28,7 @@ class ProductSmartphoneRequest extends FormRequest
     public function rules()
     {
         return [
-            'avatar' => [
+            'thumb_avatar_product' => [
                 'bail',
                 Rule::requiredIf(fn () => !$this->route('product')),
                 'image',
@@ -51,9 +51,9 @@ class ProductSmartphoneRequest extends FormRequest
             ],
             'brand_id' => 'bail|required',
             'category_id' => 'bail|required',
-            'widescreen' => 'bail|required|max:20',
-            'scanning_frequency' => 'bail|required|min:1',
-            'battery_type' => 'bail|required|min:1',
+            'widescreen' => 'bail|required',
+            'scanning_frequency' => 'bail|required',
+            'maximum_brightness' => 'bail|required',
         ];
     }
 

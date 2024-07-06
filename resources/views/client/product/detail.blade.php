@@ -35,7 +35,7 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                 src="https://cdn.tgdd.vn/Products/Images/42/305659/iphone-15-pro-max-black-thumbnew-600x600.jpg" alt="">
+                                 src="{{ asset($product->avatar) }}" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
 {{--                            @forelse($product->sub_image as $subImage)--}}
@@ -154,6 +154,7 @@
         var url_add_cart = `{{ route('client.add-cart') }}`
         var check_auth = {{ auth()->guard(GUARD_WEB)->check() ? 'true' : 'false' }};
         var url_login = `{{ route('client.page-login') }}`
+        var image_default = `{{ asset($product->avatar) }}`
     </script>
     <script src="{{ asset('client_assets/js/product_detail.js') }}" type="module"></script>
 @endsection

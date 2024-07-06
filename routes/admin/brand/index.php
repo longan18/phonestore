@@ -11,7 +11,7 @@ Route::prefix('brands')
         Route::post('/', [BrandController::class, 'handle'])->name('handle');
         Route::view('/create', 'admin.brand.form')->name('create');
         Route::get('/{brand}/show', [BrandController::class, 'show'])->name('show');
-        Route::delete('/{brand}', [BrandController::class, 'delete'])->name('delete');
+        Route::post('/{brand}/update-status', [BrandController::class, 'updateStatus'])->name('update');
     }
 );
 

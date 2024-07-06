@@ -1,7 +1,7 @@
 <section class="hero">
     <div class="container">
         <div class="row">
-{{--            <div class="col-lg-12 w-100 mb-5">--}}
+            {{--            <div class="col-lg-12 w-100 mb-5">--}}
             <div class="col-lg-12 w-100">
                 <div class="hero__search">
                     <div class="hero__search__form">
@@ -23,4 +23,6 @@
             </div>
         </div>
     </div>
+
+    <div class="container"></div>
 </section>

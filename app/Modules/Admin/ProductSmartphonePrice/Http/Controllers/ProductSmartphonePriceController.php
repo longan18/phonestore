@@ -107,20 +107,12 @@ class ProductSmartphonePriceController extends Controller
      */
     public function updateStatus(ProductSmartphonePrice $option, Request $request)
     {
-        try {
-            $countOptionPublish = $this->productSmartphonePrice->countOptionPublishProduct($option->product_id);
-            if ($request->status == StatusEnum::StopSelling->value && $countOptionPublish == 1) {
-                $option->product()->update(['status' => StatusEnum::StopSelling->value]);
-            }
+        $result = $this->productSmartphonePrice->updateStatusProductPrice($option, $request);
 
-            $result = $this->productSmartphonePrice->updateStatus($option, $request);
-
-            return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'), data: $request->status)
-                : $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
-        } catch (\Exception $exception) {
-            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
-            return $this->responseFailed(message: __('Cập nhật phẩm thất bại!'));
-        }
+        return $result ? $this->responseSuccess(message: __('Cập nhật option thành công!'), data: [
+            'status' => $result->status,
+            'updated_at' => $result->updated_at->toDateTimeString(),
+        ]) : $this->responseFailed(message: __('Cập nhật option thất bại!'));
     }
 
     /**

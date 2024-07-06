@@ -46,7 +46,7 @@ class ProductSmartphoneController extends Controller
      */
     public function index(Request $request): Application|Factory|View|JsonResponse
     {
-        $products = $this->product->search($request, CATEGORY_SAMRTPHONE);
+        $products = $this->product->search($request);
 
         if ($request->ajax()) {
             $view = view('admin.product-smartphone.table', compact('products'))->render();
@@ -82,15 +82,10 @@ class ProductSmartphoneController extends Controller
      */
     public function store(ProductSmartphoneRequest $request)
     {
-        try {
-            $result = $this->productSmartphone->handle($request);
+        $result = $this->productSmartphone->handle($request);
 
-            return $result ? $this->responseSuccess(message: __('Tạo sản phẩm thành công!'))
-                : $this->responseFailed(message: __('Tạo sản phẩm thất bại!'));
-        } catch (\Exception $exception) {
-            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
-            return $this->responseFailed(message: __('Tạo sản phẩm thất bại!'));
-        }
+        return $result ? $this->responseSuccess(message: __('Tạo sản phẩm thành công!'))
+            : $this->responseFailed(message: __('Tạo sản phẩm thất bại!'));
     }
 
     /**
@@ -99,36 +94,9 @@ class ProductSmartphoneController extends Controller
      */
     public function update(ProductSmartphoneRequest $request)
     {
-        try {
-            $result = $this->productSmartphone->handle($request);
+        $result = $this->productSmartphone->handle($request);
 
-            return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'))
-                : $this->responseFailed(message: __('Cập nhật sản phẩm thất bại!'));
-        } catch (\Exception $exception) {
-            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
-            return $this->responseFailed(message: __('Cập nhật sản phẩm thất bại!'));
-        }
-    }
-
-    /**
-     * delete
-     *
-     * @param  mixed $id
-     * @return void
-     */
-    public function delete($id)
-    {
-        DB::beginTransaction();
-        try {
-            $result = $this->product->delete($id);
-
-            DB::commit();
-            return $this->responseSuccess(message: __('Xóa sản phẩm thành công!'));
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
-
-            return $this->responseFailed(message: __('Xóa phẩm thất bại!'));
-        }
+        return $result ? $this->responseSuccess(message: __('Cập nhật sản phẩm thành công!'))
+            : $this->responseFailed(message: __('Cập nhật sản phẩm thất bại!'));
     }
 }

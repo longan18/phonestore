@@ -69,9 +69,65 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i>
+                        <li class="notify-show">
+                            <a href="#"><i class="fa fa-bell"></i>
                                 <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite">0</div>
-                            </a></li>
+                            </a>
+                            <div class="elm-notify d-none">
+                                <div class="top-noti d-flex justify-content-between align-items-center">
+                                    <div><b>Thông báo</b></div>
+                                    <div id="check-noti">Đánh dấu đã đọc (<i class="fa fa-check"></i>)</div>
+                                </div>
+                                <div class="content-noti">
+                                    <div class="d-flex align-items-center justify-content-between item-noti bg-e3e3e3" data-notify="">
+                                        <div class="content-item-noti">
+                                            <p><i>Hệ thống - 20-10-2002</i></p>
+                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
+                                        </div>
+                                        <div class="icon-noti">
+{{--                                            <i class="fa fa-check"></i>--}}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between item-noti">
+                                        <div class="content-item-noti">
+                                            <p><i>Hệ thống - 20-10-2002</i></p>
+                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
+                                        </div>
+                                        <div class="icon-noti">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between item-noti">
+                                        <div class="content-item-noti">
+                                            <p><i>Hệ thống - 20-10-2002</i></p>
+                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
+                                        </div>
+                                        <div class="icon-noti">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between item-noti">
+                                        <div class="content-item-noti">
+                                            <p><i>Hệ thống - 20-10-2002</i></p>
+                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
+                                        </div>
+                                        <div class="icon-noti">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between item-noti">
+                                        <div class="content-item-noti">
+                                            <p><i>Hệ thống - 20-10-2002</i></p>
+                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
+                                        </div>
+                                        <div class="icon-noti">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+{{--                                    <div class="text-center" style="padding: 12px 0px; color: #9a9595">Thông báo trống</div>--}}
+                                </div>
+                            </div>
+                        </li>
                         <li>
                             <a href="{{ route('client.cart.index') }}">
                                 <i class="fa fa-shopping-bag"></i>

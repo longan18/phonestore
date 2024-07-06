@@ -12,8 +12,9 @@
         <div class="parent-item item-attr {{ $key != array_key_first($dataResult['key']) ? 'd-none' : ''}}" data-key="{{ $key }}">
             @foreach($productPrice as $keyItem => $item)
                 <div data-id="{{ $item['item_id'] }}" data-price="{{ $item['price'] }}"
-                     class="item-price text-center h-43px border-non-act {{ $keyItem == 0 ? 'act' : '' }}"
-                     style="background-color: {{ $item['color'] }};"></div>
+                     data-image="{{ $item['avatar'] }}"
+                     class="item-price text-center h-43px border-non-act {{ $keyItem == 0 ? 'act' : '' }}
+                      d-flex align-items-center justify-content-center">{{ $item['color'] }}</div>
             @endforeach
         </div>
     @endforeach

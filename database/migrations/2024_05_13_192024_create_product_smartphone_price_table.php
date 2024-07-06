@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('hex_color');
             $table->string('price'); // Giá
             $table->bigInteger('quantity'); // Số lượng
-            $table->tinyInteger('status')->default(\App\Enums\StatusEnum::StopSelling->value);
+            $table->tinyInteger('status')->default(\App\Enums\StatusEnum::STOP_SELLING->value);
             $table->timestamps();
             $table->softDeletes();
 

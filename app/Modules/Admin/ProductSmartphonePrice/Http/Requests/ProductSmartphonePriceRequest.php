@@ -28,7 +28,14 @@ class ProductSmartphonePriceRequest extends FormRequest
     public function rules()
     {
         return [
-            'avatar' => [
+            'thumb_avatar_option' => [
+                'bail',
+                Rule::requiredIf(fn () => !$this->route('option')),
+                'image',
+                'mimes:jpeg,png,jpg',
+                'max:2048',
+            ],
+            'thumb_avatar_option' => [
                 'bail',
                 Rule::requiredIf(fn () => !$this->route('option')),
                 'image',

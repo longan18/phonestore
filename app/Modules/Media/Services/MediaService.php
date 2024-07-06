@@ -41,17 +41,17 @@ class MediaService extends BaseService implements MediaInterface
      * @param $request
      * @return void
      */
-    public function uploadAvatar($model, $request, $directory = 'product')
+    public function uploadAvatar($model, $request, $fileName, $directory, $tagName)
     {
         if ($model) {
-            if ($request->hasFile('avatar')) {
-                $media = $this->upload($request->file('avatar'), directory: $directory);
+            if ($request->hasFile($fileName)) {
+                $media = $this->upload($request->file($fileName), directory: $directory);
             }
-            if (!empty($media) && $model->hasMedia(TagMediaEnum::Avatar->value)) {
-                $this->deleteExistingFile($model->getMedia(TagMediaEnum::Avatar->value)->first());
+            if (!empty($media) && $model->hasMedia($tagName)) {
+                $this->deleteExistingFile($model->getMedia($tagName)->first());
             }
 
-            empty($media) ?: $model->syncMedia($media, TagMediaEnum::Avatar->value);
+            empty($media) ?: $model->syncMedia($media, $tagName);
         }
     }
 
@@ -59,7 +59,7 @@ class MediaService extends BaseService implements MediaInterface
      * @param $request
      * @param $model
      */
-    public function uploadSubImage($model, $request, $directory = 'product')
+    public function uploadSubImage($model, $request, $directory, $tagName)
     {
         if ($model) {
             $media = [];
@@ -75,7 +75,7 @@ class MediaService extends BaseService implements MediaInterface
                 $this->deleteExistingFile($model->getSubImageByIdMethod($request->sub_image_remove), false);
                 $model->detachMedia($request->sub_image_remove);
             }
-            empty($media) ?: $model->attachMedia($media, TagMediaEnum::SubImage->value);
+            empty($media) ?: $model->attachMedia($media, $tagName);
         }
     }
 

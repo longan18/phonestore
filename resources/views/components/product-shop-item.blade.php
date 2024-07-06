@@ -4,12 +4,12 @@
             <span class="lb-tragop">Trả góp 0%</span>
         </div>
         <div class="item-img item-img_42">
-            <img class="thumb" src="{{ asset('images/img-product-600x600.jpg') }}" alt="iPhone 15 Pro Max">
+            <img class="thumb" src="{{ asset($product->avatar) }}" alt="iPhone 15 Pro Max">
         </div>
         <h3>{{ $product->name }}</h3>
         <div class="item-compare gray-bg">
             <ul>
-                <li>{{ $product->productSmartphone->widescreen.'"' }}</li>
+                <li>{{ $product->productSmartphone->widescreen }}</li>
                 <li>{{ $product->productSmartphone->screen_technology }}</li>
             </ul>
         </div>
@@ -39,6 +39,6 @@
             <p class="price-old black">40.990.000₫</p>
             <span class="percent">-12%</span>
         </div>
-        <strong><span class="price">{{ formatCurrency($arrayPrice[0]['price']) }}</span><sup>đ</sup></strong>
+        <strong><span class="price">{{ !empty($arrayPrice[0]['price']) ? formatCurrency($arrayPrice[0]['price']) : '' }}</span><sup>đ</sup></strong>
     </div>
 </div>

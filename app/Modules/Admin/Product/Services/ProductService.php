@@ -34,9 +34,9 @@ class ProductService extends BaseService implements ProductInterface
      *
      * @return mixed
      */
-    public function search($request, $categoryId): mixed
+    public function search($request): mixed
     {
-        return $this->model::search($request, $categoryId)->paginate(PAGE_RECORD);
+        return $this->model::search($request)->paginate(PAGE_RECORD);
     }
 
     /**
@@ -51,18 +51,39 @@ class ProductService extends BaseService implements ProductInterface
             $arrData['slug'] = uuid();
         }
 
-        $product = $this->model::upsertWithReturn($arrData, ['slug'],
-            [
-                'name',
-                'brand_id',
-                'category_id',
-            ],
-        );
+        DB::beginTransaction();
+        try {
+            $product = $this->model::upsertWithReturn($arrData, ['slug'],
+                [
+                    'name',
+                    'brand_id',
+                    'category_id',
+                ],
+            );
 
-        $this->media->uploadAvatar($product, $request);
-        $this->media->uploadSubImage($product, $request);
+            $this->media->uploadAvatar(
+                $product,
+                $request,
+                'thumb_avatar_product',
+                TagMediaEnum::THUMB_AVATAR_PRODUCT->getDirectory(),
+                TagMediaEnum::THUMB_AVATAR_PRODUCT->value
+            );
 
-        return $product;
+            $this->media->uploadSubImage(
+                $product,
+                $request,
+                TagMediaEnum::SUB_IMAGE_PRODUCT->getDirectory(),
+                TagMediaEnum::SUB_IMAGE_PRODUCT->value
+            );
+
+            DB::commit();
+            return $product;
+        }catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+        }
+
+        return false;
     }
 
     /**
@@ -78,7 +99,7 @@ class ProductService extends BaseService implements ProductInterface
 
     public function getDataPageHome()
     {
-        return $this->model->where('status', StatusEnum::Publish->value)
+        return $this->model->where('status', StatusEnum::PUBLISH->value)
             ->with($this->withDataProduct())
             ->get();
     }
@@ -95,11 +116,32 @@ class ProductService extends BaseService implements ProductInterface
         return [
             'productSmartphone',
             'productSmartphonePrice' => function ($query) {
-                $query->where('status', StatusEnum::Publish->value);
+                $query->where('status', StatusEnum::PUBLISH->value);
             },
             'productSmartphonePrice.ram',
             'productSmartphonePrice.storageCapacity',
             'productSmartphonePrice.color'
         ];
+    }
+
+    public function updateStatusProduct($model, $request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->updateStatus($model, $request);
+
+            DB::commit();
+            return $model;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error("--msg: {$exception->getMessage()} \n--line: {$exception->getLine()} \n--file: {$exception->getFile()}");
+        }
+
+        return false;
+    }
+
+    public function updateStatusByBrandId($brandId, $status)
+    {
+        return $this->model->where('brand_id', $brandId)->update(['status' => $status]);
     }
 }

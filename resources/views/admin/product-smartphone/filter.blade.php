@@ -14,8 +14,9 @@
                 <label class="m-0 mr-2">{{ __('Trạng thái:') }}</label>
                 <select class="form-control w-100 filter-product" name="status">
                     <option value=>{{ __('Tất cả') }}</option>
-                    <option value="{{ \App\Enums\StatusEnum::StopSelling->value }}">{{ __('Dừng bán') }}</option>
-                    <option value="{{ \App\Enums\StatusEnum::Publish->value }}">{{ __('Đang bán') }}</option>
+                    <option value="{{ \App\Enums\StatusEnum::STOP_SELLING->value }}">{{ __('Dừng bán') }}</option>
+                    <option value="{{ \App\Enums\StatusEnum::PUBLISH->value }}">{{ __('Đang bán') }}</option>
+                    <option value="{{ \App\Enums\StatusEnum::UNKNOWN->value }}">{{ __('Không xác định') }}</option>
                 </select>
             </div>
             <div class="col-12 col-md-4">

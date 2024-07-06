@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('category_id');
 
-            $table->tinyInteger('status')->default(\App\Enums\StatusEnum::StopSelling->value);
+            $table->tinyInteger('status')->default(\App\Enums\StatusEnum::STOP_SELLING->value);
             $table->timestamps();
             $table->softDeletes();
 

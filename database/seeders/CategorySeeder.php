@@ -23,7 +23,7 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert(
             [
                 'name' => 'Điện thoại thông minh',
-                'status' => StatusEnum::StopSelling->value,
+                'status' => StatusEnum::STOP_SELLING->value,
                 'created_at' => now()->toDateTimeLocalString()
             ]
         );

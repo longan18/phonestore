@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->tinyInteger('status')->default(\App\Enums\StatusEnum::StopSelling->value)->unsigned();
+            $table->tinyInteger('status')->default(\App\Enums\StatusEnum::STOP_SELLING->value)->unsigned();
             $table->timestamps();
         });
     }

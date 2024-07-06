@@ -41,7 +41,7 @@
                             <label>Ảnh thương hiệu:</label>
                             <div class="avatar-upload">
                                 <div class="avatar-edit">
-                                    <input name="avatar" class="d-none" type='file' id="image-upload"
+                                    <input name="thumb_avatar_brand" class="d-none" type='file' id="image-upload"
                                            accept=".png,.jpg,.jpeg"/>
                                     <label for="image-upload">
                                         <div class="btn btn-primary icon-btn">

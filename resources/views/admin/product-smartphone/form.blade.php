@@ -73,7 +73,7 @@
                                 <label>{{ __('Ảnh sản phẩm') }}<span class="text-danger">*</span></label>
                                 <div class="avatar-upload">
                                     <div class="avatar-edit">
-                                        <input name="avatar" class="d-none" type='file' id="image-upload"
+                                        <input name="thumb_avatar_product" class="d-none" type="file" id="image-upload"
                                                accept=".png,.jpg,.jpeg"/>
                                         <label for="image-upload">
                                             <div class="btn btn-primary icon-btn">
@@ -86,10 +86,10 @@
                                              height="150" width="150" id="image-preview" alt="User profile picture" src="{{ $product->avatar ?? '' }}">
                                     </div>
                                 </div>
-                                <div class="error-message error_avatar"></div>
+                                <div class="error-message error_thumb_avatar_product"></div>
                             </div>
                             <div class="mb-3">
-                                <label>{{ __('Ảnh phụ:') }}</label>
+                                <label>{{ __('Ảnh mô tả:') }}</label>
                                 <div class="avatar-upload">
                                     <div class="avatar-edit">
                                         <input name="sub_image[]" multiple="" data-max_length="4" id="image-upload-multiple"
@@ -131,12 +131,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="scanningFrequency" class="form-label">{{ __('Scanning frequency') }}(GB)<span class="text-danger">*</span></label>
-                                <input type="number" name="scanning_frequency" value="{{ $product->smartphone->scanning_frequency ?? '' }}" class="form-control">
+                                <input type="text" name="scanning_frequency" value="{{ $product->smartphone->scanning_frequency ?? '' }}" class="form-control">
                                 <div class="error-message error_scanning_frequency"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="maximumBrightness" class="form-label">{{ __('Smaximum brightness') }}</label>
-                                <input type="number" name="maximum_brightness" value="{{ $product->smartphone->maximum_brightness ?? '' }}" class="form-control">
+                                <input type="text" name="maximum_brightness" value="{{ $product->smartphone->maximum_brightness ?? '' }}" class="form-control">
                                 <div class="error-message error_maximum_brightness"></div>
                             </div>
                             <div class="mb-3">
@@ -218,7 +218,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="batteryType" class="form-label">Battery type<span class="text-danger">*</span></label>
-                                <input type="number" name="battery_type" value="{{ $product->smartphone->battery_type ?? '' }}" class="form-control">
+                                <input type="text" name="battery_type" value="{{ $product->smartphone->battery_type ?? '' }}" class="form-control">
                                 <div class="error-message error_battery_type"></div>
                             </div>
                             <div class="mb-3">
@@ -228,7 +228,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="maximumChargingSupport" class="form-label">Maximum charging support</label>
-                                <input type="number" name="maximum_charging_support" value="{{ $product->smartphone->maximum_charging_support ?? '' }}" class="form-control">
+                                <input type="text" name="maximum_charging_support" value="{{ $product->smartphone->maximum_charging_support ?? '' }}" class="form-control">
                                 <div class="error-message error_maximum_charging_support"></div>
                             </div>
                             <div class="mb-3">
@@ -268,7 +268,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="mass" class="form-label">Mass(g)</label>
-                                <input type="number" name="mass" value="{{ $product->smartphone->mass ?? '' }}" class="form-control">
+                                <input type="text" name="mass" value="{{ $product->smartphone->mass ?? '' }}" class="form-control">
                                 <div class="error-message error_mass"></div>
                             </div>
                             <div class="mb-3">

@@ -11,23 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_details', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('address_id');
-            $table->double('quantity_total');
-            $table->decimal('price_total', 10, 0);
-            $table->text('note')->nullable();
+            $table->text('content')->nullable(false);
+            $table->tinyInteger('is_read')->default(1)->comment('1: chua doc, 2: da doc');
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')
                 ->on('users')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-
-            $table->foreign('address_id')->references('id')
-                ->on('address_shipping')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
         });
@@ -38,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_details');
+        Schema::dropIfExists('notifications');
     }
 };

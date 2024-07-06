@@ -1,0 +1,79 @@
+.elm-notify {
+    animation-name: move-up;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0, 1.11, 0.07, 1.16);
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+}
+
+@keyframes move-up {
+    from {
+        transform: translateY(90%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.content-noti::-webkit-scrollbar {
+    display: none;
+}
+
+.notify-show {
+    position: relative;
+
+    .elm-notify {
+        border-radius: 8px;
+        position: absolute;
+        width: 20vw;
+        background-color: #f5f5f5;
+        z-index: 300;
+        left: -150px;
+        box-shadow: -1px 1px 11px rgba(0, 0, 0, 0.5);
+
+        .top-noti {
+            padding: 12px;
+            border-bottom: 1px solid #a09c9c;
+
+            div:last-child {
+                font-size: 14px;
+                cursor: pointer;
+                color: red;
+            }
+        }
+
+        .content-noti {
+            height: 500px;
+            overflow-y: auto;
+
+            .item-noti {
+                font-size: 13px;
+                padding: 12px;
+                text-align: left;
+                &:not(:last-child) {
+                    border-bottom: 1px solid #a09c9c;
+                }
+
+                .content-item-noti {
+                    p {
+                        font-size: 13px;
+                        margin: 0px;
+                    }
+                }
+
+                .icon-noti {
+                    margin-left: 20px;
+                    i {
+                        color: red;
+                    }
+                }
+            }
+
+            .bg-e3e3e3 {
+                background-color: #e3e3e3;
+            }
+        }
+
+    }
+}

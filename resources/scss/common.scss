@@ -1,6 +1,6 @@
 @import "./each";
 
-$colors: '757575','DD2222';
+$colors: '757575','DD2222','999595';
 
 @each $color in $colors {
     .color-#{$color} {
@@ -35,5 +35,14 @@ $colors: '757575','DD2222';
 
 ul {
     list-style: none;
+}
+
+.unknown {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    background-color: #d0cfcf61;
 }
 

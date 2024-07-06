@@ -3,6 +3,7 @@ const COMMON = (function () {
 
     modules.STOP_SELLING = 1;
     modules.PUBLISH = 2;
+    modules.UNKNOWN = 3;
 
     modules.confirmDelete = function (handle) {
         swal({

@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/scss/client/top-bar.scss',
                 'resources/scss/client/item-product.scss',
                 'resources/scss/client/parameter-item.scss',
+                'resources/scss/client/notify.scss',
             ],
             refresh: true,
         }),

@@ -7,7 +7,7 @@ namespace App\Modules\Admin\Product\Interfaces;
  */
 interface ProductInterface
 {
-    public function search($request, $categoryId);
+    public function search($request);
 
     public function createOrUpdate($request);
 
@@ -15,4 +15,7 @@ interface ProductInterface
     public function getDataPageHome();
 
     public function getProductBySlug($slug);
+
+    public function updateStatusProduct($model, $request);
+    public function updateStatusByBrandId($brandId, $status);
 }

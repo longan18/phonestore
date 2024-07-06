@@ -24,7 +24,7 @@
                     <p>Màn hình rộng:</p>
                 </div>
                 <div class="ctRight">
-                    <span class="">{{ $specifications->widescreen }}" - Tần số quét <span target="_blank">{{ $specifications->scanning_frequency }} Hz</span></span>
+                    <span class="">{{ $specifications->widescreen }} - Tần số quét <span target="_blank">{{ $specifications->scanning_frequency }}</span></span>
                 </div>
             </li>
             <li data-id="27392" data-group-id="29" data-index="6">
@@ -32,7 +32,7 @@
                     <p>Độ sáng tối đa:</p>
                 </div>
                 <div class="ctRight">
-                    <span class="">{{ $specifications->maximum_brightness }} nits</span>
+                    <span class="">{{ $specifications->maximum_brightness }}</span>
                 </div>
             </li>
             <li data-id="7799" data-group-id="29" data-index="7">
@@ -262,7 +262,7 @@
                     <p>Dung lượng pin:</p>
                 </div>
                 <div class="ctRight">
-                    <span class="">{{ $specifications->battery_type }} mAh</span>
+                    <span class="">{{ $specifications->battery_type }}</span>
                 </div>
             </li>
             <li data-id="83" data-group-id="2122" data-index="2">
@@ -278,7 +278,7 @@
                     <p>Hỗ trợ sạc tối đa:</p>
                 </div>
                 <div class="ctRight">
-                    <span>{{ $specifications->maximum_charging_support }} W</span>
+                    <span>{{ $specifications->maximum_charging_support }}</span>
                 </div>
             </li>
             <li data-id="26846" data-group-id="2122" data-index="3">
@@ -376,7 +376,7 @@
                     <p>Kích thước, khối lượng:</p>
                 </div>
                 <div class="ctRight">
-                    <span class="">{{ $specifications->size }} - {{ $specifications->mass }}g</span>
+                    <span class="">{{ $specifications->size }} - {{ $specifications->mass }}</span>
                 </div>
             </li>
             <li data-id="13045" data-group-id="28" data-index="100">

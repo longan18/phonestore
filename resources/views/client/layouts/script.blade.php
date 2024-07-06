@@ -25,4 +25,18 @@
     $('.select2-custom').select2({
         placeholder: "Lựa chọn",
     });
+
+    $('.notify-show').on('click', function () {
+        if ($('.elm-notify').hasClass('d-none')) {
+            $('.elm-notify').removeClass('d-none');
+        } else {
+            $('.elm-notify').addClass('d-none');
+        }
+    });
+
+    $('#check-noti').on('click', function () {
+        $('.elm-notify').addClass('d-none');
+        $('.item-noti').addClass('bg-e3e3e3');
+        $('.item-noti').find('.icon-noti').empty();
+    });
 </script>

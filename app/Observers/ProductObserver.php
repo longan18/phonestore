@@ -2,15 +2,16 @@
 
 namespace App\Observers;
 
+use App\Enums\StatusEnum;
 use App\Modules\Admin\Product\Models\Product;
-use App\Modules\ShoppingItem\Interfaces\ShoppingItemInterface;
+use App\Modules\Admin\ProductSmartphonePrice\Interfaces\ProductSmartphonePriceInterface;
 
 class ProductObserver
 {
-    protected $shoppingItem;
-    public function __construct(ShoppingItemInterface $shoppingItem)
+    protected $productSmartphonePrice;
+    public function __construct(ProductSmartphonePriceInterface $productSmartphonePrice)
     {
-        $this->shoppingItem = $shoppingItem;
+        $this->productSmartphonePrice = $productSmartphonePrice;
     }
 
     /**
@@ -26,7 +27,13 @@ class ProductObserver
      */
     public function updated(Product $product): void
     {
-        //
+        if ($product->status == StatusEnum::UNKNOWN->value) {
+            $this->productSmartphonePrice->updateStatusByProductId($product->id, StatusEnum::UNKNOWN->value);
+        }
+
+        if ($product->status == StatusEnum::STOP_SELLING->value) {
+            $this->productSmartphonePrice->updateStatusByProductId($product->id, StatusEnum::STOP_SELLING->value);
+        }
     }
 
     /**
@@ -34,18 +41,7 @@ class ProductObserver
      */
     public function deleted(Product $product): void
     {
-        $product->productSmartphone()->delete();
-        $product->productSmartphonePrice()->delete();
-        $product->shoppingItems()->delete();
 
-        $shoppingItem = $this->shoppingItem->getShoppingItemByShoppingSessionId(userInfo()->shoppingSession->id);
-
-        $dataUpdate = [
-            'quantity_total' => $shoppingItem->count(),
-            'price_total' => $shoppingItem->sum('total_price_item'),
-        ];
-
-        userInfo()->shoppingSession->update($dataUpdate);
     }
 
     /**
