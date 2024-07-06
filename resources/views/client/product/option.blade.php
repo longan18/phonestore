@@ -2,8 +2,9 @@
 <div class="color-757575"><b>{{ __('Ram - Storage capacity:') }}</b></div>
 <div class="mt-3 mb-3 item-attr">
     @foreach($dataResult['key'] as $key => $item)
-        <div data-key="{{ $key }}"
-             class="item-attr-detail h-43px border-non-act {{ $key == array_key_first($dataResult['key']) ? 'act' : '' }} d-flex align-items-center justify-content-center">{{ $item }}</div>
+        <div data-key="{{ $key }}" data-ram="{{ $item['ram'] }}" data-storage-capacity="{{ $item['storage_capacity'] }}"
+             data-remaining-capacity-is-approx="{{ $item['remaining_capacity_is_approx'] }}"
+             class="item-attr-detail h-43px border-non-act {{ $key == array_key_first($dataResult['key']) ? 'act' : '' }} d-flex align-items-center justify-content-center">{{ $item['title'] }}</div>
     @endforeach
 </div>
 <div class="color-757575"><b>{{ __('Color:') }}</b></div>

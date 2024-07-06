@@ -26,7 +26,7 @@ class AccountUserService extends BaseService implements AccountUserInterface
     public function handle($request)
     {
         $data = $request->only($this->model->getFillable());
-        $data['id'] = (int) $request->id ?? null;
+        $data['id'] = $request->id ?? null;
 
         if (empty($data['password'] )) {
             unset($data['password']);

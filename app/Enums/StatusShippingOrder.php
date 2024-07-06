@@ -2,9 +2,10 @@
 
 namespace App\Enums;
 
+use App\Enums\interfaces\Notification;
 use App\Enums\interfaces\textMsg;
 
-enum StatusShippingOrder :int implements textMsg
+enum StatusShippingOrder :int implements textMsg, Notification
 {
     case ORDER_SHIP_WRATING = 1;
     case ORDER_SHIP_DELIVERING = 2;
@@ -25,6 +26,15 @@ enum StatusShippingOrder :int implements textMsg
             StatusShippingOrder::ORDER_SHIP_WRATING => 'text-warting',
             StatusShippingOrder::ORDER_SHIP_DELIVERING => 'text-delivering',
             StatusShippingOrder::ORDER_SHIP_SUCCESSFUL => 'text-success',
+        };
+    }
+
+    public function getTextNoti($uuid)
+    {
+        return match($this) {
+            StatusShippingOrder::ORDER_SHIP_WRATING =>  "Đơn hàng $uuid đang chờ vận chuyển",
+            StatusShippingOrder::ORDER_SHIP_DELIVERING => "Đơn hàng $uuid đang được giao",
+            StatusShippingOrder::ORDER_SHIP_SUCCESSFUL => "Đơn hàng $uuid đã vận chuyển thành công",
         };
     }
 }

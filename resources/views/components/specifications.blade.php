@@ -1,4 +1,3 @@
-{{--@dd($specifications)--}}
 <div style="padding:0px 15%; padding-bottom: 50px">
     <div class="parameter-item">
         <p class="parameter-ttl" data-group-id="29" data-index="1">Màn hình</p>
@@ -148,7 +147,7 @@
                     <p>RAM:</p>
                 </div>
                 <div class="ctRight">
-                    <span class="">8 GB</span>
+                    <span id="ram">{{ $optionDefault['ram'] }}</span>
                 </div>
             </li>
             <li data-id="49" data-group-id="22" data-index="2">
@@ -156,7 +155,7 @@
                     <p>Dung lượng lưu trữ:</p>
                 </div>
                 <div class="ctRight">
-                    <span class="">512 GB</span>
+                    <span id="storage-capacity">{{ $optionDefault['storage_capacity'] }}</span>
                 </div>
             </li>
             <li data-id="7803" data-group-id="22" data-index="3">
@@ -164,7 +163,7 @@
                     <p>Dung lượng còn lại (khả dụng) khoảng:</p>
                 </div>
                 <div class="ctRight d-flex align-items-center">
-                    <span class="">497 GB</span>
+                    <span id="remaining-capacity-is-approx">{{ $optionDefault['remaining_capacity_is_approx'] ?? '' }}</span>
                 </div>
             </li>
             <li data-id="7803" data-group-id="22" data-index="3">

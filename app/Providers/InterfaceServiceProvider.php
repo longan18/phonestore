@@ -34,6 +34,8 @@ use App\Modules\Client\Shop\Interfaces\ShopInterface;
 use App\Modules\Client\Shop\Services\ShopService;
 use App\Modules\Media\Interfaces\MediaInterface;
 use App\Modules\Media\Services\MediaService;
+use App\Modules\Notification\Interfaces\NotificationInterface;
+use App\Modules\Notification\Services\NotificationService;
 use App\Modules\OrderDetail\Interfaces\OrderDetailInterface;
 use App\Modules\OrderDetail\Services\OrderDetailService;
 use App\Modules\OrderItem\Interfaces\OrderItemInterface;
@@ -77,6 +79,7 @@ class InterfaceServiceProvider extends ServiceProvider
         $this->app->singleton(CustomerInterface::class, CustomerService::class);
         $this->app->singleton(OrderDetailInterface::class, OrderDetailService::class);
         $this->app->singleton(OrderItemInterface::class, OrderItemService::class);
+        $this->app->singleton(NotificationInterface::class, NotificationService::class);
     }
 
     /**

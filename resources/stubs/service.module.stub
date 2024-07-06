@@ -14,8 +14,6 @@ use App\Services\BaseService;
  */
 class {{ nameModule }}Service extends BaseService implements {{ nameModule }}Interface
 {
-    protected $media;
-
     /**
      * @param {{ nameModule }} ${{ name }}
      */

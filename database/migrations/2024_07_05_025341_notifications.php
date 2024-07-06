@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->tinyInteger('noti_type')->nullable(false);
             $table->text('content')->nullable(false);
             $table->tinyInteger('is_read')->default(1)->comment('1: chua doc, 2: da doc');
             $table->timestamps();

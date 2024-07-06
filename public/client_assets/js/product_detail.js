@@ -94,7 +94,13 @@ $(function () {
         actByClass($('.item-attr-detail'), $(this));
         let key = $(this).data('key');
         let price = $(`.parent-item[data-key="${key}"]`).find('.act').data('price');
+        let ram = $(this).data('ram');
+        let storage_capacity = $(this).data('storage-capacity');
+        let remaining_capacity_is_approx = $(this).data('remaining-capacity-is-approx');
 
+        $('#ram').text(ram);
+        $('#storage-capacity').text(storage_capacity);
+        $('#remaining-capacity-is-approx').text(remaining_capacity_is_approx);
         $(`.parent-item[data-key!="${key}"]`).addClass('d-none');
         $(`.parent-item[data-key="${key}"]`).removeClass('d-none');
 

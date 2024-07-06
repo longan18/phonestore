@@ -94,10 +94,22 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
                 'avatar' => $item->avatar
             ];
 
-            $data_result['key'][$item->ram_id . '-' . $item->storage_capacity_id] = $item->ram->value . '-' . $item->storageCapacity->value;
-        }
+            $data_result['key'][$item->ram_id . '-' . $item->storage_capacity_id] = [
+                'title' => $item->ram->value . '-' . $item->storageCapacity->value,
+                'ram' => $item->ram->value,
+                'storage_capacity' => $item->storageCapacity->value,
+                'remaining_capacity_is_approx' => $item->remaining_capacity_is_approx,
+            ];
 
-        $data_result['key'] = array_unique($data_result['key']);
+            if(!$key) {
+                $data_result['default'] = [
+                    'title' => $item->ram->value . '-' . $item->storageCapacity->value,
+                    'ram' => $item->ram->value,
+                    'storage_capacity' => $item->storageCapacity->value,
+                    'remaining_capacity_is_approx' => $item->remaining_capacity_is_approx,
+                ];
+            }
+        }
 
         return $data_result;
     }

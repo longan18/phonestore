@@ -2,10 +2,7 @@
 
 namespace App\Enums;
 
-interface Directory
-{
-    public function getDirectory();
-}
+use App\Enums\interfaces\Directory;
 
 enum TagMediaEnum: string implements Directory
 {

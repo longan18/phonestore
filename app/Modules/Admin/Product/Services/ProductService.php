@@ -114,6 +114,7 @@ class ProductService extends BaseService implements ProductInterface
     private function withDataProduct()
     {
         return [
+            'productSmartphonePrice.media',
             'productSmartphone',
             'productSmartphonePrice' => function ($query) {
                 $query->where('status', StatusEnum::PUBLISH->value);

@@ -2,9 +2,10 @@
 
 namespace App\Enums;
 
+use App\Enums\interfaces\Notification;
 use App\Enums\interfaces\textMsg;
 
-enum StatusPaymentOrder :int implements textMsg
+enum StatusPaymentOrder :int implements textMsg, Notification
 {
     case ORDER_PAYMENT_UNPAID = 1;
     case ORDER_PAYMENT_PAID = 2;
@@ -24,4 +25,11 @@ enum StatusPaymentOrder :int implements textMsg
         };
     }
 
+    public function getTextNoti($uuid)
+    {
+        return match($this) {
+            StatusPaymentOrder::ORDER_PAYMENT_UNPAID => "Đơn hàng $uuid chưa được thanh toán",
+            StatusPaymentOrder::ORDER_PAYMENT_PAID => "Đơn hàng $uuid đã được thanh toán",
+        };
+    }
 }
