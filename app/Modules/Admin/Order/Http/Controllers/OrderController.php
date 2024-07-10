@@ -40,11 +40,11 @@ class OrderController extends Controller
         return view('admin.order.index', compact('orderDetails'));
     }
 
-    public function getOrderByUser(User $user)
-    {
-        $orderDetails = $this->orderDetail->getOrderDetailByUserId($user->id, perPage: 10);
-        return view('admin.order.index', compact('orderDetails', 'user'));
-    }
+//    public function getOrderByUser(User $user)
+//    {
+//        $orderDetails = $this->orderDetail->getOrderDetailByUserId($user->id, perPage: 10);
+//        return view('admin.order.index', compact('orderDetails', 'user'));
+//    }
 
     public function show(OrderDetail $order)
     {

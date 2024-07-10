@@ -3,6 +3,7 @@
 namespace App\Modules\Client\Account\Models\Traits;
 
 use App\Modules\Client\Address\Models\AddressShipping;
+use App\Modules\Notification\Models\Notification;
 use App\Modules\ShoppingSession\Models\ShoppingSession;
 
 /**
@@ -18,5 +19,10 @@ trait AccountRelationship
     public function shoppingSession()
     {
         return $this->hasOne(ShoppingSession::class, 'user_id', 'id');
+    }
+
+    public function notifis()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id');
     }
 }

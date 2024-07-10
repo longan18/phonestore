@@ -32,9 +32,9 @@ enum StatusShippingOrder :int implements textMsg, Notification
     public function getTextNoti($uuid)
     {
         return match($this) {
-            StatusShippingOrder::ORDER_SHIP_WRATING =>  "Đơn hàng $uuid đang chờ vận chuyển",
-            StatusShippingOrder::ORDER_SHIP_DELIVERING => "Đơn hàng $uuid đang được giao",
-            StatusShippingOrder::ORDER_SHIP_SUCCESSFUL => "Đơn hàng $uuid đã vận chuyển thành công",
+            StatusShippingOrder::ORDER_SHIP_WRATING =>  "Đơn hàng <b>$uuid</b> đang chờ vận chuyển.",
+            StatusShippingOrder::ORDER_SHIP_DELIVERING => "Đơn hàng <b>$uuid</b> đang được giao.",
+            StatusShippingOrder::ORDER_SHIP_SUCCESSFUL => "Đơn hàng <b>$uuid</b> đã vận chuyển thành công.",
         };
     }
 }

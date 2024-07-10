@@ -8,4 +8,6 @@ namespace App\Modules\Notification\Interfaces;
 interface NotificationInterface
 {
     public function createNotification($data);
+
+    public function updateStatusNoti($request);
 }

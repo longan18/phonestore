@@ -143,7 +143,12 @@
     </section>
 
     <x-modal-scroll title="Thông số kỹ thuật {{ $product->name }}">
-        <x-specifications :product="$product" :specifications="$product->productSmartphone" :optionDefault="$dataResult['default']"></x-specifications>
+        <x-specifications
+            :product="$product"
+            :specifications="$product->productSmartphone"
+            :optionDefault="$dataResult['default']"
+            :urlSubImage="$product->sub_image->pluck('url')"
+        ></x-specifications>
     </x-modal-scroll>
 
     <x-modal-notify-cart></x-modal-notify-cart>

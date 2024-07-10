@@ -68,66 +68,41 @@
             </div>
             <div class="col-lg-3">
                 <div class="header__cart">
-                    <ul>
+                    <ul class="notify">
                         <li class="notify-show">
                             <a href="#"><i class="fa fa-bell"></i>
-                                <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite">0</div>
+                                <div class="d-flex justify-content-center align-items-center item-icon-cart-favorite">
+                                    {{ $qtyNotiNoRead ?? 0 }}
+                                </div>
                             </a>
-                            <div class="elm-notify d-none">
-                                <div class="top-noti d-flex justify-content-between align-items-center">
-                                    <div><b>Thông báo</b></div>
-                                    <div id="check-noti">Đánh dấu đã đọc (<i class="fa fa-check"></i>)</div>
-                                </div>
-                                <div class="content-noti">
-                                    <div class="d-flex align-items-center justify-content-between item-noti bg-e3e3e3" data-notify="">
-                                        <div class="content-item-noti">
-                                            <p><i>Hệ thống - 20-10-2002</i></p>
-                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
-                                        </div>
-                                        <div class="icon-noti">
-{{--                                            <i class="fa fa-check"></i>--}}
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between item-noti">
-                                        <div class="content-item-noti">
-                                            <p><i>Hệ thống - 20-10-2002</i></p>
-                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
-                                        </div>
-                                        <div class="icon-noti">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between item-noti">
-                                        <div class="content-item-noti">
-                                            <p><i>Hệ thống - 20-10-2002</i></p>
-                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
-                                        </div>
-                                        <div class="icon-noti">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between item-noti">
-                                        <div class="content-item-noti">
-                                            <p><i>Hệ thống - 20-10-2002</i></p>
-                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
-                                        </div>
-                                        <div class="icon-noti">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between item-noti">
-                                        <div class="content-item-noti">
-                                            <p><i>Hệ thống - 20-10-2002</i></p>
-                                            Đơn hàng <b>4c5a203c-24c0-43b2-9f5d-667db6fdba49</b> đã được tạo thành công, vui lòng chờ xác nhận đơn hàng!
-                                        </div>
-                                        <div class="icon-noti">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                    </div>
-{{--                                    <div class="text-center" style="padding: 12px 0px; color: #9a9595">Thông báo trống</div>--}}
-                                </div>
-                            </div>
                         </li>
+                        <div class="elm-notify d-none">
+                            <div class="top-noti d-flex justify-content-between align-items-center">
+                                <div><b>Thông báo</b></div>
+                                <div data-user="{{ userInfo()->id ?? '' }}"
+                                     data-url="{{ route('client.notifi.update') }}"
+                                     data-check-noti="{{ $qtyNotiNoRead ? 'true' : 'false' }}"
+                                     id="check-noti">Đánh dấu đã đọc (<i class="fa fa-check"></i>)</div>
+                            </div>
+                            <div class="content-noti">
+                                @if($notifi)
+                                    @foreach($notifi as $item)
+                                        <div class="d-flex align-items-center justify-content-between item-noti
+                                            @if($item->is_read == \App\Enums\NotiReadEnum::IS_READ_FALSE->value) no-read bg-e3e3e3 @endif" data-notify="{{ $item->id }}">
+                                            <div class="content-item-noti">
+                                                <p><i>Hệ thống - {{ $item->created_at }}</i></p>
+                                                {!! $item->content !!}
+                                            </div>
+                                            <div class="icon-noti">
+                                                @if($item->is_read == \App\Enums\NotiReadEnum::IS_READ_TRUE->value)  <i class="fa fa-check"></i> @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="text-center" style="padding: 12px 0px; color: #9a9595">Thông báo trống</div>
+                                @endif
+                            </div>
+                        </div>
                         <li>
                             <a href="{{ route('client.cart.index') }}">
                                 <i class="fa fa-shopping-bag"></i>

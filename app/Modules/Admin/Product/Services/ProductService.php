@@ -114,6 +114,7 @@ class ProductService extends BaseService implements ProductInterface
     private function withDataProduct()
     {
         return [
+            'media',
             'productSmartphonePrice.media',
             'productSmartphone',
             'productSmartphonePrice' => function ($query) {

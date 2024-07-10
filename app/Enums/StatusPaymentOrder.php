@@ -28,8 +28,8 @@ enum StatusPaymentOrder :int implements textMsg, Notification
     public function getTextNoti($uuid)
     {
         return match($this) {
-            StatusPaymentOrder::ORDER_PAYMENT_UNPAID => "Đơn hàng $uuid chưa được thanh toán",
-            StatusPaymentOrder::ORDER_PAYMENT_PAID => "Đơn hàng $uuid đã được thanh toán",
+            StatusPaymentOrder::ORDER_PAYMENT_UNPAID => "Đơn hàng <b>$uuid</b> chưa được thanh toán.",
+            StatusPaymentOrder::ORDER_PAYMENT_PAID => "Đơn hàng <b>$uuid</b> đã được thanh toán.",
         };
     }
 }

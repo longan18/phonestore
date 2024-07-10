@@ -54,6 +54,8 @@ class ShoppingCartService extends BaseService implements ShoppingCartInterface
             if (!userInfo()->shoppingSession) {
                 $shoppingSession = $this->shoppingSession->create($dataShoppingSession);
                 $shoppingSession->shoppingItems()->create($data);
+                $countShoppingItem = $shoppingSession->shoppingItems()->count();
+                $totalPrice = $dataShoppingSession['price_total'];
             } else {
                 userInfo()->shoppingSession->update([
                     'quantity_total' => userInfo()->shoppingSession->quantity_total + $dataShoppingSession['quantity_total'],
@@ -61,13 +63,15 @@ class ShoppingCartService extends BaseService implements ShoppingCartInterface
                 ]);
 
                 $this->shoppingItem->updateOrCreateShoppingItem(userInfo()->shoppingSession->id, $data);
+                $countShoppingItem = userInfo()->count_shopping_item;
+                $totalPrice = userInfo()->shoppingSession->price_total;
             }
 
             DB::commit();
 
             return [
-                'quantity_item' => userInfo()->count_shopping_item,
-                'total_price' => shorten_numbers(userInfo()->shoppingSession->price_total),
+                'quantity_item' => $countShoppingItem,
+                'total_price' => shorten_numbers($totalPrice),
             ];
         } catch (\Exception $exception) {
             DB::rollBack();

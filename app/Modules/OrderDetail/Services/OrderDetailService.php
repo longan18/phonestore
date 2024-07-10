@@ -2,9 +2,12 @@
 
 namespace App\Modules\OrderDetail\Services;
 
+use App\Enums\NotiTypeEnum;
+use App\Enums\StatusOrder;
 use App\Enums\StatusShippingOrder;
 use App\Modules\Admin\ProductSmartphonePrice\Interfaces\ProductSmartphonePriceInterface;
 use App\Modules\Admin\ProductSmartphonePrice\Models\ProductSmartphonePrice;
+use App\Modules\Notification\Interfaces\NotificationInterface;
 use App\Modules\OrderDetail\Interfaces\OrderDetailInterface;
 use App\Modules\OrderDetail\Models\OrderDetail;
 use App\Modules\OrderItem\Interfaces\OrderItemInterface;
@@ -21,23 +24,27 @@ class OrderDetailService extends BaseService implements OrderDetailInterface
     protected $shoppingSession;
     protected $orderItem;
     protected $productSmartphonePrice;
+    protected $notification;
 
     /**
      * @param OrderDetail $orderdetail
      * @param ShoppingSessionInterface $shoppingSession
      * @param OrderItemInterface $orderItem
      * @param ProductSmartphonePriceInterface $productSmartphonePrice
+     * @param NotificationInterface $notification
      */
     public function __construct(
         OrderDetail $orderdetail,
         ShoppingSessionInterface $shoppingSession,
         OrderItemInterface $orderItem,
-        ProductSmartphonePriceInterface $productSmartphonePrice
+        ProductSmartphonePriceInterface $productSmartphonePrice,
+        NotificationInterface $notification,
     ){
         $this->model = $orderdetail;
         $this->shoppingSession = $shoppingSession;
         $this->orderItem = $orderItem;
         $this->productSmartphonePrice = $productSmartphonePrice;
+        $this->notification = $notification;
     }
 
     public function storeOrder($requestArray)
@@ -73,6 +80,11 @@ class OrderDetailService extends BaseService implements OrderDetailInterface
 
             $this->orderItem->insert($dataOrderItem);
             $this->shoppingSession->deleteById($requestArray['shopping_session_id']);
+            $this->notification->createNotification([
+                'user_id' => $orderDetail->user_id,
+                'noti_type' => NotiTypeEnum::ORDER->value,
+                'content' => StatusOrder::ORDER_WRATING->getTextNoti($orderDetail->uuid),
+            ]);
 
             DB::commit();
             return $orderDetail;
@@ -102,6 +114,7 @@ class OrderDetailService extends BaseService implements OrderDetailInterface
             if (!empty($request['client']) && $request['client'] == true) {
                 if ($orderDetail->status_shipping == StatusShippingOrder::ORDER_SHIP_WRATING->value) {
                     $orderDetail->update($request->all());
+                    // noti cancel order
                 } else {
                     return false;
                 }
@@ -112,6 +125,7 @@ class OrderDetailService extends BaseService implements OrderDetailInterface
                 }
 
                 $orderDetail->update($request->all());
+                // noti order
             }
 
             DB::commit();
@@ -159,6 +173,9 @@ class OrderDetailService extends BaseService implements OrderDetailInterface
                     $q->where('users.email', 'like', '%'. $params['key_search'] . '%')
                         ->orWhere('users.phone', 'like', '%'. $params['key_search'] . '%');
                 });
+            })
+            ->when(isset($params['user']), function($q) use($params) {
+                $q->where('user_id', $params['user']);
             })
             ->when(isset($params['status']), function($q) use($params) {
                 $q->where('status', $params['status']);

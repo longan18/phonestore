@@ -33,7 +33,6 @@
                     <th>{{ __('Đơn giá') }}</th>
                     <th>{{ __('Số lượng') }}</th>
                     <th>{{ __('Thành tiền') }}</th>
-                    <th class="text-center w-7">{{ __('Hành động') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,39 +57,11 @@
 
         <x-slot:footer></x-slot:>
     </x-modal-confirm>
-
-    <x-modal-confirm>
-        <ol style="list-style-type: disc">
-            <li>Tên sản phẩm: <span class="name"></span></li>
-            <li>Ram : <span class="ram"></span></li>
-            <li>Bộ nhớ trong: <span class="storage"></span></li>
-            <li>Bộ nhớ còn lại: <span class="storage-after"></span></li>
-            <li>Color: <span class="color"></span></li>
-            <li>Đơn giá: <span class="price"></span></li>
-            <li>Số lượng mua: <span class="quantity"></span></li>
-            <li>Thành tiền: <span class="price-total"></span></li>
-        </ol>
-
-        <x-slot:footer>
-            <button type="button" class="btn btn-secondary" id="close-modal">Close</button>
-        </x-slot:>
-    </x-modal-confirm>
 </div>
 @endsection
 
 @section('script-after')
     <script>
-        $('.show-attr-shopping-item').on('click', function () {
-            $('.name').text($(this).attr('data-name'));
-            $('.ram').text($(this).attr('data-ram'));
-            $('.storage').text($(this).attr('data-storage'));
-            $('.storage-after').text($(this).attr('data-storage-after'));
-            $('.color').text($(this).attr('data-color'));
-            $('.price').text(formattedPrice(Number($(this).attr('data-price')), false));
-            $('.quantity').text($(this).attr('data-qty'));
-            $('.price-total').text(formattedPrice(Number($(this).attr('data-price-total')), false));
-        });
-
         $('#show-modal-infor-cart').on('click', function () {
             $('#modal-info-cart').modal('show');
         })

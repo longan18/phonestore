@@ -2,6 +2,7 @@
 
 namespace App\Modules\Client\Account\Models\Traits;
 
+use App\Enums\NotiReadEnum;
 use App\Enums\StatusAccountEnum;
 use App\Enums\TagMediaEnum;
 use Illuminate\Support\Collection;
@@ -29,8 +30,15 @@ trait AccountAttribute
             $result = $this->shoppingSession->shoppingItems->count();
         }
 
-        return $result;
+        return $result > 99 ? '+99' : $result;
     }
+
+//    public function getCountNotifiAttribute()
+//    {
+//        $result = $this->notifis()->where('is_read', NotiReadEnum::IS_READ_FALSE->value)->count();
+//
+//        return $result > 99 ? '+99' : $result;
+//    }
 
     /**
      * @return Collection

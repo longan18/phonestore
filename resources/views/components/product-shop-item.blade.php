@@ -1,7 +1,7 @@
 <div class="item d-flex flex-column justify-content-between">
     <a href="{{ route('client.product.detail', ['product' => $product->slug]) }}">
         <div class="item-label">
-            <span class="lb-tragop">Trả góp 0%</span>
+            <span class="lb-tragop">Giảm giá: 0%</span>
         </div>
         <div class="item-img item-img_42">
             <img class="thumb" src="{{ asset($product->avatar) }}" alt="iPhone 15 Pro Max">

@@ -1,5 +1,6 @@
 <div class="mb-3">
     <form action="#" id="fillter-order" method="GET">
+        <input type="hidden" name="user" value="{{ request()->user ?? null }}">
         <div class="row">
             <div class="col-3">
                 <label class="m-0 mr-2">Tìm kiếm mã đơn hàng, email, số điện thoại khách hàng</label>
@@ -8,6 +9,7 @@
             <div class="col-3">
                 <label class="m-0 mr-2">Tìm kiếm theo trạng thái đơn hàng</label>
                 <select class="w-100 form-control filter-order" name="status">
+                    <option value="">Tất cả</option>
                     @foreach(\App\Enums\StatusOrder::cases() as $item)
                         <option value="{{ $item->value }}">{{ $item->getTextAdmin() }}</option>
                     @endforeach
@@ -16,6 +18,7 @@
             <div class="col-3">
                 <label class="m-0 mr-2">Tìm kiếm theo trạng thái thanh toán</label>
                 <select class="w-100 form-control filter-order" name="status_payment">
+                    <option value="">Tất cả</option>
                     @foreach(\App\Enums\StatusPaymentOrder::cases() as $item)
                         <option value="{{ $item->value }}">{{ $item->getText() }}</option>
                     @endforeach
@@ -24,6 +27,7 @@
             <div class="col-3">
                 <label class="m-0 mr-2">Tìm kiếm theo trạng thái giao hàng</label>
                 <select class="w-100 form-control filter-order" name="status_shipping">
+                    <option value="">Tất cả</option>
                     @foreach(\App\Enums\StatusShippingOrder::cases() as $item)
                         <option value="{{ $item->value }}">{{ $item->getText() }}</option>
                     @endforeach

@@ -9,7 +9,11 @@
         <td>{{ $option->storageCapacity->value }}</td>
         <td>{{ $option->remaining_capacity_is_approx }}</td>
         <td>{{ $option->color->color }}</td>
-        <td>{{ formatCurrency($option->price) }}</td>
+        <td>
+{{--            <p class="mb-0">Giảm giá: 20%</p>--}}
+{{--            <strike class="text-danger">{{ formatCurrency($option->price) }}</strike>--}}
+            <p class="mb-0">{{ formatCurrency($option->price) }}</p>
+        </td>
         <td>{{ $option->quantity }}</td>
         <td class="{{ $option->status_action->color }} msg-status fw-700"><b>{{ $option->status_action->text }}</b></td>
         <td>

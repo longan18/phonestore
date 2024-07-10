@@ -43,7 +43,7 @@
                             <a href="{{ route('cart.index', ['user' => $user->id]) }}" class="btn btn-success d-flex align-items-center mr-2">
                                 <i class="fa fa-shopping-cart"></i>Giỏ hàng
                             </a>
-                            <a href="{{ route('order.show-order-user', ['user' => $user->id]) }}" class="btn btn-danger d-flex align-items-center">
+                            <a href="{{ route('order.index', ['user' => $user->id]) }}" class="btn btn-danger d-flex align-items-center">
                                 <i class="fa fa-money"></i>Đơn hàng
                             </a>
                         </div>

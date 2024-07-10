@@ -36,7 +36,7 @@ class EventServiceProvider extends ServiceProvider
         Brand::observe(BrandObserver::class);
         ShoppingSession::observe(ShoppingSessionObserver::class);
         Product::observe(ProductObserver::class);
-//        User::observe(UserObserver::class);
+        User::observe(UserObserver::class);
     }
 
     /**

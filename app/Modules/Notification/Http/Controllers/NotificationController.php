@@ -27,4 +27,12 @@ class NotificationController extends Controller
     {
         $this->notification = $notification;
     }
+
+    public function update(Request $request)
+    {
+        $result = $this->notification->updateStatusNoti($request->all());
+
+        return $result ? $this->responseSuccess(message: __('Cập nhật trạng thái thông báo thành công'))
+            : $this->responseFailed(message: __('Có một lỗi xảy ra, vui lòng thử lại trong giây lát'));
+    }
 }

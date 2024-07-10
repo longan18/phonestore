@@ -20,7 +20,7 @@
     display: none;
 }
 
-.notify-show {
+.notify {
     position: relative;
 
     .elm-notify {
@@ -44,7 +44,7 @@
         }
 
         .content-noti {
-            height: 500px;
+            max-height: 500px;
             overflow-y: auto;
 
             .item-noti {

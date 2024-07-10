@@ -22,5 +22,5 @@
     </section>
 @endsection
 @section('script')
-    <script src="{{ asset('client_assets/js/product-item.js') }}"></script>
+    <script src="{{ asset('client_assets/js/home.js') }}"></script>
 @endsection

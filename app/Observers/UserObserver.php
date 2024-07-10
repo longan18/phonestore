@@ -25,7 +25,7 @@ class UserObserver
             'content' => NotiTypeEnum::NEW_USER->getTextNoti($user->name),
         ];
 
-        $this->notification->create($data);
+        $this->notification->createNotification($data);
     }
 
     /**

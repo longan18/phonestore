@@ -14,6 +14,7 @@
             @foreach($productPrice as $keyItem => $item)
                 <div data-id="{{ $item['item_id'] }}" data-price="{{ $item['price'] }}"
                      data-image="{{ $item['avatar'] }}"
+                     data-quantity="{{ $item['quantity'] }}"
                      class="item-price text-center h-43px border-non-act {{ $keyItem == 0 ? 'act' : '' }}
                       d-flex align-items-center justify-content-center">{{ $item['color'] }}</div>
             @endforeach

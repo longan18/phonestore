@@ -131,24 +131,24 @@
         </div>
     </section>
 
-    <section class="timeline-section">
-        <div class="timeline-container">
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <h4>Sự kiện 1</h4>
-                    <p class="m-0">Mô tả sự kiện 1</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-marker"></div>
-                <div class="timeline-content">
-                    <h4>Sự kiện 1</h4>
-                    <p class="m-0">Mô tả sự kiện 1</p>
-                </div>
-            </div>
-        </div>
-    </section>
+{{--    <section class="timeline-section">--}}
+{{--        <div class="timeline-container">--}}
+{{--            <div class="timeline-item">--}}
+{{--                <div class="timeline-marker"></div>--}}
+{{--                <div class="timeline-content">--}}
+{{--                    <h4>Sự kiện 1</h4>--}}
+{{--                    <p class="m-0">Mô tả sự kiện 1</p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="timeline-item">--}}
+{{--                <div class="timeline-marker"></div>--}}
+{{--                <div class="timeline-content">--}}
+{{--                    <h4>Sự kiện 1</h4>--}}
+{{--                    <p class="m-0">Mô tả sự kiện 1</p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 @endsection
 
 @section('script')

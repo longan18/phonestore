@@ -4,7 +4,6 @@ namespace App\Modules\Notification\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Modules\Notification\Models\Traits\NotificationAttribute;
 use App\Modules\Notification\Models\Traits\NotificationScope;
@@ -21,7 +20,6 @@ use Plank\Mediable\Mediable;
 class Notification extends Model
 {
      use HasFactory,
-         SoftDeletes,
          Mediable,
          NotificationAttribute,
          NotificationScope,
@@ -34,6 +32,7 @@ class Notification extends Model
 
     protected $fillable = [
         'user_id',
+        'noti_type',
         'content',
         'is_read',
     ];

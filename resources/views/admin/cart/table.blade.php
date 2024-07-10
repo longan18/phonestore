@@ -1,18 +1,20 @@
 @forelse($carts as $item)
     <tr>
         <td class="text-center">{{ indexTable($carts->currentPage(), $carts->perPage(), $loop->index) }}</td>
-        <td></td>
-        <td>{{ $item->product->name }}</td>
+        <td><img src="{{ asset($item->productPrice->avatar) }}" width="100" height="100" class="object-fit-cover image-table" alt=""></td>
+        <td>
+            <div style="margin-left: 20px">
+                <ol class="text-left" style="list-style-type: disc">
+                    <li><span>Tên sản phẩm: </span>{{ $item->product->name }}</li>
+                    <li><span>Ram: </span>{{ $item->productPrice->ram->value }}</li>
+                    <li><span>Bộ nhớ trong: </span>{{ $item->productPrice->storageCapacity->value }}</li>
+                    <li><span>Màu: </span>{{ $item->productPrice->color->color }}</li>
+                </ol>
+            </div>
+        </td>
         <td>{{ formatCurrency($item->price) }}</td>
         <td>{{ $item->quantity }}</td>
         <td>{{ formatCurrency($item->total_price_item) }}</td>
-        <td class="d-flex justify-content-center">
-            <button class="btn btn-warning d-flex justify-content-center align-items-center class-show-modal show-attr-shopping-item"
-            data-name="{{ $item->product->name }}" data-price="{{ $item->price }}" data-qty="{{ $item->quantity }}"
-            data-price-total="{{ $item->total_price_item }}" data-ram="{{ $item->ram->value }}" data-storage="{{ $item->storage_capacity->value }}"
-            data-color="{{ $item->color->color }}" data-storage-after="{{ $item->productPrice->remaining_capacity_is_approx ?? '' }}"
-            ><i class="fa fa-eye m-0"></i></button>
-        </td>
     </tr>
 @empty
     <tr>

@@ -50,6 +50,7 @@ class ShoppingItemService extends BaseService implements ShoppingItemInterface
     public function getShoppingItemByShoppingSessionId($shoppingSessionId, $perPage = null, $page = null)
     {
         return $this->model->with([
+            'productPrice.media',
             'product',
             'productPrice.ram',
             'productPrice.storageCapacity',

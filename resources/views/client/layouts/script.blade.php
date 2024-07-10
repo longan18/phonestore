@@ -26,17 +26,58 @@
         placeholder: "Lựa chọn",
     });
 
+    var SHOW_NOTI = true
     $('.notify-show').on('click', function () {
-        if ($('.elm-notify').hasClass('d-none')) {
+        if (SHOW_NOTI) {
             $('.elm-notify').removeClass('d-none');
         } else {
             $('.elm-notify').addClass('d-none');
         }
+
+        SHOW_NOTI = !SHOW_NOTI;
     });
 
-    $('#check-noti').on('click', function () {
-        $('.elm-notify').addClass('d-none');
-        $('.item-noti').addClass('bg-e3e3e3');
-        $('.item-noti').find('.icon-noti').empty();
+    $(document).on('click', '#check-noti', function () {
+        let dataCheckNoti = $(this).attr('data-check-noti');
+        const user_id = $(this).data('user');
+        const url = $(this).data('url');
+
+        // let data = {}
+        if (dataCheckNoti == 'true') {
+            // $('.no-read').map(function (index, elm) {
+            //
+            // });
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { user_id },
+                beforeSend: function () {
+
+                },
+                success: function (res) {
+                    if (res.success) {
+                        $('.item-icon-cart-favorite').text('0');
+                        $('.no-read').find('.icon-noti').append(`<i class="fa fa-check"></i>`);
+                        $('.item-noti').removeClass('no-read bg-e3e3e3');
+                        $('#check-noti').attr('data-check-noti', 'false');
+                        toastr.success(res.message);
+                    } else {
+                        toastr.error(res.message);
+                    }
+                },
+                error: function (jqXHR) {
+
+                },
+                complete: function () {
+
+                }
+            })
+
+
+        }
+        // $('.elm-notify').addClass('d-none');
+        // $('.item-noti').addClass('bg-e3e3e3');
+        // $('.item-noti').find('.icon-noti').empty();
     });
 </script>

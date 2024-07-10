@@ -84,6 +84,9 @@ $(function () {
         actByClass($($(this)).parent('.parent-item').find('.item-price'), $(this));
 
         let price = $(this).data('price');
+        let quantityCurren = $(this).data('quantity');
+        $('.quantity-current').html(`<b>${quantityCurren}</b> sản phẩm có sẵn`);
+        $('.quantity-current').attr('data-quantity-current', quantityCurren);
 
         $('.price').text(price.toLocaleString('de-DE'));
         $('.current-price').data('price', price);
