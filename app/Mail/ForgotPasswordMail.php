@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewOrderMail extends Mailable
+class ForgotPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,6 +21,6 @@ class NewOrderMail extends Mailable
     {
         return $this->subject('Thông tin đặt hàng')
                     ->with(['data' => $this->data])
-                    ->view('emails.orders');
+                    ->view('emails.forgot-password');
     }
 }

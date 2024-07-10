@@ -4,8 +4,10 @@ namespace App\Modules\Admin\Payment\Http;
 
 use App\Enums\StatusPaymentOrder;
 use App\Http\Controllers\Controller;
+use App\Mail\NewOrderMail;
 use App\Modules\OrderDetail\Interfaces\OrderDetailInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class VnPay extends Controller
 {
@@ -110,7 +112,7 @@ class VnPay extends Controller
         if ($secureHash == $vnp_SecureHash) {
             if ($_GET['vnp_ResponseCode'] == '00') {
                 $orderDetail->update(['status_payment' => StatusPaymentOrder::ORDER_PAYMENT_PAID->value]);
-
+                Mail::to(env('EMAIL_ADMIN'))->send(new NewOrderMail(['uuid' => $orderDetail->uuid]));
                 return to_route('client.order.index')->with(
                     ['data_vnpay' =>
                         [

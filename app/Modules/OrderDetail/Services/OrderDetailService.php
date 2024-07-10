@@ -5,6 +5,7 @@ namespace App\Modules\OrderDetail\Services;
 use App\Enums\NotiTypeEnum;
 use App\Enums\StatusOrder;
 use App\Enums\StatusShippingOrder;
+use App\Mail\NewOrderMail;
 use App\Modules\Admin\ProductSmartphonePrice\Interfaces\ProductSmartphonePriceInterface;
 use App\Modules\Admin\ProductSmartphonePrice\Models\ProductSmartphonePrice;
 use App\Modules\Notification\Interfaces\NotificationInterface;
@@ -15,6 +16,7 @@ use App\Modules\ShoppingSession\Interfaces\ShoppingSessionInterface;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * @OrderDetailService
@@ -87,6 +89,7 @@ class OrderDetailService extends BaseService implements OrderDetailInterface
             ]);
 
             DB::commit();
+            Mail::to(env('EMAIL_ADMIN'))->send(new NewOrderMail(['uuid' => $orderDetail->uuid]));
             return $orderDetail;
         } catch (\Exception $exception) {
             DB::rollBack();

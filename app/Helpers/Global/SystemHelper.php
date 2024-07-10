@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 if (! function_exists('includeFilesInFolder')) {
     /**
      * Loops through a folder and requires all PHP files
@@ -34,5 +36,13 @@ if (! function_exists('includeRouteFiles')) {
     function includeRouteFiles($folder)
     {
         includeFilesInFolder($folder);
+    }
+}
+
+if (! function_exists('generateRandomString')) {
+    function generateRandomString($length)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        return Str::random($length, $characters);
     }
 }
