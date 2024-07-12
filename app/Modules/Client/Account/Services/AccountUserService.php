@@ -33,7 +33,7 @@ class AccountUserService extends BaseService implements AccountUserInterface
             $random = generateRandomString(10);
             $user->password = Hash::make($random);
             $user->save();
-            Mail::to($request->email)->send(new ForgotPasswordMail(['password' => $random]));
+            Mail::to($request->email)->queue(new ForgotPasswordMail(['password' => $random]));
         } catch (\Exception $e) {
             Log::error("{$e->getMessage()} --line: {$e->getLine()} --file: {$e->getFile()}");
 
@@ -47,7 +47,7 @@ class AccountUserService extends BaseService implements AccountUserInterface
         $data = $request->only($this->model->getFillable());
         $data['id'] = $request->id ?? null;
 
-        if (empty($data['password'] )) {
+        if (empty($data['password'])) {
             unset($data['password']);
         } else {
             $data['password'] = bcrypt($data['password']);

@@ -54,9 +54,9 @@ class OrderController extends Controller
 
     public function updateStatus(Request $request)
     {
-        $result = $this->orderDetail->updateStatusOrder($request);
+        [$result, $msg] = $this->orderDetail->updateStatusOrder($request);
 
         return $result ? $this->responseSuccess(message: __('Cập nhật đơn hàng thành công!'))
-            : $this->responseFailed(message: __('Cập nhật đơn hàng thất bại!'));
+            : $this->responseFailed(message: $msg);
     }
 }

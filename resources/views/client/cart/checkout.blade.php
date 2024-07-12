@@ -18,13 +18,9 @@
     </ur>
 </section>
 <div class="d-flex justify-content-between mt-3 pb-3 border-ebebeb">
-    <div class="title-checkout-quantity">Số sản phẩm trong giỏ: </div>
-    <div class="text-danger"><span class="value-quantity" data-value="{{ optional($shoppingItems)->total() ?? 0 }}">{{ optional($shoppingItems)->total() ?? 0 }}</span> sản phẩm</div>
-</div>
-<div class="d-flex justify-content-between mt-3 pb-3 border-ebebeb">
     <div>Tổng đơn giá: </div>
     <div class="text-danger">
-        <span class="value-price-default" data-value="{{ $shoppingSession ? $shoppingSession->shoppingItems->sum('price') : 0 }}">
+        <span class="value-price-default" data-root="{{ $shoppingSession ? $shoppingSession->shoppingItems->sum('price') : 0 }}" data-value="{{ $shoppingSession ? $shoppingSession->shoppingItems->sum('price') : 0 }}">
             {{ $shoppingSession ? formatCurrency($shoppingSession->shoppingItems->sum('price')) : 0 }}
         </span><sup class="text-danger">đ</sup>
     </div>
@@ -32,7 +28,7 @@
 <div class="d-flex justify-content-between mt-3 mb-3">
     <div>Tổng tiền: </div>
     <div class="text-danger">
-        <span class="value-price-total" data-value="{{ $shoppingSession ? $shoppingSession->price_total : 0 }}">
+        <span class="value-price-total" data-root="{{ $shoppingSession ? $shoppingSession->price_total : 0 }}"  data-value="{{ $shoppingSession ? $shoppingSession->price_total : 0 }}">
             {{ $shoppingSession ? formatCurrency($shoppingSession->price_total) : 0 }}
         </span><sup class="text-danger">đ</sup>
     </div>

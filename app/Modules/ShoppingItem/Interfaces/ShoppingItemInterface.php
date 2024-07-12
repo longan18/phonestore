@@ -12,4 +12,6 @@ interface ShoppingItemInterface
     public function getShoppingItemByShoppingSessionId($shoppingSessionId, $perPage = null, $page = null);
 
     public function updateUpsertShoppingItem($data);
+    public function getDataByIdOrShoppingSessionId($arrayId, $shoppingSessionId);
+    public function deleteDataById($arrayId);
 }

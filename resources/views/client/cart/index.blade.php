@@ -13,6 +13,21 @@
         a:hover {
             color: #0d95e8;
         }
+
+        input[type="checkbox"] {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #A7A7A7;
+            border-radius: 8px;
+
+            &:checked {
+                border: 2px solid #FF0000;
+                background-color: #FF0000; /* Màu đỏ */
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: center;                    }
+        }
     </style>
 @endsection
 
@@ -42,6 +57,8 @@
                             <table>
                                 <thead>
                                 <tr>
+                                    <th class="d-flex align-items-center">
+                                    </th>
                                     <th class="w-50">Sản phẩm</th>
                                     <th>Giá tiền</th>
                                     <th>Số lượng</th>
@@ -79,6 +96,12 @@
 
 @section('script')
     <script>
+        if (localStorage.getItem('checkVnPay') != undefined) {
+            localStorage.removeItem('checkVnPay');
+            location.reload();
+        }
+
+        // location.reload();
         var url_update_item_cart = `{{ route('client.update-item-cart') }}`;
         var url_delete_item_cart = `{{ route('client.delete-item-cart') }}`;
         var url_get_list = `{{ route('client.cart.index') }}`;

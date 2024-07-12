@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Payment\Http;
 
+use App\Enums\StatusOrder;
 use App\Enums\StatusPaymentOrder;
 use App\Http\Controllers\Controller;
 use App\Mail\NewOrderMail;
@@ -27,7 +28,7 @@ class VnPay extends Controller
         $vnp_HashSecret = $inforVnPay['vnp_HashSecret'];
 
         $vnp_TxnRef = $order->uuid;
-        $vnp_OrderInfo = $order->note;
+        $vnp_OrderInfo = $order->note ?? "Mua hàng";
         $vnp_OrderType = '110000'; // Mã điện thoại và máy tính bảng
         $vnp_Amount = $order->price_total * 100;
         $vnp_Locale = 'vn';
@@ -111,8 +112,13 @@ class VnPay extends Controller
 
         if ($secureHash == $vnp_SecureHash) {
             if ($_GET['vnp_ResponseCode'] == '00') {
-                $orderDetail->update(['status_payment' => StatusPaymentOrder::ORDER_PAYMENT_PAID->value]);
-                Mail::to(env('EMAIL_ADMIN'))->send(new NewOrderMail(['uuid' => $orderDetail->uuid]));
+                $orderDetail->update(
+                    [
+                        'status_payment' => StatusPaymentOrder::ORDER_PAYMENT_PAID->value,
+                        'status' => StatusOrder::ORDER_CONFIRMED->value
+                    ]
+                );
+                Mail::to(env('EMAIL_ADMIN'))->queue(new NewOrderMail(['uuid' => $orderDetail->uuid]));
                 return to_route('client.order.index')->with(
                     ['data_vnpay' =>
                         [

@@ -2,6 +2,7 @@
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -51,14 +52,18 @@ if (!function_exists('generateSlug')) {
     }
 }
 
-if (!function_exists('uuid')) {
+if (!function_exists('generateUUIDWithRandomString')) {
     /**
      * @param $data
      *
      * @return string
      */
-    function uuid(): string
+    function generateUUIDWithRandomString(): string
     {
-        return Str::uuid();
+        $randomString = Str::random(5);
+        $timestamp = Carbon::now()->format('YmdHis'); // Get the current timestamp in YYYY-MM-DD HH:II:SS format
+
+        $uuid = $randomString . '-' . $timestamp;
+        return $uuid;
     }
 }

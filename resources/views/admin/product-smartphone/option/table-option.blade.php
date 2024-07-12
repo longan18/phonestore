@@ -4,7 +4,7 @@
 {{--        <td class="text-center">{{ $index++ }}</td>--}}
         <td class="text-center">{{ $option->id }}</td>
         <td><img src="{{ asset($option->avatar) }}" width="100" height="100" class="object-fit-cover image-table" alt=""></td>
-        <td><img src="{{ asset($option->thumb_option) }}" width="100" height="100" class="object-fit-cover image-table" alt=""></td>
+{{--        <td><img src="{{ asset($option->thumb_option) }}" width="100" height="100" class="object-fit-cover image-table" alt=""></td>--}}
         <td>{{ $option->ram->value }}</td>
         <td>{{ $option->storageCapacity->value }}</td>
         <td>{{ $option->remaining_capacity_is_approx }}</td>

@@ -17,7 +17,6 @@ use App\Enums\StatusPaymentOrder;
         <td>
             <ol style="list-style-type: disc; margin: 0px; padding-left: 13px">
                 <li><b>Ngày tạo: </b> {{ $item->created_at }}</li>
-                <li><b>Ghi chú: </b> <i style="color: #7992a3">{{ $item->note }}</i></li>
             </ol>
         </td>
         <td>

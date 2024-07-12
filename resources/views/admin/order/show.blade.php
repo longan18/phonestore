@@ -47,6 +47,9 @@
                         <th class="text-center">Giá tiền</th>
                         <th class="text-center">Số lượng</th>
                         <th class="w-15 text-center">Tổng tiền</th>
+                        @if(request()->order->status != \App\Enums\StatusOrder::ORDER_CONFIRMED->value)
+                            <th class="w-15 text-center">Trạng thái của sản phẩm</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -58,7 +61,7 @@
                                 </div>
                                 <div style="margin-left: 20px">
                                     <ol class="text-left" style="list-style-type: disc">
-                                        <li><span>Tên sản phẩm: </span>{{ $item->product->name }}</li>
+                                        <li><span>Tên sản phẩm: </span><a href="{{ route('smartphone.option.index', ['product' => $item->product->slug]) }}">{{ $item->product->name }}</a></li>
                                         <li><span>Ram: </span>{{ $item->productPrice->ram->value }}</li>
                                         <li><span>Bộ nhớ trong: </span>{{ $item->productPrice->storageCapacity->value }}</li>
                                         <li><span>Màu: </span>{{ $item->productPrice->color->color }}</li>
@@ -72,6 +75,15 @@
                                 {{ $item->quantity }}
                             </td>
                             <td class="text-center"><span class="price-total">{{ formatCurrency($item->total_price_item) }}</span><sup>đ</sup></td>
+                            @if(request()->order->status != \App\Enums\StatusOrder::ORDER_CONFIRMED->value)
+                                <td class="text-center">
+                                    @if($item->productPrice->quantity > 0)
+                                        <span class="text-success"><b>Còn hàng</b></span>
+                                    @else
+                                        <span class="text-danger"><b>Số lượng không đủ</b></span>
+                                    @endif
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>

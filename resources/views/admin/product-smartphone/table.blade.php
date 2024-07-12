@@ -8,7 +8,7 @@
                 <p class="color-999595"><i>Sản phẩm này đã được xóa vào thời gian <br> {{ $product->updated_at }}</i></p>
             @endif
         </td>
-        <td><img src="{{ $product->brand->avatar }}" width="100" height="100" class="object-fit-cover image-table" alt=""></td>
+        <td>{{ $product->brand->name }}</td>
         <td>{{ $product->productSmartphonePrice->sum('quantity') }}</td>
         <td class="{{ $product->status_action->color }} msg-status fw-700"><b>{{ $product->status_action->text }}</b></td>
         <td>{{ formatTime($product->created_at) }}</td>

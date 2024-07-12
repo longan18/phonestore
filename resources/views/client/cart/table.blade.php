@@ -6,6 +6,9 @@
         data-shopping-session-id="{{ $shoppingItem->shopping_session_id }}"
         data-product-id="{{ $shoppingItem->product_id }}"
         data-price="{{ $shoppingItem->price }}">
+        <td>
+            <input type="checkbox" class="checkbox-item-cart" value="{{ $shoppingItem->id }}">
+        </td>
         <td class="d-flex align-items-center">
             <div class="">
                 <img src="{{ asset($shoppingItem->productPrice->avatar) }}" alt="" style="width: 100px;">

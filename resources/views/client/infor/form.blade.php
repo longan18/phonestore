@@ -42,13 +42,6 @@
                 <span class="color-red fs-12">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="checkout__input d-none" id="password_confirmation">
-                <p>{{ __('Xác nhận mật khẩu') }}</p>
-                <input type="password" value="" name="password_confirmation" autocomplete="off">
-                @error('password_confirmation')
-                <span class="color-red fs-12">{{ $message }}</span>
-                @enderror
-            </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-success">{{ __('Cập nhật') }}</button>
             </div>

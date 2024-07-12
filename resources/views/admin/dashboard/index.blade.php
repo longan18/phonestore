@@ -33,7 +33,6 @@
                 <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
                     <div class="info">
                         <h4 style="margin-bottom: 0px">Người dùng</h4>
-                        <p class="text-danger fs-0875"><i>Tổng số người đăng ký tài khoản</i></p>
                         <p><b>{{ $countUser }}</b></p>
                     </div>
                 </div>
@@ -43,7 +42,6 @@
             <div class="widget-small info coloured-icon"><i class="icon fa fa-usd fa-3x"></i></i>
                 <div class="info">
                     <h4 style="margin-bottom: 0px">Doanh thu trong tháng</h4>
-                    <p class="text-danger fs-0875"><i>Doanh thu đầu tháng -> 0h ngày hiện tại</i></p>
                     <p><b>{{ number_format($sumPriceTotalInMonth, 0, '.', '.') }} đ</b></p>
                 </div>
             </div>
@@ -56,7 +54,6 @@
                 <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
                     <div class="info">
                         <h4 style="margin-bottom: 0px">Số đơn hàng cần xử lý</h4>
-                        <p class="text-danger fs-0875"><i>Chưa xác nhận & chưa thanh toán</i></p>
                         <p><b>{{ $totalOrderDetailStatusOrderWarting }}</b></p>
                     </div>
                 </div>
@@ -70,7 +67,6 @@
                 <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
                     <div class="info">
                         <h4 style="margin-bottom: 0px">Số đơn hàng hủy</h4>
-                        <p class="text-danger fs-0875"><i>Hủy & chưa thanh toán</i></p>
                         <p><b>{{ $totalOrderDetailStatusOrderCancel }}</b></p>
                     </div>
                 </div>

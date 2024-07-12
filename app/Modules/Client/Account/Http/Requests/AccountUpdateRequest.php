@@ -27,33 +27,25 @@ class AccountUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        dd(!$this->route('user') && !$this->filled('password'));
         return [
             'name' => 'bail|required',
-            'email' => 'bail|required|email|unique:users,email',
             'email' => [
                 'bail',
                 'required',
                 'email',
-                Rule::unique('users')->ignore($this->route('user'))
+                Rule::unique('users')->ignore($this->id),
             ],
             'phone' => [
                 'bail',
                 'required',
-                Rule::unique('users')->ignore($this->route('user')),
+                Rule::unique('users')->ignore($this->id),
                 "regex:".REGEX_PHONE
             ],
             'password' => [
                 'bail',
-                Rule::requiredIf(function () {
-                    return !$this->route('user') && $this->filled('password');
-                }),
-                'min:6',
-                'confirmed',
-            ],
-            'password_confirmation' => [
-                'bail',
-                Rule::requiredIf(fn () => !$this->route('user')),
+                'nullable',
+                Rule::requiredIf(fn () => !$this->id),
+                'min:6'
             ],
         ];
     }

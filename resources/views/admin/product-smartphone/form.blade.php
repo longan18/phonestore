@@ -31,7 +31,7 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="d-flex justify-content-between">
-                    <h3 class="tile-title">{{ !empty($product->name) ? __('Sửa sản phẩm').' '. $product->slug : __('Tạo sản phẩm') }} @if(!empty($product->name)) <span class="{{ $product->status_action->color }}">- {{ $product->status_action->text }}</span> @endif</h3>
+                    <h3 class="tile-title">{{ !empty($product->name) ? __('Sửa sản phẩm').' '. $product->name : __('Tạo sản phẩm') }} @if(!empty($product->name)) <span class="{{ $product->status_action->color }}">- {{ $product->status_action->text }}</span> @endif</h3>
                     @if(!empty($product))
                         <p>
                             <a class="btn btn-primary icon-btn" href="{{ route('smartphone.option.index', ['product' => $product->slug]) }}"><i class="fa fa-list"></i>{{ __('Danh sách option sản phẩm') }}</a>

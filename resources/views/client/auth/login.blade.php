@@ -75,8 +75,9 @@
                                 @endif
                                 <button type="submit" class="btn btn-pill text-white btn-block btn-auth-action font-weight-bold"
                                         style="background-color: #0015f6">{{ __('Đăng nhập') }}</button>
-                                    <a href="{{ route('client.forgot-password') }}" style="text-decoration: none"><b style="color: red; cursor: pointer">{{ __('Quên mật khẩu') }}</b></a>
-                                    <span class="d-block text-center my-4 text-muted">{{ __('Bạn mới biết đến shop?') }}
+                                    <span class="d-block text-center mt-4 text-muted">{{ __('Bạn quên mật khẩu?') }}
+                                        <a href="{{ route('client.forgot-password') }}" style="text-decoration: none"><b style="color: red; cursor: pointer">{{ __('Quên mật khẩu') }}</b></a></span>
+                                    <span class="d-block text-center mb-4 text-muted">{{ __('Bạn mới biết đến shop?') }}
                                     <a href="{{ route('client.page-register') }}" style="text-decoration: none"><b style="color: red; cursor: pointer">{{ __('Đăng ký') }}</b></a>
                                 </span>
                             </form>

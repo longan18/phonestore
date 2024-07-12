@@ -64,7 +64,7 @@ class OrderDetailController extends Controller
 
     public function cancelOrder(Request $request)
     {
-        $result = $this->orderDetail->updateStatusOrder($request);
+        $result = $this->orderDetail->cancelOrder($request);
 
         return $result ? $this->responseSuccess(message: __('Hủy đơn hàng thành công!'))
             : $this->responseFailed(message: __('Hủy đơn hàng thất bại!'));

@@ -25,7 +25,7 @@
             <li class="breadcrumb-item"><a href="{{ route('smartphone.index') }}">{{ __('Danh sách sản phẩm điện thoại thông minh') }}</a></li>
             <li class="breadcrumb-item">
                 <a href="{{ route('smartphone.option.index', ['product' => $product->slug]) }}">
-                    {{ __('Option sản phẩm').' '. $product->slug }}
+                    {{ __('Option sản phẩm').' '. $product->name }}
                 </a>
             </li>
         </ul>
@@ -34,7 +34,7 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="d-flex justify-content-between">
-                    <h3 class="tile-title">{{ !empty($productSmartphonePrice->id) ? __('Chỉnh sửa option sản phẩm').' '. $product->slug : __('Thêm option sản phẩm').' '. $product->slug }}
+                    <h3 class="tile-title">{{ !empty($productSmartphonePrice->id) ? __('Chỉnh sửa option sản phẩm').' '. $product->name : __('Thêm option sản phẩm').' '. $product->slug }}
                         <span class="{{ $product->status_action->color }}">- {{ $product->status_action->text }}</span>
                     </h3>
                 </div>
@@ -70,25 +70,25 @@
                                 </div>
                                 <div class="error-message error_thumb_avatar_option"></div>
                             </div>
-                            <div class="mb-3">
-                                <label>{{ __('Ảnh thumb option (200x200)') }}<span class="text-danger">*</span></label>
-                                <div class="avatar-upload">
-                                    <div class="avatar-edit">
-                                        <input name="thumb_option" class="d-none" type="file" id="image-upload-option"
-                                               accept=".png,.jpg,.jpeg"/>
-                                        <label for="image-upload-option">
-                                            <div class="btn btn-primary icon-btn">
-                                                <i class="fa fa-plus"></i>{{ __('Chọn file') }}
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="avatar-preview mt-2 mb-1">
-                                        <img class="profile-user-img img-responsive img-circle object-fit-cover {{ !empty($productSmartphonePrice->thumb_option) ?: 'd-none' }}"
-                                             height="150" width="150" id="image-preview-option" alt="User profile picture" src="{{ $productSmartphonePrice->thumb_option ?? '' }}">
-                                    </div>
-                                </div>
-                                <div class="error-message error_thumb_option"></div>
-                            </div>
+{{--                            <div class="mb-3">--}}
+{{--                                <label>{{ __('Ảnh thumb option (200x200)') }}<span class="text-danger">*</span></label>--}}
+{{--                                <div class="avatar-upload">--}}
+{{--                                    <div class="avatar-edit">--}}
+{{--                                        <input name="thumb_option" class="d-none" type="file" id="image-upload-option"--}}
+{{--                                               accept=".png,.jpg,.jpeg"/>--}}
+{{--                                        <label for="image-upload-option">--}}
+{{--                                            <div class="btn btn-primary icon-btn">--}}
+{{--                                                <i class="fa fa-plus"></i>{{ __('Chọn file') }}--}}
+{{--                                            </div>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="avatar-preview mt-2 mb-1">--}}
+{{--                                        <img class="profile-user-img img-responsive img-circle object-fit-cover {{ !empty($productSmartphonePrice->thumb_option) ?: 'd-none' }}"--}}
+{{--                                             height="150" width="150" id="image-preview-option" alt="User profile picture" src="{{ $productSmartphonePrice->thumb_option ?? '' }}">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="error-message error_thumb_option"></div>--}}
+{{--                            </div>--}}
                             <div class="mb-3">
                                 <label>{{ __('Ram') }}<span class="text-danger">*</span></label>
                                 <select class="select2-multiple form-control w-100 filter-product" name="ram_id">

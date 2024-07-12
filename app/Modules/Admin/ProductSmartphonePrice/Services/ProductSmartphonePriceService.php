@@ -49,13 +49,13 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
                 TagMediaEnum::THUMB_AVATAR_OPTION->getDirectory(),
                 TagMediaEnum::THUMB_AVATAR_OPTION->value
             );
-            $this->media->uploadAvatar(
-                $model,
-                $request,
-                'thumb_option',
-                TagMediaEnum::THUMB_OPTION->getDirectory(),
-                TagMediaEnum::THUMB_OPTION->value
-            );
+//            $this->media->uploadAvatar(
+//                $model,
+//                $request,
+//                'thumb_option',
+//                TagMediaEnum::THUMB_OPTION->getDirectory(),
+//                TagMediaEnum::THUMB_OPTION->value
+//            );
 
             DB::commit();
             return true;
@@ -142,7 +142,10 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
                 $model->product()->update(['status' => StatusEnum::STOP_SELLING->value]);
             }
 
-            $this->updateStatus($model, $request);
+            if ($model->quantity != 0) {
+                $this->updateStatus($model, $request);
+            }
+
 
             DB::commit();
             return $model;

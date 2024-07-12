@@ -50,15 +50,15 @@
                                         <div>
                                             <p class="mb-1"><i>Thông tin đơn hàng</i></p>
                                             <ol style="list-style-type: disc">
-                                                <li><b>Khách hàng:</b> {{ $item->user->name }}</li>
-                                                <li><b>Email:</b> {{ $item->user->email }}</li>
-                                                <li><b>Số điện thoại:</b> {{ $item->user->phone }}</li>
                                                 <li><b>Tổng số lượng sản phẩm:</b> {{ $item->quantity_total }}</li>
                                                 <li><b>Tổng tiền thanh toán:</b> <span class="text-danger font-weight-bold">{{ formatCurrency($item->price_total) }} <sup>đ</sup></span></li>
-                                                <li><b>Trạng thái đơn hàng: </b> <span class="{{ $item->status_order->color }}"><i>{{ $item->status_order->text }}</i></span></li>
+                                                @if($item->status_shipping == \App\Enums\StatusShippingOrder::ORDER_SHIP_WRATING->value)
+                                                    <li><b>Trạng thái đơn hàng: </b> <span class="{{ $item->status_order->color }}"><i>{{ $item->status_order->text }}</i></span></li>
+                                                @else
+                                                    <li><b>Trạng thái đơn hàng: </b> <span class="{{ $item->status_order_shipping->color }}"><i>{{ $item->status_order_shipping->text }}</i></span></li>
+                                                @endif
                                                 @if($item->status != \App\Enums\StatusOrder::ORDER_CANCEL->value)
                                                     <li><b>Trạng thái thanh toán: </b> <span class="{{ $item->status_order_payment->color  }}"><i>{{ $item->status_order_payment->text }}</i></span></li>
-                                                    <li><b>Thông tin thanh toán: </b> <i>{{ $item->note }}</i></li>
                                                 @endif
                                                 <li><b>Thời gian tạo đơn hàng:</b> {{ $item->created_at }}</li>
                                             </ol>
@@ -70,9 +70,6 @@
                                                 <li><b>Quận / huyện / thị xã:</b> {{ $item->district }}</li>
                                                 <li><b>Phường / xã:</b> {{ $item->ward }}</li>
                                                 <li><b>Địa chỉ chi tiết:</b> {{ $item->address_detail }}</li>
-                                                @if($item->status != \App\Enums\StatusOrder::ORDER_CANCEL->value)
-                                                    <li><b>Trạng thái giao hàng:</b> <span class="{{ $item->status_order_shipping->color }}"><i>{{ $item->status_order_shipping->text }}</i></span></li>
-                                                @endif
                                             </ol>
                                         </div>
                                     </div>

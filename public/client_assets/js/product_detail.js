@@ -7,7 +7,7 @@ const PRODUCT_DETAIL = (function () {
 
     modules.handleQuantity = function () {
         let quantity = $("input[name='quantity']");
-        let quantityCurrent = $(document).find('.quantity-current').data('quantity-current');
+        let quantityCurrent = $(document).find('.quantity-current').attr('data-quantity-current');
         if(parseInt(quantity.val()) > parseInt(quantityCurrent)) {
             quantity.val(quantityCurrent);
         } else if (parseInt(quantity.val()) < 1) {
@@ -85,6 +85,7 @@ $(function () {
 
         let price = $(this).data('price');
         let quantityCurren = $(this).data('quantity');
+
         $('.quantity-current').html(`<b>${quantityCurren}</b> sản phẩm có sẵn`);
         $('.quantity-current').attr('data-quantity-current', quantityCurren);
 
@@ -102,13 +103,16 @@ $(function () {
         let remaining_capacity_is_approx = $(this).data('remaining-capacity-is-approx');
 
         $('#ram').text(ram);
+
         $('#storage-capacity').text(storage_capacity);
         $('#remaining-capacity-is-approx').text(remaining_capacity_is_approx);
         $(`.parent-item[data-key!="${key}"]`).addClass('d-none');
         $(`.parent-item[data-key="${key}"]`).removeClass('d-none');
-
         $('.price').text(price.toLocaleString('de-DE'));
+
         $('.current-price').data('price', price);
+
+        $('.item-price:first-child').click();
 
         PRODUCT_DETAIL.handleQuantity();
     });

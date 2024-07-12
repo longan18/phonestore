@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\ForgotPasswordMail;
 use App\Modules\Client\Account\Http\Requests\AccountLoginRequest;
 use App\Modules\Client\Account\Http\Requests\AccountRegisterRequest;
+use App\Modules\Client\Account\Http\Requests\AccountUpdateRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -81,10 +82,10 @@ class AccountController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param AccountUpdateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function update(AccountUpdateRequest $request)
     {
         $result = $this->account->handle($request);
         return redirect()->back()->with('status', $result);

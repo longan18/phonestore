@@ -18,7 +18,7 @@ return new class extends Migration
         }
 
         Schema::table('order_details', function (Blueprint $table) {
-            $table->uuid('uuid')->nullable()->after('id');
+            $table->string('uuid')->nullable()->after('id');
             $table->tinyInteger('status')->nullable()->unsigned()->default(1)->after('note')
                 ->comment("1: Chờ xác nhận, 2: Đã xác nhận, 3: Hủy đơn hàng");
             $table->tinyInteger('status_payment')->nullable()->unsigned()->default(1)->after('status')

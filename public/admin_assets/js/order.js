@@ -53,19 +53,19 @@ $(document).ready(function () {
         ORDER.getList($(`#fillter-order`).attr('action'), ORDER.filter());
     });
 
-    $(".status-order").on('change', function () {
+    $(document).on('change', ".status-order", function () {
         const id = $(this).parents('tr').data('order');
         const status = $(this).val();
         updateStatus({id, status});
     })
 
-    $(".status-payment").on('change', function () {
+    $(document).on('change', ".status-payment", function () {
         const id = $(this).parents('tr').data('order');
         const status_payment = $(this).val();
         updateStatus({id, status_payment});
     })
 
-    $(".status-shipping").on('change', function () {
+    $(document).on('change', ".status-shipping", function () {
         const id = $(this).parents('tr').data('order');
         const status_shipping = $(this).val();
         updateStatus({id, status_shipping});
@@ -89,7 +89,10 @@ $(document).ready(function () {
                 }
             },
             error: function (Xhtp) {
-
+                toastr.error(Xhtp.responseJSON.message);
+                setTimeout(() => {
+                    location.reload();
+                }, 300)
             },
             complete: function () {
                 setTimeout(() => $('.loading').addClass('d-none'), 700);

@@ -35,13 +35,6 @@ class ProductSmartphonePriceRequest extends FormRequest
                 'mimes:jpeg,png,jpg',
                 'max:2048',
             ],
-            'thumb_avatar_option' => [
-                'bail',
-                Rule::requiredIf(fn () => !$this->route('option')),
-                'image',
-                'mimes:jpeg,png,jpg',
-                'max:2048',
-            ],
             'ram_id' => 'bail|required|numeric|min:1',
             'color_id' => 'bail|required',
             'storage_capacity_id' => 'bail|required',

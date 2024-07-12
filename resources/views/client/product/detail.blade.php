@@ -160,6 +160,12 @@
         var check_auth = {{ auth()->guard(GUARD_WEB)->check() ? 'true' : 'false' }};
         var url_login = `{{ route('client.page-login') }}`
         var image_default = `{{ asset($product->avatar) }}`
+
+        $(function () {
+            $('.carousel').carousel({
+                interval: 2000
+            })
+        })
     </script>
     <script src="{{ asset('client_assets/js/product_detail.js') }}" type="module"></script>
 @endsection

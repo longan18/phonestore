@@ -60,9 +60,9 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="{{ route('client.home') }}">{{ __('Trang chủ') }}</a></li>
-                        <li><a href="{{ route('client.cart.index') }}">{{ __('Giỏ hàng') }}</a></li>
-                        <li><a href="{{ route('client.order.index') }}">{{ __('Đơn hàng') }}</a></li>
+                        <li class="@if(currentRoute('client.home')) active @endif"><a href="{{ route('client.home') }}">{{ __('Trang chủ') }}</a></li>
+                        <li class="@if(currentRoute('client.cart.index')) active @endif"><a href="{{ route('client.cart.index') }}">{{ __('Giỏ hàng') }}</a></li>
+                        <li class="@if(currentRoute('client.order.index')) active @endif"><a href="{{ route('client.order.index') }}">{{ __('Đơn hàng') }}</a></li>
                     </ul>
                 </nav>
             </div>

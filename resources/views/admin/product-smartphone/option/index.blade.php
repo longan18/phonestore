@@ -29,7 +29,7 @@
             <li class="breadcrumb-item"><a href="{{ route('smartphone.index') }}">Danh sách sản phẩm điện thoại thông minh</a></li>
             <li class="breadcrumb-item">
                 <a href="{{ route('smartphone.option.index', ['product' => $product->slug]) }}">
-                    {{ __('Option sản phẩm').' '. $product->slug }}
+                    {{ __('Option sản phẩm').' '. $product->name }}
                 </a>
             </li>
         </ul>
@@ -38,22 +38,19 @@
         <div class="col-md-12">
             <div class="tile" id="list-product">
                 <div class="d-flex justify-content-between">
-                    <h3 class="tile-title">{{ __('Option sản phẩm').' '. $product->slug }} <span class="{{ $product->status_action->color }}">- {{ $product->status_action->text }}</span></h3>
+                    <h3 class="tile-title">{{ __('Option sản phẩm').' '. $product->name }} <span class="{{ $product->status_action->color }}">- {{ $product->status_action->text }}</span></h3>
                     <p>
                         <a class="btn btn-primary icon-btn"
                            href="{{ route('smartphone.option.create', ['product' => $product->slug]) }}"><i
                                 class="fa fa-plus"></i>{{ __('Thêm option sản phẩm') }}</a>
                     </p>
                 </div>
-                <ul>
-                    <li><b>Tên sản phẩm:</b> {{ $product->name }}</li>
-                </ul>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th class="text-center">#</th>
                         <th>{{ __('Avatar') }}</th>
-                        <th>{{ __('Thumb') }}</th>
+{{--                        <th>{{ __('Thumb') }}</th>--}}
                         <th>{{ __('Ram') }}</th>
                         <th>{{ __('Khả năng lưu trữ') }}</th>
                         <th>{{ __('Dung lượng còn lại') }}</th>

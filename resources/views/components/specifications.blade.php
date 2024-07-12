@@ -1,4 +1,23 @@
 <div style="padding:0px 15%; padding-bottom: 50px">
+    <div id="carouselExampleControls" class="carousel slide mb-3" data-ride="carousel">
+        <div class="carousel-inner">
+            @php($index = 0)
+            @foreach($product->sub_image as $item)
+                <div class="carousel-item @if($index == 0) active @endif">
+                    <img src="{{ asset($item['url']) }}" class="d-block w-100" alt="...">
+                </div>
+                @php($index++)
+            @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
     <div class="parameter-item">
         <p class="parameter-ttl" data-group-id="29" data-index="1">Màn hình</p>
         <ul class="ulist">

@@ -8,6 +8,10 @@
 <script src="{{ asset('client_assets/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('client_assets/js/main.js') }}"></script>
 <script>
+    // window.addEventListener('popstate', function(event) {
+    //     window.location.reload();
+    // });
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -42,12 +46,7 @@
         const user_id = $(this).data('user');
         const url = $(this).data('url');
 
-        // let data = {}
         if (dataCheckNoti == 'true') {
-            // $('.no-read').map(function (index, elm) {
-            //
-            // });
-
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -73,11 +72,6 @@
 
                 }
             })
-
-
         }
-        // $('.elm-notify').addClass('d-none');
-        // $('.item-noti').addClass('bg-e3e3e3');
-        // $('.item-noti').find('.icon-noti').empty();
     });
 </script>

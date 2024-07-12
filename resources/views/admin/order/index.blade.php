@@ -34,7 +34,7 @@
                     <tr>
                         <th class="text-center">#</th>
                         <th>{{ __('Thông tin') }}</th>
-                        <th>{{ __('Ngày tạo / Ghi chú') }}</th>
+                        <th>{{ __('Ngày tạo') }}</th>
                         <th>{{ __('Khách hàng') }}</th>
                         <th>{{ __('Trạng thái đơn hàng') }}</th>
                         <th>{{ __('Trạng thái thanh toán') }}</th>

@@ -65,4 +65,18 @@ class ShoppingItemService extends BaseService implements ShoppingItemInterface
     {
         return $this->model::upsert($data['cartItems'], ['id']);
     }
+
+    public function getDataByIdOrShoppingSessionId($arrayId, $shoppingSessionId)
+    {
+        return $this->model->when(isset($arrayId), function ($query) use ($arrayId) {
+            $query->whereIn('id', $arrayId);
+        }, function ($query) use ($shoppingSessionId) {
+            $query->where('shopping_session_id', $shoppingSessionId);
+        })->get();
+    }
+
+    public function deleteDataById($arrayId)
+    {
+        return $this->model->whereIn('id', $arrayId)->delete();
+    }
 }

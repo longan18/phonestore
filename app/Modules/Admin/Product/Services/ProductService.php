@@ -48,7 +48,7 @@ class ProductService extends BaseService implements ProductInterface
         $arrData = $request->only($this->fillable());
 
         if (empty($request->slug)) {
-            $arrData['slug'] = uuid();
+            $arrData['slug'] = generateSlug($arrData['name']);
         }
 
         DB::beginTransaction();

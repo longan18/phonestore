@@ -42,7 +42,7 @@ class ProductImport implements ToModel, WithHeadingRow, WithColumnLimit
 
         return new Product([
             'name' => $row['name'],
-            'slug' => uuid(),
+            'slug' => generateUUIDWithRandomString(),
             'brand_id' => Brand::where('name', $row['brand_name'])->first()->id,
             'category_id' => Category::where('name', $row['category_name'])->first()->id,
         ]);

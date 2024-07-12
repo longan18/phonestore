@@ -6,31 +6,7 @@
 
 @section('style_css')
     <style>
-        .element {
-            opacity: 0; /* Ban đầu ẩn phần tử */
-            transform: translateY(-20px); /* Di chuyển phần tử lên trên */
-            animation: slideIn 1s ease forwards; /* Áp dụng animation */
-        }
 
-        @keyframes slideIn {
-            to {
-                opacity: 1; /* Hiển thị phần tử */
-                transform: translateY(0); /* Di chuyển phần tử về vị trí ban đầu */
-            }
-        }
-
-        .element-none {
-            opacity: 1; /* Ban đầu ẩn phần tử */
-            transform: translateY(-20px); /* Di chuyển phần tử lên trên */
-            animation: slideNone 1s ease forwards; /* Áp dụng animation */
-        }
-
-        @keyframes slideNone {
-            to {
-                opacity: 0; /* Hiển thị phần tử */
-                transform: translateY(0); /* Di chuyển phần tử về vị trí ban đầu */
-            }
-        }
     </style>
 @endsection
 

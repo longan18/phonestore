@@ -1,24 +1,32 @@
 $(document).on('click', '#checkout-postpaid', function () {
     const shopping_session_id = $(this).parent().data('shopping-session');
     const address_shipping_id = $(this).parent().data('address-act');
-    const note = "Thanh toán trả sau";
+    const note = "";
     const payment = '';
     checkoutCart(shopping_session_id, address_shipping_id, note, payment);
 });
 
 $(document).on('click', '#checkout-vnpay', function () {
+    localStorage.setItem('checkVnPay', 'checkVnPay');
     const shopping_session_id = $(this).parent().data('shopping-session');
     const address_shipping_id = $(this).parent().data('address-act');
-    const note = "Thanh toán qua VnPay";
+    const note = "";
     const payment = 'vn_pay';
     checkoutCart(shopping_session_id, address_shipping_id, note, payment);
 });
 
 const checkoutCart = (shopping_session_id, address_shipping_id, note, payment) => {
+    const shopping_item_id = JSON.parse(localStorage.getItem('dataCheckBox')) ?? [];
+
+    let dataSubmit = {shopping_session_id, address_shipping_id, note, payment}
+    if (shopping_item_id.length != 0) {
+        dataSubmit = {...dataSubmit, shopping_item_id}
+    }
+
     $.ajax({
         url: url_checkout,
         method: 'POST',
-        data: { shopping_session_id, address_shipping_id, note, payment},
+        data: dataSubmit,
         beforeSend: function () {
             $('#preloder').css('display', 'block');
             $('#preloder .loader').css('display', 'block');
@@ -32,9 +40,8 @@ const checkoutCart = (shopping_session_id, address_shipping_id, note, payment) =
                     window.location.href = res.data;
                 } else {
                     toastr.success(res.message);
-                    setTimeout(() => {
-                        window.location.href = url_order_list;
-                    }, 500)
+                    localStorage.clear();
+                    window.location.href = url_order_list;
                 }
             } else {
                 toastr.error(res.message);
