@@ -37,9 +37,9 @@ class HomeController extends Controller
         $this->productInterface = $productInterface;
     }
 
-    public function getDataPageHome()
+    public function getDataPageHome(Request $request)
     {
-        $products = $this->productInterface->getDataPageHome();
+        $products = $this->productInterface->getDataPageHome($request->all());
 
         return view('client.home.index', compact('products'));
     }

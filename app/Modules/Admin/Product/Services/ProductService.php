@@ -97,9 +97,12 @@ class ProductService extends BaseService implements ProductInterface
         return $this->deleteById($id);
     }
 
-    public function getDataPageHome()
+    public function getDataPageHome($request)
     {
         return $this->model->where('status', StatusEnum::PUBLISH->value)
+            ->when(!empty($request['name']), function ($q) use ($request) {
+                $q->where('name', 'like', "%{$request['name']}%");
+            })
             ->with($this->withDataProduct())
             ->get();
     }
