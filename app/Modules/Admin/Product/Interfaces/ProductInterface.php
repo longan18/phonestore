@@ -12,7 +12,7 @@ interface ProductInterface
     public function createOrUpdate($request);
 
     public function delete($id);
-    public function getDataPageHome();
+    public function getDataPageHome($request);
 
     public function getProductBySlug($slug);
 
