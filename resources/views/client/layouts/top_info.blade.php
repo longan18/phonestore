@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="{{ route('client.home') }}"><img src="{{ asset('images/logo.png') }}" alt="" style="width: 60%"></a>
+                    <a href="#"><img src="{{ asset('client_assets/img/logo.png') }}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6">
