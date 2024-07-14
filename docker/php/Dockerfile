@@ -35,6 +35,10 @@ RUN apt-get -y install --fix-missing \
 # Install PHP extensions
 RUN docker-php-ext-install zip
 
+# Cài đặt Node.js và npm (nếu cần)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
+
 # RUN echo "\e[1;33mInstall important docker dependencies\e[0m"
 # RUN docker-php-ext-install \
 #     exif \
