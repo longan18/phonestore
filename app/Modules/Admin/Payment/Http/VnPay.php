@@ -28,7 +28,7 @@ class VnPay extends Controller
         $vnp_HashSecret = $inforVnPay['vnp_HashSecret'];
 
         $vnp_TxnRef = $order->uuid;
-        $vnp_OrderInfo = $order->note ?? "Mua hàng";
+        $vnp_OrderInfo = "Mua hàng";
         $vnp_OrderType = '110000'; // Mã điện thoại và máy tính bảng
         $vnp_Amount = $order->price_total * 100;
         $vnp_Locale = 'vn';
