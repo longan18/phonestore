@@ -1,5 +1,5 @@
 <div class="item-address">
-    <div class="d-flex">
+    <div class="d-flex content-item-address">
         <ur class="w-100">
             <li><span class="d-inline-block w-25 font-weight-bold">Tỉnh / thành phố: </span>{{ $province }}</li>
             <li><span class="d-inline-block w-25 font-weight-bold">Quận / huyện / thị xã: </span>{{ $district }}</li>

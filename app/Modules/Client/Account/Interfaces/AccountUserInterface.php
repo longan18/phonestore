@@ -7,6 +7,7 @@ namespace App\Modules\Client\Account\Interfaces;
  */
 interface AccountUserInterface
 {
+    public function search($request);
     public function handle($request);
     public function login($request);
     public function logout();

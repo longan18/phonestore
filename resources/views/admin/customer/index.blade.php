@@ -19,14 +19,17 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="tile" id="list-product">
+            <div class="tile" id="list-customer">
                 <div class="d-flex justify-content-between">
                     <h3 class="tile-title">{{ __('Danh sách người dùng') }}</h3>
-                    <p>
-                        <a class="btn btn-primary icon-btn" href="{{ route('customer.create') }}"><i class="fa fa-plus"></i>{{ __('Thêm mới') }}</a>
-                    </p>
+{{--                    <p>--}}
+{{--                        <a class="btn btn-primary icon-btn" href="{{ route('customer.create') }}"><i class="fa fa-plus"></i>{{ __('Thêm mới') }}</a>--}}
+{{--                    </p>--}}
                 </div>
-{{--                @include('admin.product-smartphone.filter')--}}
+                <div class="w-30 ml-0 mb-3 position-relative">
+                    <i class="fa fa-search position-absolute position-search cursor-pointer" aria-hidden="true"></i>
+                    <input name="key_search" class="form-control" type="text" placeholder="Tìm kiếm">
+                </div>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -52,6 +55,6 @@
 @endsection
 
 @section('script-after')
-
+    <script src="{{ asset('admin_assets/js/customer.js') }}" type="module"></script>
 @endsection
 

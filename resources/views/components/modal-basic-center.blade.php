@@ -10,8 +10,8 @@
                 @endif
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="close-modal">Close</button>
-                <button type="submit" id="submit-address-shipping" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" id="close-modal">Trở lại</button>
+                <button type="submit" id="submit-address-shipping" class="btn btn-primary">Lưu</button>
             </div>
         </div>
     </div>

@@ -58,57 +58,57 @@
                     <input name="id" value="{{ $user->id ?? '' }}" type="hidden">
                     <div class="row w-100 d-flex justify-content-center">
                         <div class="col-md-12 col-lg-4">
-                            <div class="mb-3">
-                                <label>{{ __('Ảnh đại diện') }}</label>
-                                <div class="avatar-upload">
-                                    <div class="avatar-edit">
-                                        <input name="avatar" class="d-none" type='file' id="image-upload"
-                                               accept=".png,.jpg,.jpeg"/>
-                                        <label for="image-upload">
-                                            <div class="btn btn-primary icon-btn">
-                                                <i class="fa fa-plus"></i>{{ __('Chọn file') }}
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="avatar-preview mt-2 mb-1">
-                                        <img class="profile-user-img img-responsive img-circle object-fit-cover {{ !empty($user->avatar) ?: 'd-none' }}"
-                                             height="150" width="150" id="image-preview" alt="User profile picture" src="{{ $user->avatar ?? '' }}">
-                                    </div>
-                                </div>
-                                <div class="error-message error_avatar"></div>
-                            </div>
+{{--                            <div class="mb-3">--}}
+{{--                                <label>{{ __('Ảnh đại diện') }}</label>--}}
+{{--                                <div class="avatar-upload">--}}
+{{--                                    <div class="avatar-edit">--}}
+{{--                                        <input name="avatar" class="d-none" type='file' id="image-upload"--}}
+{{--                                               accept=".png,.jpg,.jpeg"/>--}}
+{{--                                        <label for="image-upload">--}}
+{{--                                            <div class="btn btn-primary icon-btn">--}}
+{{--                                                <i class="fa fa-plus"></i>{{ __('Chọn file') }}--}}
+{{--                                            </div>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="avatar-preview mt-2 mb-1">--}}
+{{--                                        <img class="profile-user-img img-responsive img-circle object-fit-cover {{ !empty($user->avatar) ?: 'd-none' }}"--}}
+{{--                                             height="150" width="150" id="image-preview" alt="User profile picture" src="{{ $user->avatar ?? '' }}">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="error-message error_avatar"></div>--}}
+{{--                            </div>--}}
                             <div class="mb-3">
                                 <label>{{ __('Họ và tên') }}<span class="text-danger">*</span></label>
-                                <input name="name" value="{{ $user->name ?? '' }}" class="form-control" type="text" placeholder="Nhập tên người dùng" autocomplete="off">
+                                <input name="name" value="{{ $user->name ?? '' }}" class="form-control" type="text" placeholder="Nhập tên người dùng" autocomplete="off" readonly>
                                 <div class="error-message error_name"></div>
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Email') }}<span class="text-danger">*</span></label>
-                                <input name="email" value="{{ $user->email ?? '' }}" class="form-control" type="text" placeholder="Nhập email" autocomplete="off">
+                                <input name="email" value="{{ $user->email ?? '' }}" class="form-control" type="text" placeholder="Nhập email" autocomplete="off" readonly>
                                 <div class="error-message error_email"></div>
                             </div>
                             <div class="mb-3">
                                 <label>{{ __('Số điện thoại') }}<span class="text-danger">*</span></label>
-                                <input name="phone" value="{{ $user->phone ?? '' }}" class="form-control" type="text" placeholder="Nhập số điện thoại" autocomplete="off">
+                                <input name="phone" value="{{ $user->phone ?? '' }}" class="form-control" type="text" placeholder="Nhập số điện thoại" autocomplete="off" readonly>
                                 <div class="error-message error_phone"></div>
                             </div>
-                            <div class="mb-3">
-                                <label>{{ __('Mật khẩu') }}<span class="text-danger">*</span></label>
-                                <input name="password" value="" class="form-control" type="text" placeholder="Nhập mật khẩu" autocomplete="off">
-                                <div class="error-message error_password"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label>{{ __('Nhập lại mật khẩu') }}<span class="text-danger">*</span></label>
-                                <input name="password_confirmation" value="" class="form-control" type="text" placeholder="Nhập lại mật khẩu" autocomplete="off">
-                                <div class="error-message error_password_confirmation"></div>
-                            </div>
-                            <div class="row mb-10">
-                                <div class="col-md-12 d-flex justify-content-end">
-                                    <button class="btn btn-primary" type="button" id="show-modal">
-                                        <i class="fa fa-fw fa-lg fa-check-circle"></i> {{ __('Lưu') }}
-                                    </button>
-                                </div>
-                            </div>
+{{--                            <div class="mb-3">--}}
+{{--                                <label>{{ __('Mật khẩu') }}<span class="text-danger">*</span></label>--}}
+{{--                                <input name="password" value="" class="form-control" type="text" placeholder="Nhập mật khẩu" autocomplete="off">--}}
+{{--                                <div class="error-message error_password"></div>--}}
+{{--                            </div>--}}
+{{--                            <div class="mb-3">--}}
+{{--                                <label>{{ __('Nhập lại mật khẩu') }}<span class="text-danger">*</span></label>--}}
+{{--                                <input name="password_confirmation" value="" class="form-control" type="text" placeholder="Nhập lại mật khẩu" autocomplete="off">--}}
+{{--                                <div class="error-message error_password_confirmation"></div>--}}
+{{--                            </div>--}}
+{{--                            <div class="row mb-10">--}}
+{{--                                <div class="col-md-12 d-flex justify-content-end">--}}
+{{--                                    <button class="btn btn-primary" type="button" id="show-modal">--}}
+{{--                                        <i class="fa fa-fw fa-lg fa-check-circle"></i> {{ __('Lưu') }}--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
 

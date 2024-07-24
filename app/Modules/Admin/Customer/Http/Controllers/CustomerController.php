@@ -36,9 +36,16 @@ class CustomerController extends Controller
         $this->accountUser = $accountUser;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = $this->accountUser->paginate(10);
+        $users = $this->accountUser->search($request);
+        if ($request->ajax()) {
+            $view = view('admin.customer.table', compact('users'))->render();
+            $paginate = view('admin.pagination.index')->with(['data' => $users])->render();
+
+            return $this->responseSuccess(data: ['html' => $view, 'pagination' => $paginate]);
+        }
+
         return view('admin.customer.index', compact('users'));
     }
 

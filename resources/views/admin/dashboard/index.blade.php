@@ -74,21 +74,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="tile">
                 <h3 class="tile-title m-0">{{ $title }}</h3>
-                <p class="text-danger"><i>{{ $description }}</i></p>
                 <div class="embed-responsive embed-responsive-16by9">
                     <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
                 </div>
                 <div class="d-flex justify-content-end mt-3">
-                    <a href="{{ route('admin.dashboard.index', ['query_total' => 'week']) }}" class="btn btn-warning mr-3">8 Tuần gần nhất</a>
-                    <a href="{{ route('admin.dashboard.index', ['query_total' => 'month']) }}" class="btn btn-blue mr-3">4 Tháng gần nhất</a>
-                    <a href="{{ route('admin.dashboard.index', ['query_total' => 'year']) }}" class="btn btn-danger">4 Năm gần nhất</a>
+                    <a href="{{ route('admin.dashboard.index', ['query_total' => 'month']) }}" class="btn btn-warning mr-3">Doanh thu các ngày trong tháng</a>
+                    <a href="{{ route('admin.dashboard.index', ['query_total' => 'year']) }}" class="btn btn-blue mr-3">Doanh thu các tháng trong năm</a>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
         </div>
     </div>
 @endsection
@@ -97,6 +93,7 @@
     <script type="text/javascript">
         var dataController = @json($data);
 
+        console.log(dataController);
         var data = {
             labels: dataController.map(row => row.time),
             datasets: [

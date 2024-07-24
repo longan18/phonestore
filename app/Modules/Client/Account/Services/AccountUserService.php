@@ -26,6 +26,16 @@ class AccountUserService extends BaseService implements AccountUserInterface
         $this->model = $user;
     }
 
+    public function search($request)
+    {
+        return $this->model
+            ->where('name', 'like', '%' . $request['key_search'] . '%')
+            ->orWhere('email', 'like', '%' . $request['key_search'] . '%')
+            ->orWhere('phone', 'like', '%' . $request['key_search'] . '%')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+    }
+
     public function forgotPassword($request)
     {
         try {

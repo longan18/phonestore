@@ -27,7 +27,12 @@ class NotificationService extends BaseService implements NotificationInterface
     {
         DB::beginTransaction();
         try {
-            $this->create($data);
+            $notiSendSuccess = $this->where('user_id', $data['user_id'], '=')
+                ->where('content', '%'.$data['content'].'%', 'like')->first();
+
+            if (!$notiSendSuccess) {
+                $this->create($data);
+            }
 
             DB::commit();
             return true;

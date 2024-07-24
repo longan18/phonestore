@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Modules\Admin\Brand\Models\Brand;
 use App\Modules\Admin\Product\Models\Product;
 use App\Modules\Client\Account\Models\User;
+use App\Modules\OrderDetail\Models\OrderDetail;
 use App\Modules\ShoppingSession\Models\ShoppingSession;
 use App\Observers\BrandObserver;
+use App\Observers\OrderDetailObserver;
 use App\Observers\ProductObserver;
 use App\Observers\ShoppingSessionObserver;
 use App\Observers\UserObserver;
@@ -37,6 +39,7 @@ class EventServiceProvider extends ServiceProvider
         ShoppingSession::observe(ShoppingSessionObserver::class);
         Product::observe(ProductObserver::class);
         User::observe(UserObserver::class);
+        OrderDetail::observe(OrderDetailObserver::class);
     }
 
     /**

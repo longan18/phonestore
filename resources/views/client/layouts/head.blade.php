@@ -24,7 +24,34 @@
 @vite(['resources/scss/client/notify.scss', 'resources/scss/common.scss','resources/scss/client/top-bar.scss'])
 @yield('style_css')
 <style>
+    @media (max-width: 995px) {
+        .listproduct {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
 
+    @media (max-width: 850px) {
+        .listproduct {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 600px) {
+        .featured,
+        .spad {
+            padding-top: 0px !important;
+        }
+
+        .product__details__pic__item--large {
+            margin-top: 50px;
+            width: 100vw!important;
+            height: auto;
+        }
+
+        .listproduct {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 

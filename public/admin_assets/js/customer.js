@@ -43,6 +43,29 @@ const CUSTOMER = (function () {
         });
     };
 
+    modules.getList = function (url, data = {}) {
+        $.ajax({
+            type: 'GET',
+            url,
+            data,
+            dataType: 'json',
+            beforeSend: function () {
+                COMMON.loading(true);
+            },
+            success: function (res) {
+                if (res.success) {
+                    $('#list-customer table tbody').html(res.data.html);
+                    $('#list-customer .render-paginate').html(res.data.pagination);
+                } else {
+                    toastr.error('Đã xảy ra lỗi hệ thống');
+                }
+            },
+            complete: function () {
+                COMMON.loading(false, 300);
+            }
+        });
+    };
+
     return modules;
 })(window.jQuery, window, document);
 
@@ -53,4 +76,8 @@ $(document).ready(function () {
         $('#image-preview').removeClass('d-none');
         COMMON.previewImage(data, '#image-preview');
     });
+
+    $(document).on('keyup', "input[name='key_search']", COMMON.debounce(function () {
+        CUSTOMER.getList('/admin/customer/', {key_search: $(this).val().trim()});
+    }, 500));
 });

@@ -83,7 +83,7 @@ $(document).ready(function () {
                 if (res.success) {
                     toastr.success(res.message);
 
-                    setTimeout(() => window.location.reload(), 700);
+                    ORDER.getList($(`#fillter-order`).attr('action'), ORDER.filter());
                 } else {
                     toastr.error(res.message);
                 }
