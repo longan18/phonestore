@@ -48,7 +48,7 @@
                       data-redirect="{{ route('smartphone.option.index', ['product' => $product->slug]) }}" enctype="multipart/form-data">
                     <input name="id" value="{{ $productSmartphonePrice->id ?? '' }}" type="hidden">
                     <input name="status" value="{{ $productSmartphonePrice->status ?? '' }}" type="hidden">
-                    <input name="product_id" value="{{ $product->smartphone->id ?? '' }}" type="hidden">
+                    <input name="product_id" value="{{ $product->id ?? '' }}" type="hidden">
                     <div class="row w-100 d-flex justify-content-center">
                         <div class="col-md-12 col-lg-4">
                             <div class="mb-3">

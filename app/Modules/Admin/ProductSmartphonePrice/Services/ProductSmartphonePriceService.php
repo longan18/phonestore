@@ -40,6 +40,7 @@ class ProductSmartphonePriceService extends BaseService implements ProductSmartp
            $dataArr = $request->only($this->model->getFillable());
            $dataArr['price'] = str_replace(',', '', $dataArr['price']);
            $dataArr['id'] = $request->id ?? null;
+           $dataArr['status'] = $request->status ?? \App\Enums\StatusEnum::STOP_SELLING->value;
 
            $model = $this->model::upsertWithReturn($dataArr, ['id', 'product_id'], $this->model->getFillable());
             $this->media->uploadAvatar(

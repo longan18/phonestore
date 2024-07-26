@@ -64,7 +64,7 @@ class ProductSmartphonePriceRequest extends FormRequest
         if ($this->request->has('price')) {
             $this->merge(
                 [
-                    'price' => str_replace('.', '', request('price')),
+                    'price' => str_replace(',', '', request('price')),
                 ]
             );
         }

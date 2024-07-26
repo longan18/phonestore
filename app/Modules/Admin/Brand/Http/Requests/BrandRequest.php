@@ -33,12 +33,22 @@ class BrandRequest extends FormRequest
                 'max:255',
                 Rule::unique('brands')->ignore($this->id)
             ],
-            'avatar' => [
+            'thumb_avatar_brand' => [
                 $this->id ? 'sometimes' : 'required',
                 'file',
                 'max:'.config('upload.file_max_size'),
                 'mimetypes:'.implode(',', config('upload.image_mime_types_allow')),
             ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'thumb_avatar_brand.required' => 'The avatar field is required.',
+            'thumb_avatar_brand.file' => 'The avatar field is required.',
+            'thumb_avatar_brand.max' => 'The avatar field is required.',
+            'thumb_avatar_brand.mimetypes' => 'The avatar field is required.',
         ];
     }
 }

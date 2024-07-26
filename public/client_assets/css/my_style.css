@@ -78,11 +78,11 @@
     text-decoration-line: line-through;
 }
 
-.product__details__pic__item--large {
-    width: 555px;
-    height: 576px;
-    object-fit: cover;
-}
+/*.product__details__pic__item--large {*/
+/*    width: 555px;*/
+/*    height: 576px;*/
+/*    object-fit: cover;*/
+/*}*/
 
 .product__details__pic__slider img{
     width: 120px;
