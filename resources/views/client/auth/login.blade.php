@@ -81,6 +81,7 @@
                                         <div class="text-center mb-2 text-danger"><span>Tài khoản không tồn tại, vui lòng thử lại</span></div>
                                     @endif
 
+                                    @php(session()->forget('status'))
                                 @endif
                                 <button type="submit" class="btn btn-pill text-white btn-block btn-auth-action font-weight-bold"
                                         style="background-color: #0015f6">{{ __('Đăng nhập') }}</button>

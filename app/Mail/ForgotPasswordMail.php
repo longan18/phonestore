@@ -19,7 +19,7 @@ class ForgotPasswordMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Thông tin đặt hàng')
+        return $this->subject('Mật khẩu mới')
                     ->with(['data' => $this->data])
                     ->view('emails.forgot-password');
     }

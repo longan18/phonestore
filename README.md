@@ -25,11 +25,15 @@ git clone https://github.com/longan18/phonestore.git
 ```bash
 cd phonestore
 ```
+```bash
+import file phonestore.sql
+thay thế folder public trong folder storage/app bằng folder public.zip (đã giải nén)
+```
 
 Setup docker
 ```bash
 docker-compose bulid
-docker-compose up -d
+./run.sh
 ```
 
 ```bash
@@ -65,15 +69,41 @@ Generate a new application key
 php artisan key:generate
 ```
 
-Create database
-```bash
-php artisan migrate
-php artisan db:seed
-```
-
 Make link storage
 ```bash
 php artisan storage:link
 ```
+## Hướng phát triển
+Lưu ý: cần xác nhận thông qua giáo viên bộ môn hoặc giáo viên hướng dẫn.
+
+Thiết kế database để phát triển bán nhiều loại sản phẩm
+```bash
+1 products - 1 product_smartphone 
+Thực hiện:
+  - Thêm cột attr_product vào bảng products
+  - Chuyển data bảng product_smartphone thành JSON và thêm vào products.attr_product
+  - update lại luồng thêm sản phẩm, cập nhật sản phẩm:
+     - Thêm mới sản phẩm: chuyển thuộc tính thành JSON và thêm vào products.attr_product
+     - Show sản phẩm: chuyển JSON thành chuỗi và đọc ra
+     - Cập nhật sản phẩm: chuyển JSON thành chuỗi, cập nhật lại và chuyển lại thành JSON rồi lưu lại
+  * Như vậy các ta không cần quan tâm đến sản phẩm có bao nhiêu thuộc tính.
+  
+1 products - n product_smartphone_price
+Thực hiện:
+  - Bỏ bảng product_smartphone_price thay bằng bảng product_price
+  - table product_price:
+      - product_id (bigInt)
+      - option_attr (JSON)
+      - price (decimal)
+      - quantity (bigInt)
+      - status (tinyInt)
+      - created_at (timestamp)
+      - updated_at (timestamp)
+      - deleted_at (timestamp)
+  * Như vậy các ta không cần quan tâm đến các thuộc tính phân định giá tiền sản phẩm có bao nhiêu thuộc tính.
+
+ERD: Bỏ thực thể ram, color, storage_capacity vì nó được tính là thuộc tính của sản phẩm
+```
+
 
     

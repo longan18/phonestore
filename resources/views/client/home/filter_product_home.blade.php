@@ -6,7 +6,7 @@
                 <div class="hero__search">
                     <div class="hero__search__form">
                         <form action="{{ route('client.home') }}">
-                            <input type="text" placeholder="Nhập tên sản phẩm" name="name" value="{{ request('name') ?? '' }}">
+                            <input type="text" placeholder="Nhập tên sản phẩm" name="name" value="{{ request('name') ?? '' }}" autocomplete="off">
                             <button type="submit" class="site-btn">Tìm kiếm</button>
                         </form>
                     </div>

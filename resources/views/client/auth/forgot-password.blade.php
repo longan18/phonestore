@@ -43,15 +43,18 @@
                                 @error('email')
                                 <span class="color-red fs-12">{{ $message }}</span>
                                 @enderror
+                                <div class="d-flex mb-5 align-items-center">
+                                </div>
                                 @if(session()->has('status'))
                                     @if(session()->get('status'))
                                         <div class="text-center mb-2 text-success"><span>{{session()->get('status')}}</span></div>
                                     @endif
                                 @endif
-                                <div class="d-flex mb-3 align-items-center mt-5">
-                                </div>
                                 <button type="submit" class="btn btn-pill text-white btn-block btn-auth-action font-weight-bold"
                                         style="background-color: #0015f6">{{ __('Lấy lại mật khẩu') }}</button>
+                                <span class="d-block text-center my-4 text-muted">{{ __('Bạn đã có tài khoản?') }}
+                                    <a href="{{ route('client.page-login') }}" style="text-decoration: none"><b style="color: red; cursor: pointer">{{ __('Đăng nhập') }}</b></a>
+                                </span>
                             </form>
                         </div>
                     </div>

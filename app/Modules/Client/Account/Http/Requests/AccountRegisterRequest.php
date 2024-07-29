@@ -29,7 +29,6 @@ class AccountRegisterRequest extends FormRequest
     {
         return [
             'name' => 'bail|required',
-            'email' => 'bail|required|email|unique:users,email',
             'email' => [
                 'bail',
                 'required',
@@ -49,6 +48,25 @@ class AccountRegisterRequest extends FormRequest
                 'confirmed',
             ],
             'password_confirmation' => 'bail|required',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'name.required' => 'Họ và tên không được để trống.',
+            'email.required' => 'Email không được để trống.',
+            'email.email' => 'Email không đúng định dạng.',
+            'email.unique' => 'Email đã tồn tại.',
+
+            'phone.required' => 'Số điện thoại không được để trống.',
+            'phone.unique' => 'Số điện thoại đã tồn tại.',
+            'phone.regex' => 'Số điện thoại không đúng định dạng.',
+
+            'password.required' => 'Mật khẩu không được để trống.',
+            'password.min' => 'Mật khẩu phải lớn hơn hoặc bằng 6 kí tự.',
+            'password.confirmed' => 'Xác nhận mật khẩu không trùng khớp.',
+
+            'password_confirmation.required' => 'Xác nhận mật khẩu không được để trống.',
         ];
     }
 }
