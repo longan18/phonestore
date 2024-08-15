@@ -27,7 +27,6 @@ cd phonestore
 ```
 ```bash
 import file phonestore.sql
-thay thế folder public trong folder storage/app bằng folder public.zip (đã giải nén)
 ```
 
 Setup docker
@@ -36,6 +35,12 @@ docker-compose bulid
 ./run.sh
 ```
 
+*IF ENOSPC: System limit for number of file watchers reached
+```bash
+sudo sysctl -w fs.inotify.max_user_watches=524288
+```
+
+Exec container
 ```bash
 docker exec -it phonestore bash
 ```
